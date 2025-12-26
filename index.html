@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DDNetwork One | Digital Solutions</title>
+    <title>DDNetwork One</title>
     <meta name="description" content="Professional web development and AI solutions.">
     
     <!-- Google Fonts: Inter -->
@@ -31,7 +31,7 @@
             --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
             --shadow-glow: 0 0 20px rgba(37, 99, 235, 0.15);
 
-            --header-height: 85px;
+            --header-height: 110px;
         }
 
         /* --- RESET & BASE --- */
@@ -69,13 +69,13 @@
 
         .badge {
             display: inline-block;
-            padding: 8px 18px; /* Slightly larger padding */
+            padding: 8px 18px; 
             border-radius: 50px;
             font-size: 0.85rem;
             font-weight: 600;
             letter-spacing: 0.5px;
             text-transform: uppercase;
-            margin-bottom: 32px; /* Increased margin to push content down */
+            margin-bottom: 32px; 
         }
         
         .badge-discount {
@@ -113,6 +113,8 @@
             backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--border);
             z-index: 1000;
+            padding-top: 10px;
+            padding-bottom: 10px;
         }
 
         nav {
@@ -194,7 +196,7 @@
             grid-template-columns: 1fr 1fr;
             align-items: center;
             gap: 80px;
-            padding-top: 150px; /* ADJUSTED: Increased from 80px to 150px */
+            padding-top: 150px; 
             padding-bottom: 80px;
             position: relative;
         }
@@ -328,7 +330,7 @@
             margin-top: 4px;
         }
 
-        /* --- ABOUT --- */
+        /* --- ABOUT & FOUNDER SHARED STYLES --- */
         .about-split {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -336,8 +338,31 @@
             align-items: center;
         }
         
-        .about-img { border-radius: var(--radius-lg); box-shadow: var(--shadow-md); width: 100%; height: auto; }
+        .about-img, .founder-img {
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md); 
+            width: 100%; 
+            height: auto;
+            object-fit: cover;
+            aspect-ratio: 1/1; /* Keep it square */
+        }
 
+        /* CENTERED TEXT STYLE FOR FOUNDER */
+        .text-center-wrapper {
+            text-align: center;
+        }
+
+        /* SPECIFIC STYLE FOR FOUNDER TEXT - MADE SMALLER */
+        #founder p {
+            font-size: 0.9rem; /* Reduced from 1.05rem to 0.9rem */
+            line-height: 1.6;   /* Tighter line height for smaller text */
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            max-width: 650px; /* Limit width to look better when centered */
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
         .check-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -438,7 +463,7 @@
             .hero { 
                 grid-template-columns: 1fr; 
                 text-align: center; 
-                padding-top: 110px; /* ADJUSTED: Increased from 60px to 110px for mobile */
+                padding-top: 110px; 
                 gap: 50px; 
             }
             .hero-content p { margin: 0 auto 32px; }
@@ -451,6 +476,36 @@
         }
 
         @media (max-width: 768px) {
+            :root {
+                --header-height: 80px; /* Compact header on mobile */
+            }
+            
+            /* TEXT SIZING ADJUSTMENTS */
+            html {
+                font-size: 14px; 
+            }
+
+            .hero-content h1 { 
+                font-size: 2rem; 
+                margin-bottom: 15px;
+            }
+
+            h2 { font-size: 1.6rem !important; } 
+            h3 { font-size: 1.3rem !important; }
+
+            .hero-content p { 
+                font-size: 0.9rem; 
+                margin: 0 auto 20px;
+            }
+
+            .section-padding { 
+                padding: 50px 0; 
+            }
+
+            .service-card { padding: 24px; } 
+            .service-title { font-size: 1.1rem; }
+            .service-desc { font-size: 0.9rem; }
+            
             .nav-links {
                 position: absolute;
                 top: var(--header-height);
@@ -458,17 +513,16 @@
                 width: 100%;
                 background: white;
                 flex-direction: column;
-                padding: 40px 20px;
+                padding: 20px;
                 border-bottom: 1px solid var(--border);
                 transform: translateY(-150%);
                 transition: transform 0.3s ease;
-                gap: 20px;
+                gap: 15px;
                 text-align: center;
             }
             .nav-links.active { transform: translateY(0); }
             .mobile-toggle { display: block; }
             .footer-grid { grid-template-columns: 1fr; }
-            .section-padding { padding: 80px 0; }
         }
     </style>
 </head>
@@ -492,6 +546,7 @@
                     <li class="nav-item" onclick="switchPage('services')">Services</li>
                     <li class="nav-item" onclick="switchPage('pricing')">Pricing</li>
                     <li class="nav-item" onclick="switchPage('about')">About</li>
+                    <li class="nav-item" onclick="switchPage('founder')">Founder</li>
                     <li class="nav-item" onclick="switchPage('testimonials')">Testimonials</li>
                     <li><button class="btn-nav" onclick="switchPage('contact')">Contact Us</button></li>
                 </ul>
@@ -590,7 +645,7 @@
                 </div>
 
                 <div class="addon-list">
-                    <!-- Addon 1 -->
+                    <!-- Addon 1: Updated Pricing -->
                     <div class="addon-item">
                         <div class="addon-check">
                             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
@@ -598,7 +653,10 @@
                         <div>
                             <h4 style="font-size:1.2rem; margin-bottom:8px;">Domain & Hosting Setup</h4>
                             <p style="font-size:0.95rem; color:var(--text-secondary); margin-bottom:12px;">We handle server configuration and domain registration for you.</p>
-                            <span style="font-weight:700; color:var(--primary); font-size:1.1rem;">RM 80 – RM 150</span>
+                            <p style="font-size:0.95rem; color:var(--text-main); margin-bottom:8px; font-weight: 500;">
+                                RM 80 – RM 2000 <span style="font-size:0.85rem; font-weight: 400; color:var(--text-secondary);">(Based on Your Domain Name, Need to buy monthly)</span>
+                            </p>
+                            <p style="font-size:1.1rem; font-weight:700; color:var(--primary);">RM 50/Month for (ddn.one) Domain</p>
                         </div>
                     </div>
 
@@ -631,7 +689,6 @@
         </section>
 
         <!-- === PRICING (REDIRECTS TO ADDONS) === -->
-        <!-- This section is technically handled by the JS logic directing to Services -->
 
         <!-- === ABOUT === -->
         <section id="about" class="page-section">
@@ -674,6 +731,30 @@
             </div>
         </section>
 
+        <!-- === FOUNDER (TEXT CENTERED AND SMALLER) === -->
+        <section id="founder" class="page-section">
+            <div class="container section-padding">
+                <div class="about-split">
+                    <div>
+                        <!-- Image provided by user -->
+                        <img src="https://raw.githubusercontent.com/ddnetwork-ent/DDN-One/refs/heads/main/DD.JPG" alt="Danial Danish - Founder" class="founder-img">
+                    </div>
+                    <!-- Text Center Wrapper Added Here -->
+                    <div class="text-center-wrapper">
+                        <div class="badge" style="background:#f0f9ff; color:var(--primary);">Leadership</div>
+                        <h2 style="font-size:2.8rem; margin-bottom:24px;">Meet The Founder</h2>
+                        
+                        <p>Hi, I’m <strong>Danial Danish</strong>, founder of this studio.</p>
+                        <p>My journey started with a strong passion for coding and web development. What began as a personal interest in building websites with HTML slowly evolved into offering professional web solutions for businesses and individuals.</p>
+                        <p>I focus on creating websites that are simple, functional, and user-friendly — because a good website should not only look good, but also work well for your customers. Every project is built with attention to detail, clear communication, and a commitment to quality.</p>
+                        <p>Today, I’m proud to open my services to help brands establish a strong online presence and turn ideas into meaningful digital experiences.</p>
+                        
+                        <button class="btn-nav" onclick="switchPage('contact')">Connect With Me</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- === TESTIMONIALS === -->
         <section id="testimonials" class="page-section">
             <div class="container section-padding">
@@ -696,7 +777,7 @@
 
                     <div class="t-card">
                         <div class="quote-icon">“</div>
-                        <p style="font-style:italic; font-size:1.1rem; margin-bottom:24px; position:relative; z-index:1; color:var(--text-main);">Fast, affordable, and professional. The 5% discount was a nice bonus, but the quality of work is what keeps us coming back for updates.</p>
+                        <p style="font-style:italic; font-size:1.1rem; margin-bottom:24px; position:relative; z-index:1; color:var(--text-main);">Fast, affordable, and professional. The 5% discount was a nice bonus, but quality of work is what keeps us coming back for updates.</p>
                         <div style="display:flex; align-items:center; gap:15px;">
                             <img src="https://picsum.photos/seed/user2/60/60" style="border-radius:50%;" alt="User">
                             <div>
@@ -708,7 +789,7 @@
 
                     <div class="t-card">
                         <div class="quote-icon">“</div>
-                        <p style="font-style:italic; font-size:1.1rem; margin-bottom:24px; position:relative; z-index:1; color:var(--text-main);">I was worried about the technical side of things, but they handled the domain and hosting setup perfectly. Highly recommended!</p>
+                        <p style="font-style:italic; font-size:1.1rem; margin-bottom:24px; position:relative; z-index:1; color:var(--text-main);">I was worried about technical side of things, but they handled the domain and hosting setup perfectly. Highly recommended!</p>
                         <div style="display:flex; align-items:center; gap:15px;">
                             <img src="https://picsum.photos/seed/user3/60/60" style="border-radius:50%;" alt="User">
                             <div>
@@ -781,8 +862,8 @@
                 <div class="footer-col">
                     <h4>Company</h4>
                     <a href="#" onclick="switchPage('about')">About Us</a>
+                    <a href="#" onclick="switchPage('founder')">Meet The Founder</a>
                     <a href="#" onclick="switchPage('services')">Services</a>
-                    <a href="#" onclick="switchPage('pricing')">Pricing</a>
                 </div>
                 <div class="footer-col">
                     <h4>Support</h4>
