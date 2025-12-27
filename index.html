@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DDNetwork One</title>
+    <title>DDNetwork One | Digital Solutions</title>
     <meta name="description" content="Professional web development and AI solutions.">
     
     <!-- Google Fonts: Inter -->
@@ -109,7 +109,7 @@
             left: 0;
             width: 100%;
             height: var(--header-height);
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--border);
             z-index: 1000;
@@ -124,27 +124,31 @@
             align-items: center;
         }
 
+        /* LOGO STYLING: Image + Text Left */
         .logo {
-            font-size: 1.5rem;
             font-weight: 800;
             color: var(--text-main);
             letter-spacing: -0.03em;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px; /* Space between logo and text */
+            text-decoration: none;
         }
 
-        .logo span { color: var(--primary); }
-        
-        .logo-icon {
-            width: 36px;
-            height: 36px;
-            background: var(--primary);
-            border-radius: 10px;
-            display: grid;
-            place-items: center;
-            color: white;
+        .logo-img {
+            height: 50px; /* Fixed height for consistency */
+            width: auto;
+            object-fit: contain;
+            display: block;
         }
+
+        .logo-text {
+            font-size: 1.2rem; /* Text size */
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo span { color: var(--primary); } /* Highlight period */
 
         .nav-links {
             display: flex;
@@ -300,9 +304,30 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            margin-bottom: 20px;
         }
 
         .price-tag { font-size: 1.4rem; font-weight: 700; color: var(--text-main); }
+
+        /* BUY NOW BUTTON STYLE */
+        .btn-buy-now {
+            width: 100%;
+            padding: 14px;
+            background-color: var(--text-main);
+            color: white;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .btn-buy-now:hover {
+            background-color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-glow);
+        }
 
         /* --- ADD-ONS --- */
         .addon-list {
@@ -343,8 +368,8 @@
             box-shadow: var(--shadow-md); 
             width: 100%; 
             height: auto;
-            object-fit: cover;
-            aspect-ratio: 1/1; /* Keep it square */
+            object-fit: contain; /* Changed from cover to contain for Logo */
+            /* aspect-ratio: 1/1;  Removed aspect ratio to let logo natural fit */
         }
 
         /* CENTERED TEXT STYLE FOR FOUNDER */
@@ -354,11 +379,11 @@
 
         /* SPECIFIC STYLE FOR FOUNDER TEXT - MADE SMALLER */
         #founder p {
-            font-size: 0.9rem; /* Reduced from 1.05rem to 0.9rem */
-            line-height: 1.6;   /* Tighter line height for smaller text */
+            font-size: 0.9rem; 
+            line-height: 1.6;   
             color: var(--text-secondary);
             margin-bottom: 20px;
-            max-width: 650px; /* Limit width to look better when centered */
+            max-width: 650px; 
             margin-left: auto;
             margin-right: auto;
         }
@@ -372,7 +397,7 @@
         
         .check-item { display: flex; align-items: center; gap: 12px; font-weight: 600; font-size: 1.05rem; }
 
-        /* --- TESTIMONIALS --- */
+        /* --- TESTIMONIALS (IMPROVED) --- */
         .testimonial-slider {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -380,22 +405,38 @@
         }
 
         .t-card {
-            background: var(--bg-offset);
+            background: white; /* Changed to white for better contrast */
             padding: 40px;
             border-radius: var(--radius-lg);
             position: relative;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .t-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--primary);
         }
         
         .quote-icon {
             position: absolute;
             top: 30px;
             right: 30px;
-            font-size: 3rem;
-            color: #cbd5e1;
+            font-size: 2.5rem; /* Slightly smaller */
+            color: #e2e8f0;
             font-family: serif;
+            opacity: 0.5;
         }
 
-        /* --- CONTACT --- */
+        .t-rating {
+            color: #fbbf24; /* Gold */
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+
+        /* --- CONTACT (FORM) --- */
         .contact-card {
             max-width: 750px;
             margin: 0 auto;
@@ -430,6 +471,15 @@
             border-color: var(--primary);
             background: white;
             box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+        }
+
+        /* Phone Input Group Style */
+        .phone-group {
+            display: flex;
+            gap: 10px;
+        }
+        .phone-select {
+            width: 140px; /* Fixed width for code */
         }
 
         /* --- FOOTER --- */
@@ -477,10 +527,16 @@
 
         @media (max-width: 768px) {
             :root {
-                --header-height: 80px; /* Compact header on mobile */
+                --header-height: 80px; 
             }
             
-            /* TEXT SIZING ADJUSTMENTS */
+            /* Adjust Logo on Mobile */
+            .logo-text { display: none; } /* Hide text on very small screens if needed, or keep it */
+            .logo-img { height: 40px; }
+            
+            /* Actually, let's keep the text but make it smaller */
+            .logo-text { display: block; font-size: 1rem; }
+
             html {
                 font-size: 14px; 
             }
@@ -523,6 +579,8 @@
             .nav-links.active { transform: translateY(0); }
             .mobile-toggle { display: block; }
             .footer-grid { grid-template-columns: 1fr; }
+            /* Phone input responsive */
+            .phone-select { width: 100px; } /* Smaller on mobile */
         }
     </style>
 </head>
@@ -532,11 +590,10 @@
     <header>
         <div class="container">
             <nav>
+                <!-- LOGO: Image + Text Left -->
                 <a href="#" class="logo" onclick="switchPage('home')">
-                    <div class="logo-icon">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-                    </div>
-                    DDNetwork One<span>.</span>
+                    <img src="https://raw.githubusercontent.com/ddnetwork-ent/DDN-One/refs/heads/main/DD-LOGO.JPEG" class="logo-img" alt="DDNetwork One Logo">
+                    <span class="logo-text">DDNetwork One<span>.</span>
                 </a>
                 
                 <button class="mobile-toggle" onclick="toggleMenu()">☰</button>
@@ -564,7 +621,7 @@
                 <div class="hero-content">
                     <div class="badge" style="background:#e0f2fe; color:#0369a1;">🚀 Modern Web Solutions</div>
                     <h1>Digital Growth for <span class="text-gradient">Your Business</span></h1>
-                    <p>We craft fast, responsive, and intelligent websites. From basic HTML sites to advanced AI integrations, we have the tools to scale your brand.</p>
+                    <p>We craft fast, responsive, and intelligent websites. From basic HTML sites to advanced AI integrations, we have tools to scale your brand.</p>
                     <div class="hero-buttons" style="display:flex; gap:16px; flex-wrap: wrap;">
                         <button class="btn-nav" style="padding: 16px 36px; font-size: 1.05rem;" onclick="switchPage('services')">Explore Packages</button>
                         <button class="btn-nav" style="background:white; color:var(--text-main); border:1px solid var(--border);" onclick="switchPage('contact')">Get a Quote</button>
@@ -608,6 +665,7 @@
                             <span class="price-tag">RM 400 - 800</span>
                             <span class="badge badge-discount">5% OFF</span>
                         </div>
+                        <button class="btn-buy-now" onclick="switchPage('contact')">Buy Now</button>
                     </article>
 
                     <!-- Card 2: AI Website -->
@@ -622,6 +680,7 @@
                             <span class="price-tag">RM 800 - 1,500</span>
                             <span class="badge badge-discount">5% OFF</span>
                         </div>
+                        <button class="btn-buy-now" onclick="switchPage('contact')">Buy Now</button>
                     </article>
 
                     <!-- Card 3: HTML Only -->
@@ -635,6 +694,7 @@
                             <span class="price-tag">RM 200 - 400</span>
                             <span class="badge badge-discount">5% OFF</span>
                         </div>
+                        <button class="btn-buy-now" onclick="switchPage('contact')">Buy Now</button>
                     </article>
                 </div>
 
@@ -690,12 +750,13 @@
 
         <!-- === PRICING (REDIRECTS TO ADDONS) === -->
 
-        <!-- === ABOUT === -->
+        <!-- === ABOUT (UPDATED IMAGE) === -->
         <section id="about" class="page-section">
             <div class="container section-padding">
                 <div class="about-split">
                     <div>
-                        <img src="https://picsum.photos/seed/techmeeting/600/500" alt="Team Collaboration" class="about-img">
+                        <!-- UPDATED: Use DD-LOGO.JPEG -->
+                        <img src="https://raw.githubusercontent.com/ddnetwork-ent/DDN-One/refs/heads/main/DD-LOGO.JPEG" alt="DDNetwork One Logo" class="about-img">
                     </div>
                     <div>
                         <h2 style="font-size:2.8rem; margin-bottom:24px;">Why Choose DDNetwork One?</h2>
@@ -755,7 +816,7 @@
             </div>
         </section>
 
-        <!-- === TESTIMONIALS === -->
+        <!-- === TESTIMONIALS (IMPROVED) === -->
         <section id="testimonials" class="page-section">
             <div class="container section-padding">
                 <div style="text-align:center; margin-bottom:70px;">
@@ -764,6 +825,7 @@
 
                 <div class="testimonial-slider">
                     <div class="t-card">
+                        <div class="t-rating">★★★★★</div>
                         <div class="quote-icon">“</div>
                         <p style="font-style:italic; font-size:1.1rem; margin-bottom:24px; position:relative; z-index:1; color:var(--text-main);">The team transformed our outdated site into a modern masterpiece. The AI chatbot feature is a game changer for our customer service speed.</p>
                         <div style="display:flex; align-items:center; gap:15px;">
@@ -776,6 +838,7 @@
                     </div>
 
                     <div class="t-card">
+                        <div class="t-rating">★★★★★</div>
                         <div class="quote-icon">“</div>
                         <p style="font-style:italic; font-size:1.1rem; margin-bottom:24px; position:relative; z-index:1; color:var(--text-main);">Fast, affordable, and professional. The 5% discount was a nice bonus, but quality of work is what keeps us coming back for updates.</p>
                         <div style="display:flex; align-items:center; gap:15px;">
@@ -788,8 +851,9 @@
                     </div>
 
                     <div class="t-card">
+                        <div class="t-rating">★★★★★</div>
                         <div class="quote-icon">“</div>
-                        <p style="font-style:italic; font-size:1.1rem; margin-bottom:24px; position:relative; z-index:1; color:var(--text-main);">I was worried about technical side of things, but they handled the domain and hosting setup perfectly. Highly recommended!</p>
+                        <p style="font-style:italic; font-size:1.1rem; margin-bottom:24px; position:relative; z-index:1; color:var(--text-main);">I was worried about technical side of things, but they handled domain and hosting setup perfectly. Highly recommended!</p>
                         <div style="display:flex; align-items:center; gap:15px;">
                             <img src="https://picsum.photos/seed/user3/60/60" style="border-radius:50%;" alt="User">
                             <div>
@@ -802,30 +866,54 @@
             </div>
         </section>
 
-        <!-- === CONTACT === -->
+        <!-- === CONTACT (FORM WITH PHONE) === -->
         <section id="contact" class="page-section">
             <div class="container section-padding">
                 <div class="contact-card">
                     <div style="text-align:center; margin-bottom:50px;">
                         <h2 style="font-size:2.4rem;">Let's Start Your Project</h2>
-                        <p style="font-size:1.1rem; color:var(--text-secondary);">Fill out the form below to claim your first-time client discount.</p>
+                        <p style="font-size:1.1rem; color:var(--text-secondary);">Fill out the form below. On success, you will be redirected back to Home.</p>
                     </div>
 
-                    <form onsubmit="event.preventDefault(); alert('Thank you! We have received your message and will contact you shortly.');">
+                    <!-- FORMSUBMIT.CO INTEGRATION -->
+                    <form action="https://formsubmit.co/danialamir1809@gmail.com" method="POST">
+                        <!-- Hidden field for Redirection to Home Page after success -->
+                        <input type="hidden" name="_redirect" value="index.html">
+                        
                         <div class="form-row">
                             <div class="form-group">
                                 <label>Name</label>
-                                <input type="text" class="form-input" placeholder="Your Full Name" required>
+                                <input type="text" name="name" class="form-input" placeholder="Your Full Name" required>
                             </div>
                             <div class="form-group">
                                 <label>Email</label>
-                                <input type="email" class="form-input" placeholder="email@address.com" required>
+                                <input type="email" name="email" class="form-input" placeholder="email@address.com" required>
+                            </div>
+                        </div>
+
+                        <!-- NEW: Phone Number Field -->
+                        <div class="form-group">
+                            <label>Phone Number</label>
+                            <div class="phone-group">
+                                <!-- Dropdown for Country Code (Default +60) -->
+                                <select name="country_code" class="form-input phone-select">
+                                    <option value="+60" selected>+60 (MY)</option>
+                                    <option value="+65">+65 (SG)</option>
+                                    <option value="+62">+62 (ID)</option>
+                                    <option value="+66">+66 (TH)</option>
+                                    <option value="+44">+44 (UK)</option>
+                                    <option value="+1">+1 (US)</option>
+                                    <option value="+91">+91 (IN)</option>
+                                    <option value="+86">+86 (CN)</option>
+                                    <option value="+81">+81 (JP)</option>
+                                </select>
+                                <input type="tel" name="phone" class="form-input" placeholder="12 345 6789">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label>Service Interest</label>
-                            <select class="form-input">
+                            <select name="service" class="form-input">
                                 <option>Front-End Website (RM 400-800)</option>
                                 <option>AI Website (RM 800-1500)</option>
                                 <option>HTML Only (RM 200-400)</option>
@@ -835,7 +923,7 @@
 
                         <div class="form-group">
                             <label>Message</label>
-                            <textarea class="form-input" rows="6" placeholder="Tell us about your project requirements..." required></textarea>
+                            <textarea name="message" class="form-input" rows="6" placeholder="Tell us about your project requirements..." required></textarea>
                         </div>
 
                         <button type="submit" class="btn-nav" style="width:100%; justify-content:center; padding: 16px 0;">Send Message</button>
@@ -851,11 +939,10 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-brand">
+                    <!-- LOGO: Image + Text Left -->
                     <div class="logo" style="color:white; margin-bottom:15px;">
-                        <div class="logo-icon" style="background:white; color:var(--text-main); width:28px; height:28px;">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-                        </div>
-                        DDNetwork One
+                        <img src="https://raw.githubusercontent.com/ddnetwork-ent/DDN-One/refs/heads/main/DD-LOGO.JPEG" class="logo-img" alt="DDNetwork One Logo">
+                        <span class="logo-text">DDNetwork One</span>
                     </div>
                     <p>Building modern, high-performance websites for the future of business.</p>
                 </div>
