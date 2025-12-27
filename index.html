@@ -41,7 +41,7 @@
             font-family: 'Inter', sans-serif;
             background-color: var(--bg-body);
             color: var(--text-main);
-            line-height: 1.6; /* Increased line-height for readability */
+            line-height: 1.6; /* Improved readability */
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
         }
@@ -442,7 +442,7 @@
             margin: 0 auto;
             background: white;
             border-radius: var(--radius-lg);
-            padding: 50px; /* More padding on desktop for spacious look */
+            padding: 60px; /* Increased padding */
             box-shadow: var(--shadow-lg);
             border: 1px solid var(--border);
         }
@@ -453,7 +453,7 @@
             gap: 24px;
         }
 
-        .form-group { margin-bottom: 30px; /* Increased margin for clarity */ }
+        .form-group { margin-bottom: 30px; /* Increased margin */ }
         .form-group label { display: block; margin-bottom: 12px; font-weight: 600; font-size: 1rem; color: var(--text-main); } /* Darker labels for visibility */
         
         .form-input {
@@ -515,7 +515,7 @@
 
         .thankyou h2 {
             font-size: 2.5rem;
-            margin-bottom: 24px;
+            margin-bottom: 16px;
             color: var(--text-main);
         }
 
@@ -561,6 +561,11 @@
             transform: translateY(-100%); /* Move completely out of view */
         }
         
+        /* Optional: Hide toggle button so user is't confused */
+        body.thankyou-mode .mobile-toggle {
+            display: none !important;
+        }
+
         /* --- RESPONSIVE --- */
         @media (max-width: 992px) {
             .hero { 
@@ -609,7 +614,7 @@
             }
 
             .hero-content h1 { 
-                font-size: 2.2rem; 
+                font-size: 2rem; 
                 margin-bottom: 15px;
             }
 
@@ -952,24 +957,26 @@
             </div>
         </section>
 
-        <!-- === CONTACT (STANDARD FORMSUBMIT) === -->
+        <!-- === CONTACT (AJAX FORM + RELIABLE EMAIL) === -->
         <section id="contact" class="page-section">
             <div class="container section-padding">
                 <div class="contact-card">
                     <div style="text-align:center; margin-bottom:50px;">
                         <h2 style="font-size:2.4rem;">Let's Start Your Project</h2>
-                        <p style="font-size:1.1rem; color:var(--text-secondary);">Fill out the form below. You will be redirected to our main page upon success.</p>
+                        <p style="font-size:1.1rem; color:var(--text-secondary);">Fill out the form below to get in touch.</p>
                     </div>
 
-                    <!-- FORM SUBMISSION -->
-                    <!-- Using standard POST with Server-Side Redirect (Most Reliable) -->
-                    <form action="https://formsubmit.co/el/gafase" method="POST">
+                    <!-- FORMSUBMIT CO INTEGRATION -->
+                    <!-- ACTION URL: CHANGED TO DIRECT EMAIL ADDRESS TO FIX "NO EMAIL" ISSUE -->
+                    <form action="https://formsubmit.co/danialamir1809@gmail.com" method="POST" id="contactForm">
                         
+                        <!-- Subject Line -->
+                        <input type="hidden" name="_subject" value="New Project Inquiry - DDNetwork">
+
                         <!-- Hidden Redirect Parameter -->
-                        <!-- Tells FormSubmit to redirect to this URL with ?thankyou=true after email is sent -->
                         <input type="hidden" name="_redirect" value="https://one.ddnetwork.uk/?thankyou=true">
                         
-                        <!-- Disable CAPTCHA (Optional, but improves UX) -->
+                        <!-- Disable CAPTCHA (Optional) -->
                         <input type="hidden" name="_captcha" value="false">
 
                         <div class="form-row">
@@ -1018,7 +1025,8 @@
                             <textarea name="message" class="form-input" rows="6" placeholder="Tell us about your project requirements..." required></textarea>
                         </div>
 
-                        <button type="submit" class="btn-nav" style="width:100%; justify-content:center; padding: 18px 0;">Send Message</button>
+                        <!-- Submit Button -->
+                        <button type="submit" class="btn-nav" id="submitBtn" style="width:100%; justify-content:center; padding: 18px 0;">Send Message</button>
                     </form>
                 </div>
             </div>
@@ -1054,7 +1062,7 @@
                         <img src="https://raw.githubusercontent.com/ddnetwork-ent/DDN-One/refs/heads/main/DD-LOGO.JPEG" class="logo-img" alt="DDNetwork One Logo">
                         <span class="logo-text">DDNetwork One</span>
                     </div>
-                    <p>Building modern, high-performance websites for future of business.</p>
+                    <p>Building modern, high-performance websites for the future of business.</p>
                 </div>
                 <div class="footer-col">
                     <h4>Company</h4>
@@ -1147,7 +1155,70 @@
             document.getElementById('navLinks').classList.toggle('active');
         }
 
-        // Check URL parameters to see if we should show Thank You page
+        // === AJAX FORM HANDLER (FIXES "NO EMAIL" ISSUE) ===
+        document.getElementById('contactForm').addEventListener('submit', function(event) {
+            // 1. Prevent default form submission (page reload)
+            event.preventDefault();
+
+            const form = event.target;
+            const btn = document.getElementById('submitBtn');
+
+            // 2. Show "Sending..." state
+            const originalText = btn.innerText;
+            btn.innerText = "Sending...";
+            btn.style.opacity = "0.7";
+            btn.disabled = true;
+
+            // 3. Prepare Data
+            const formData = new FormData(form);
+
+            // 4. Send data via Fetch API to FormSubmit
+            // Using mode: 'cors' ensures correct pre-flight checks
+            fetch(form.action, {
+                method: "POST",
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => {
+                // 5. Handle Success
+                if (response.success) {
+                    // Restore Button and Show Success
+                    btn.innerText = "Email sent successfully!";
+                    btn.style.opacity = "1";
+                    btn.disabled = false;
+
+                    // Show Alert so user KNOW it worked
+                    alert("Email sent successfully! Redirecting to Thank You page...");
+
+                    // Wait 1 second then redirect to Thank You page
+                    setTimeout(() => {
+                        window.location.href = "https://one.ddnetwork.uk/?thankyou=true";
+                    }, 1000);
+                } else {
+                    // 6. Handle Error (This tells you WHY email didn't send)
+                    console.error("FormSubmit Error:", response);
+                    alert("Error: " + response.message);
+                    
+                    // Restore Button
+                    btn.innerText = originalText;
+                    btn.style.opacity = "1";
+                    btn.disabled = false;
+                }
+            })
+            .catch(error => {
+                console.error("Fetch Error:", error);
+                alert("Network Error: " + error.message);
+                
+                // Restore Button
+                btn.innerText = originalText;
+                btn.style.opacity = "1";
+                btn.disabled = false;
+            });
+        });
+
+        // Initialize Home page on load
         window.addEventListener('DOMContentLoaded', () => {
             const params = new URLSearchParams(window.location.search);
             const isThankYou = params.get('thankyou');
