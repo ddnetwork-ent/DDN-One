@@ -115,6 +115,7 @@
             z-index: 1000;
             padding-top: 10px;
             padding-bottom: 10px;
+            transition: all 0.3s ease; /* Smooth hiding */
         }
 
         nav {
@@ -131,24 +132,24 @@
             letter-spacing: -0.03em;
             display: flex;
             align-items: center;
-            gap: 12px; /* Space between logo and text */
+            gap: 12px; 
             text-decoration: none;
         }
 
         .logo-img {
-            height: 50px; /* Fixed height for consistency */
+            height: 50px; 
             width: auto;
             object-fit: contain;
             display: block;
         }
 
         .logo-text {
-            font-size: 1.2rem; /* Text size */
+            font-size: 1.2rem; 
             display: flex;
             align-items: center;
         }
         
-        .logo span { color: var(--primary); } /* Highlight period */
+        .logo span { color: var(--primary); }
 
         .nav-links {
             display: flex;
@@ -481,29 +482,46 @@
             width: 140px; 
         }
 
-        /* --- THANK YOU SECTION --- */
+        /* --- THANK YOU SECTION (SINGLE PAGE STYLE) --- */
         #thankyou {
+            min-height: 100vh; /* Full screen height */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
             text-align: center;
-            padding-top: 150px;
+        }
+        
+        .thankyou-content {
+            max-width: 600px;
+            width: 100%;
         }
         
         .thankyou-icon {
-            font-size: 4rem;
+            font-size: 5rem;
             color: var(--success);
-            margin-bottom: 24px;
+            margin-bottom: 30px;
+            display: inline-block;
+            background: #ecfdf5;
+            padding: 40px;
+            border-radius: 50%;
+            width: 140px;
+            height: 140px;
+            line-height: 1; /* Center SVG vertically */
         }
 
-        .thankyou-title {
+        .thankyou h2 {
             font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 16px;
+            margin-bottom: 20px;
+            color: var(--text-main);
         }
 
-        .thankyou-msg {
-            font-size: 1.2rem;
+        .thankyou p {
+            font-size: 1.1rem;
             color: var(--text-secondary);
             margin-bottom: 40px;
-            max-width: 600px;
+            max-width: 500px;
             margin-left: auto;
             margin-right: auto;
         }
@@ -514,6 +532,7 @@
             color: white;
             padding: 80px 0 40px;
             margin-top: 120px;
+            transition: all 0.3s ease; /* Smooth hiding */
         }
         .footer-grid {
             display: grid;
@@ -532,6 +551,19 @@
             text-align: center;
             color: #64748b;
             font-size: 0.9rem;
+        }
+
+        /* --- HIDE HEADER & FOOTER ON THANK YOU PAGE --- */
+        body.thankyou-mode header,
+        body.thankyou-mode footer {
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(-100%); /* Move completely out of view */
+        }
+        
+        /* Optional: Hide toggle button so user is't confused */
+        body.thankyou-mode .mobile-toggle {
+            display: none !important;
         }
 
         /* --- RESPONSIVE --- */
@@ -556,11 +588,8 @@
                 --header-height: 80px; 
             }
             
-            /* Adjust Logo on Mobile */
             .logo-text { display: none; } 
             .logo-img { height: 40px; }
-            
-            /* Actually, let's keep text but make it smaller */
             .logo-text { display: block; font-size: 1rem; }
 
             html {
@@ -605,7 +634,6 @@
             .nav-links.active { transform: translateY(0); }
             .mobile-toggle { display: block; }
             .footer-grid { grid-template-columns: 1fr; }
-            /* Phone input responsive */
             .phone-select { width: 100px; }
         }
     </style>
@@ -787,7 +815,7 @@
                     <div>
                         <h2 style="font-size:2.8rem; margin-bottom:24px;">Why Choose DDNetwork One?</h2>
                         <p style="font-size:1.1rem; color:var(--text-secondary); margin-bottom:32px;">
-                            We combine technical expertise with creative design to build digital assets that actually convert visitors into customers. Our transparent process ensures you are involved every step of the way.
+                            We combine technical expertise with creative design to build digital assets that actually convert visitors into customers. Our transparent process ensures you are involved every step of way.
                         </p>
 
                         <div class="check-grid">
@@ -811,7 +839,7 @@
 
                         <div style="margin-top:48px; padding:30px; background:#f0f9ff; border-radius:var(--radius-md); border-left:5px solid var(--primary);">
                             <strong style="color:var(--primary-dark); font-size:1.1rem; display:block; margin-bottom:8px;">Our Promise:</strong>
-                            <p style="margin:0; font-size:1rem;">Personalized support from start to finish. We ensure you understand every step of the process.</p>
+                            <p style="margin:0; font-size:1rem;">Personalized support from start to finish. We ensure you understand every step of process.</p>
                         </div>
                     </div>
                 </div>
@@ -879,7 +907,7 @@
                     <div class="t-card">
                         <div class="t-rating">★★★★★</div>
                         <div class="quote-icon">“</div>
-                        <p style="font-style:italic; font-size:1.1rem; margin-bottom:24px; position:relative; z-index:1; color:var(--text-main);">I was worried about the technical side of things, but they handled domain and hosting setup perfectly. Highly recommended!</p>
+                        <p style="font-style:italic; font-size:1.1rem; margin-bottom:24px; position:relative; z-index:1; color:var(--text-main);">I was worried about technical side of things, but they handled domain and hosting setup perfectly. Highly recommended!</p>
                         <div style="display:flex; align-items:center; gap:15px;">
                             <img src="https://picsum.photos/seed/user3/60/60" style="border-radius:50%;" alt="User">
                             <div>
@@ -892,20 +920,21 @@
             </div>
         </section>
 
-        <!-- === CONTACT (FORM WITH PHONE & FORMSUBMIT) === -->
+        <!-- === CONTACT (FORM WITH PHONE & REAL SUBMIT) === -->
         <section id="contact" class="page-section">
             <div class="container section-padding">
                 <div class="contact-card">
                     <div style="text-align:center; margin-bottom:50px;">
                         <h2 style="font-size:2.4rem;">Let's Start Your Project</h2>
-                        <p style="font-size:1.1rem; color:var(--text-secondary);">Fill out the form below. On success, you will see the thank you page.</p>
+                        <p style="font-size:1.1rem; color:var(--text-secondary);">Fill out the form below to start your project.</p>
                     </div>
 
-                    <!-- FORMSUBMIT.CO INTEGRATION -->
-                    <form action="https://formsubmit.co/el/gafase" method="POST">
+                    <!-- FORMSUBMIT.CO INTEGRATION & REAL SUBMIT -->
+                    <!-- Updated action to GitHub Pages URL for Real Submit -->
+                    <form action="https://ddnetwork-ent.github.io/DDN-One/" method="POST">
                         <!-- Hidden field for Redirection to Thank You Page -->
-                        <!-- We redirect to index.html?thankyou=true, and JS will catch it -->
-                        <input type="hidden" name="_redirect" value="index.html?thankyou=true">
+                        <!-- Note: You must set this redirect in FormSubmit dashboard to this exact URL including ?thankyou=true -->
+                        <input type="hidden" name="_redirect" value="?thankyou=true">
                         
                         <div class="form-row">
                             <div class="form-group">
@@ -953,22 +982,26 @@
                             <textarea name="message" class="form-input" rows="6" placeholder="Tell us about your project requirements..." required></textarea>
                         </div>
 
+                        <!-- REAL SUBMIT BUTTON: No action needed here, submits form action URL -->
                         <button type="submit" class="btn-nav" style="width:100%; justify-content:center; padding: 16px 0;">Send Message</button>
                     </form>
                 </div>
             </div>
         </section>
 
-        <!-- === THANK YOU SECTION (NEW) === -->
+        <!-- === THANK YOU PAGE (SINGLE PAGE) === -->
         <section id="thankyou" class="page-section">
-            <div class="container section-padding">
-                <div class="thankyou-icon">
-                    <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-                </div>
-                <h2 class="thankyou-title">Thank You For Choosing Us</h2>
-                <p class="thankyou-msg">Thank you for choosing us, this order will take up to 24 hours.</p>
-                <div style="margin-top: 30px;">
-                    <button class="btn-nav" onclick="switchPage('home')">Return to Home</button>
+            <div class="container">
+                <div class="thankyou-content">
+                    <div class="thankyou-icon">
+                        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                    </div>
+                    
+                    <h2>Thank You!</h2>
+                    <p>Your order has been received.</p>
+                    <p>Thank you for choosing us, this order will take up to 24 hours.</p>
+                    
+                    <button class="btn-nav" onclick="switchPage('home')" style="padding: 16px 40px; font-size: 1.1rem; margin-top:20px;">Return to Home</button>
                 </div>
             </div>
         </section>
@@ -1013,25 +1046,45 @@
     </footer>
 
     <script>
-        // Function to handle page switching (SPA logic)
         function switchPage(pageId) {
-            // Special handling for "Pricing" - Go to Services and scroll to Add-ons
-            if (pageId === 'pricing') {
-                // 1. Hide all sections
+            // 1. Handle "Thank You" Page Logic (Isolate it)
+            if (pageId === 'thankyou') {
+                // Hide all sections
                 const sections = document.querySelectorAll('.page-section');
                 sections.forEach(s => s.classList.remove('active'));
 
-                // 2. Show Services section
+                // Show Thank You section
+                const thankYouSection = document.getElementById('thankyou');
+                if (thankYouSection) thankYouSection.classList.add('active');
+
+                // Add class to body to hide header/footer (Standalone page effect)
+                document.body.classList.add('thankyou-mode');
+
+                // Scroll to top
+                window.scrollTo(0,0);
+                return;
+            } else {
+                // 2. Normal Page Logic (Remove thank you mode)
+                document.body.classList.remove('thankyou-mode');
+            }
+
+            // Special handling for "Pricing" - Go to Services and scroll to Add-ons
+            if (pageId === 'pricing') {
+                // Hide all sections
+                const sections = document.querySelectorAll('.page-section');
+                sections.forEach(s => s.classList.remove('active'));
+
+                // Show Services section
                 const servicesSection = document.getElementById('services');
                 if (servicesSection) servicesSection.classList.add('active');
 
-                // 3. Update nav state to Services
+                // Update nav state to Services
                 const items = document.querySelectorAll('.nav-item');
                 items.forEach(i => i.classList.remove('active'));
                 const servicesItem = Array.from(items).find(i => i.getAttribute('onclick').includes('services'));
                 if (servicesItem) servicesItem.classList.add('active');
 
-                // 4. Scroll to top first, then smooth scroll to addons
+                // Scroll to top first, then smooth scroll to addons
                 window.scrollTo(0,0);
                 setTimeout(() => {
                     const addons = document.getElementById('pricing-addons');
