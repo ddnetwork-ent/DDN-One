@@ -504,10 +504,10 @@
             margin-bottom: 30px;
             display: inline-block;
             background: #ecfdf5;
-            padding: 30px;
+            padding: 40px;
             border-radius: 50%;
-            width: 120px;
-            height: 120px;
+            width: 140px;
+            height: 140px;
             line-height: 1; /* Center SVG vertically */
         }
 
@@ -520,7 +520,7 @@
         .thankyou p {
             font-size: 1.1rem;
             color: var(--text-secondary);
-            margin-bottom: 10px; /* Reduced margin for multiple paragraphs */
+            margin-bottom: 10px; /* Space between paragraphs */
         }
 
         /* --- FOOTER --- */
@@ -812,7 +812,7 @@
                     <div>
                         <h2 style="font-size:2.8rem; margin-bottom:24px;">Why Choose DDNetwork One?</h2>
                         <p style="font-size:1.1rem; color:var(--text-secondary); margin-bottom:32px;">
-                            We combine technical expertise with creative design to build digital assets that actually convert visitors into customers. Our transparent process ensures you are involved every step of the way.
+                            We combine technical expertise with creative design to build digital assets that actually convert visitors into customers. Our transparent process ensures you are involved every step of way.
                         </p>
 
                         <div class="check-grid">
@@ -836,7 +836,7 @@
 
                         <div style="margin-top:48px; padding:30px; background:#f0f9ff; border-radius:var(--radius-md); border-left:5px solid var(--primary);">
                             <strong style="color:var(--primary-dark); font-size:1.1rem; display:block; margin-bottom:8px;">Our Promise:</strong>
-                            <p style="margin:0; font-size:1rem;">Personalized support from start to finish. We ensure you understand every step of the process.</p>
+                            <p style="margin:0; font-size:1rem;">Personalized support from start to finish. We ensure you understand every step of process.</p>
                         </div>
                     </div>
                 </div>
@@ -904,7 +904,7 @@
                     <div class="t-card">
                         <div class="t-rating">★★★★★</div>
                         <div class="quote-icon">“</div>
-                        <p style="font-style:italic; font-size:1.1rem; margin-bottom:24px; position:relative; z-index:1; color:var(--text-main);">I was worried about the technical side of things, but they handled domain and hosting setup perfectly. Highly recommended!</p>
+                        <p style="font-style:italic; font-size:1.1rem; margin-bottom:24px; position:relative; z-index:1; color:var(--text-main);">I was worried about technical side of things, but they handled domain and hosting setup perfectly. Highly recommended!</p>
                         <div style="display:flex; align-items:center; gap:15px;">
                             <img src="https://picsum.photos/seed/user3/60/60" style="border-radius:50%;" alt="User">
                             <div>
@@ -917,7 +917,7 @@
             </div>
         </section>
 
-        <!-- === CONTACT (FORM WITH NEW REDIRECT URL) === -->
+        <!-- === CONTACT (FORM WITH REDIRECT URL) === -->
         <section id="contact" class="page-section">
             <div class="container section-padding">
                 <div class="contact-card">
@@ -927,9 +927,10 @@
                     </div>
 
                     <!-- FORMSUBMIT.CO INTEGRATION -->
-                    <!-- UPDATED ACTION URL to point to one.ddnetwork.uk -->
+                    <!-- ACTION URL: Updated to one.ddnetwork.uk. FormSubmit will redirect to ?thankyou=true -->
                     <form action="https://one.ddnetwork.uk/" method="POST">
                         <!-- Hidden field for Redirection to Thank You Page -->
+                        <!-- This makes FormSubmit redirect to: https://one.ddnetwork.uk/?thankyou=true -->
                         <input type="hidden" name="_redirect" value="?thankyou=true">
                         
                         <div class="form-row">
@@ -996,7 +997,8 @@
                     <p>Your order has been received.</p>
                     <p>Thank you for choosing us! Our team will review your email within 24 hours.</p>
                     
-                    <button class="btn-nav" onclick="switchPage('home')" style="padding: 16px 40px; font-size: 1.1rem; margin-top:20px;">Return to Home</button>
+                    <!-- Button redirects to https://one.ddnetwork.uk/ -->
+                    <button class="btn-nav" onclick="window.location.href='https://one.ddnetwork.uk/'" style="padding: 16px 40px; font-size: 1.1rem; margin-top:20px;">Return to Home</button>
                 </div>
             </div>
         </section>
@@ -1035,7 +1037,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                &copy; 2025 DDNetwork One. All rights reserved.
+                &copy; 2023 DDNetwork One. All rights reserved.
             </div>
         </div>
     </footer>
@@ -1057,7 +1059,7 @@
                 window.scrollTo(0,0);
                 return;
             } else {
-                // If we navigate normally (not thankyou), ensure we are not in thankyou mode
+                // 2. Normal Page Logic (Remove thank you mode)
                 document.body.classList.remove('thankyou-mode');
             }
 
@@ -1085,39 +1087,34 @@
                 return;
             }
 
-            // Standard page switching logic (Exclude thankyou from standard logic)
-            if (pageId !== 'thankyou') {
-                const sections = document.querySelectorAll('.page-section');
-                sections.forEach(s => s.classList.remove('active'));
+            // Standard page switching logic
+            const sections = document.querySelectorAll('.page-section');
+            sections.forEach(s => s.classList.remove('active'));
 
-                const target = document.getElementById(pageId);
-                if (target) target.classList.add('active');
+            const target = document.getElementById(pageId);
+            if (target) target.classList.add('active');
 
-                const items = document.querySelectorAll('.nav-item');
-                items.forEach(i => i.classList.remove('active'));
-                const activeItem = Array.from(items).find(i => i.getAttribute('onclick').includes(pageId));
-                if (activeItem) activeItem.classList.add('active');
+            const items = document.querySelectorAll('.nav-item');
+            items.forEach(i => i.classList.remove('active'));
+            const activeItem = Array.from(items).find(i => i.getAttribute('onclick').includes(pageId));
+            if (activeItem) activeItem.classList.add('active');
 
-                window.scrollTo(0,0);
-                document.getElementById('navLinks').classList.remove('active');
-            }
+            window.scrollTo(0,0);
+            document.getElementById('navLinks').classList.remove('active');
         }
 
         function toggleMenu() {
             document.getElementById('navLinks').classList.toggle('active');
         }
 
-        // === NEW LOGIC TO HANDLE FORMSUBMIT REDIRECT TO ONE.DDNETWORK.UK ===
+        // Check URL parameters to see if we should show Thank You page
         window.addEventListener('DOMContentLoaded', () => {
-            // 1. Check URL parameters to see if we are on the "Thank You" page
             const params = new URLSearchParams(window.location.search);
             const isThankYou = params.get('thankyou');
             
-            // 2. If FormSubmit redirects to ...?thankyou=true, show Thank You page
             if (isThankYou) {
                 switchPage('thankyou');
             } else {
-                // 3. Otherwise, default to Home
                 const homeSection = document.getElementById('home');
                 if (homeSection) homeSection.classList.add('active');
             }
