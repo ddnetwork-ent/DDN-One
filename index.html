@@ -14,7 +14,7 @@
         :root {
             --bg-body: #ffffff;
             --bg-offset: #f8fafc; 
-            --text-main: #0f172a;
+            --text-main: #0f172a; /* Main text color - slightly smaller default */
             --text-secondary: #475569;
             --primary: #2563eb;
             --primary-dark: #1d4ed8;
@@ -44,6 +44,7 @@
             line-height: 1.6; /* Improved readability */
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
+            font-size: 15px; /* Base size reduced slightly */
         }
 
         a { text-decoration: none; color: inherit; transition: color 0.2s; }
@@ -58,7 +59,7 @@
             padding: 0 24px;
         }
 
-        .section-padding { padding: 120px 0; }
+        .section-padding { padding: 100px 0; /* Slightly smaller padding for desktop */ }
         
         .text-gradient {
             background: linear-gradient(135deg, var(--text-main) 0%, var(--primary) 100%);
@@ -69,13 +70,13 @@
 
         .badge {
             display: inline-block;
-            padding: 8px 18px; 
+            padding: 6px 14px; /* Smaller badge */
             border-radius: 50px;
-            font-size: 0.85rem;
+            font-size: 0.75rem; /* Smaller badge text */
             font-weight: 600;
             letter-spacing: 0.5px;
             text-transform: uppercase;
-            margin-bottom: 32px; 
+            margin-bottom: 24px; 
         }
         
         .badge-discount {
@@ -137,14 +138,14 @@
         }
 
         .logo-img {
-            height: 50px; 
+            height: 45px; /* Slightly smaller logo */
             width: auto;
             object-fit: contain;
             display: block;
         }
 
         .logo-text {
-            font-size: 1.2rem; 
+            font-size: 1rem; /* Smaller logo text */
             display: flex;
             align-items: center;
         }
@@ -157,7 +158,7 @@
         }
 
         .nav-item {
-            font-size: 1rem;
+            font-size: 0.95rem; /* Smaller nav text */
             font-weight: 500;
             color: var(--text-secondary);
             cursor: pointer;
@@ -181,12 +182,12 @@
         .nav-item:hover::after, .nav-item.active::after { width: 100%; }
 
         .btn-nav {
-            padding: 12px 28px;
+            padding: 10px 24px; /* Smaller nav button */
             background-color: var(--text-main);
             color: white;
             border-radius: 50px;
             font-weight: 600;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             transition: all 0.2s;
             border: none;
         }
@@ -201,23 +202,23 @@
             grid-template-columns: 1fr 1fr;
             align-items: center;
             gap: 80px;
-            padding-top: 150px; 
+            padding-top: 140px; 
             padding-bottom: 80px;
             position: relative;
         }
 
         .hero-content h1 {
-            font-size: 3.8rem;
+            font-size: 3rem; /* Reduced from 3.8rem */
             line-height: 1.1;
             font-weight: 800;
-            margin-bottom: 28px;
+            margin-bottom: 24px;
             letter-spacing: -0.02em;
         }
 
         .hero-content p {
-            font-size: 1.15rem;
+            font-size: 0.95rem; /* Smaller text */
             color: var(--text-secondary);
-            margin-bottom: 40px;
+            margin-bottom: 32px;
             max-width: 500px;
         }
 
@@ -246,30 +247,30 @@
 
         /* --- SERVICES (COMBINED) --- */
         .category-header {
-            margin-bottom: 40px;
+            margin-bottom: 30px;
             display: flex;
             align-items: center;
             gap: 15px;
-            margin-top: 60px;
+            margin-top: 50px;
         }
         
         .category-header:first-child { margin-top: 0; }
 
-        .category-header h3 { font-size: 2rem; font-weight: 700; color: var(--text-main); }
+        .category-header h3 { font-size: 1.6rem; /* Smaller header */ font-weight: 700; color: var(--text-main); }
         .category-line { height: 1px; background: var(--border); flex-grow: 1; }
 
         .services-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
+            gap: 30px; /* Smaller gap */
+            margin-bottom: 30px;
         }
 
         .service-card {
             background: white;
             border: 1px solid var(--border);
             border-radius: var(--radius-lg);
-            padding: 40px;
+            padding: 30px; /* Smaller padding */
             transition: all 0.3s ease;
             position: relative;
             display: flex;
@@ -278,29 +279,29 @@
         }
 
         .service-card:hover {
-            transform: translateY(-8px);
+            transform: translateY(-5px);
             box-shadow: var(--shadow-lg);
             border-color: var(--primary);
         }
 
         .card-icon {
-            width: 60px;
-            height: 60px;
+            width: 50px; /* Smaller icon */
+            height: 50px;
             background: var(--bg-offset);
             border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--primary);
-            margin-bottom: 24px;
-            font-size: 1.8rem;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
         }
 
-        .service-title { font-size: 1.4rem; font-weight: 700; margin-bottom: 12px; color: var(--text-main); }
-        .service-desc { font-size: 1.05rem; color: var(--text-secondary); margin-bottom: 24px; flex-grow: 1; }
+        .service-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 10px; color: var(--text-main); }
+        .service-desc { font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 20px; flex-grow: 1; }
         
         .price-area {
-            padding-top: 24px;
+            padding-top: 20px;
             border-top: 1px solid var(--border);
             display: flex;
             justify-content: space-between;
@@ -308,17 +309,17 @@
             margin-bottom: 20px;
         }
 
-        .price-tag { font-size: 1.4rem; font-weight: 700; color: var(--text-main); }
+        .price-tag { font-size: 1.2rem; font-weight: 700; color: var(--text-main); }
 
         /* BUY NOW BUTTON STYLE */
         .btn-buy-now {
             width: 100%;
-            padding: 14px;
+            padding: 12px; /* Smaller button */
             background-color: var(--text-main);
             color: white;
             border: none;
             border-radius: var(--radius-sm);
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.2s;
@@ -334,15 +335,15 @@
         .addon-list {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            gap: 25px;
         }
 
         .addon-item {
             display: flex;
             align-items: flex-start;
-            gap: 20px;
+            gap: 15px;
             background: white;
-            padding: 30px;
+            padding: 25px; /* Smaller padding */
             border-radius: var(--radius-md);
             border: 1px solid var(--border);
             transition: transform 0.2s;
@@ -360,7 +361,7 @@
         .about-split {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 80px;
+            gap: 60px;
             align-items: center;
         }
         
@@ -379,10 +380,10 @@
 
         /* SPECIFIC STYLE FOR FOUNDER TEXT - MADE SMALLER */
         #founder p {
-            font-size: 0.9rem; 
+            font-size: 0.85rem; /* Smaller text */
             line-height: 1.6;   
             color: var(--text-secondary);
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             max-width: 650px; 
             margin-left: auto;
             margin-right: auto;
@@ -391,22 +392,22 @@
         .check-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-top: 40px;
+            gap: 15px;
+            margin-top: 30px;
         }
         
-        .check-item { display: flex; align-items: center; gap: 12px; font-weight: 600; font-size: 1.05rem; }
+        .check-item { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 0.95rem; }
 
         /* --- TESTIMONIALS (IMPROVED) --- */
         .testimonial-slider {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
         }
 
         .t-card {
             background: white; 
-            padding: 40px;
+            padding: 30px; /* Smaller padding */
             border-radius: var(--radius-lg);
             position: relative;
             border: 1px solid var(--border);
@@ -415,16 +416,16 @@
         }
 
         .t-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-3px);
             box-shadow: var(--shadow-md);
             border-color: var(--primary);
         }
         
         .quote-icon {
             position: absolute;
-            top: 30px;
-            right: 30px;
-            font-size: 2.5rem; 
+            top: 20px;
+            right: 20px;
+            font-size: 2rem; /* Smaller icon */
             color: #e2e8f0;
             font-family: serif;
             opacity: 0.5;
@@ -432,17 +433,17 @@
 
         .t-rating {
             color: #fbbf24; 
-            margin-bottom: 20px;
-            font-size: 1.2rem;
+            margin-bottom: 15px;
+            font-size: 1rem;
         }
 
         /* --- CONTACT (FORM) --- */
         .contact-card {
-            max-width: 750px;
+            max-width: 700px;
             margin: 0 auto;
             background: white;
             border-radius: var(--radius-lg);
-            padding: 60px; /* Increased padding */
+            padding: 40px; /* Reduced padding */
             box-shadow: var(--shadow-lg);
             border: 1px solid var(--border);
         }
@@ -450,18 +451,18 @@
         .form-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 24px;
+            gap: 20px; /* Reduced gap */
         }
 
-        .form-group { margin-bottom: 30px; /* Increased margin */ }
-        .form-group label { display: block; margin-bottom: 12px; font-weight: 600; font-size: 1rem; color: var(--text-main); } /* Darker labels for visibility */
+        .form-group { margin-bottom: 20px; /* Reduced margin */ }
+        .form-group label { display: block; margin-bottom: 10px; font-weight: 600; font-size: 0.9rem; color: var(--text-main); } 
         
         .form-input {
             width: 100%;
-            padding: 18px 20px; /* Larger inputs for easier typing */
+            padding: 14px 16px; /* Reduced padding for "smaller" look */
             border: 1px solid var(--border);
             border-radius: var(--radius-sm);
-            font-size: 1.05rem; /* Slightly larger font for readability */
+            font-size: 0.95rem; /* Smaller font */
             font-family: inherit;
             transition: all 0.2s;
             background: #fafafa;
@@ -476,17 +477,17 @@
         /* Phone Input Group Style */
         .phone-group {
             display: flex;
-            gap: 12px; /* Slightly wider gap */
+            gap: 12px;
         }
         .phone-select {
-            width: 150px; /* Wider select for mobile ease */
-            padding: 18px 20px; /* Match input height */
+            width: 140px; 
+            padding: 14px 16px; /* Match input */
             flex-shrink: 0;
         }
 
         /* --- THANK YOU SECTION (SINGLE PAGE STYLE) --- */
         #thankyou {
-            min-height: 100vh; /* Full screen height */
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -501,28 +502,28 @@
         }
         
         .thankyou-icon {
-            font-size: 5rem;
+            font-size: 4rem;
             color: var(--success);
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             display: inline-block;
             background: #ecfdf5;
-            padding: 40px;
+            padding: 30px;
             border-radius: 50%;
-            width: 140px;
-            height: 140px;
-            line-height: 1; /* Center SVG vertically */
+            width: 110px; /* Smaller icon */
+            height: 110px;
+            line-height: 1;
         }
 
         .thankyou h2 {
-            font-size: 2.5rem;
-            margin-bottom: 16px;
+            font-size: 2rem; /* Smaller heading */
+            margin-bottom: 15px;
             color: var(--text-main);
         }
 
         .thankyou p {
-            font-size: 1.2rem; /* Larger text for emphasis */
+            font-size: 1rem; /* Smaller text */
             color: var(--text-secondary);
-            margin-bottom: 15px; /* Clearer spacing */
+            margin-bottom: 10px;
             line-height: 1.5;
         }
 
@@ -530,27 +531,27 @@
         footer {
             background: var(--text-main);
             color: white;
-            padding: 80px 0 40px;
-            margin-top: 120px;
-            transition: all 0.3s ease; /* Smooth hiding */
+            padding: 60px 0 30px;
+            margin-top: 100px;
+            transition: all 0.3s ease;
         }
         .footer-grid {
             display: grid;
             grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 50px;
-            margin-bottom: 60px;
+            gap: 40px;
+            margin-bottom: 50px;
         }
-        .footer-brand h2 { margin-bottom: 20px; font-size: 1.5rem; }
-        .footer-brand p { color: #94a3b8; max-width: 350px; font-size: 1rem; }
-        .footer-col h4 { color: white; margin-bottom: 24px; font-size: 1.1rem; }
-        .footer-col a { display: block; color: #94a3b8; margin-bottom: 14px; font-size: 0.95rem; }
+        .footer-brand h2 { margin-bottom: 15px; font-size: 1.3rem; }
+        .footer-brand p { color: #94a3b8; max-width: 350px; font-size: 0.9rem; }
+        .footer-col h4 { color: white; margin-bottom: 20px; font-size: 0.95rem; }
+        .footer-col a { display: block; color: #94a3b8; margin-bottom: 12px; font-size: 0.85rem; }
         .footer-col a:hover { color: white; }
         .footer-bottom {
             border-top: 1px solid #334155;
-            padding-top: 30px;
+            padding-top: 25px;
             text-align: center;
             color: #64748b;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
         }
 
         /* --- HIDE HEADER & FOOTER ON THANK YOU PAGE --- */
@@ -558,10 +559,9 @@
         body.thankyou-mode footer {
             opacity: 0;
             pointer-events: none;
-            transform: translateY(-100%); /* Move completely out of view */
+            transform: translateY(-100%); 
         }
         
-        /* Optional: Hide toggle button so user is't confused */
         body.thankyou-mode .mobile-toggle {
             display: none !important;
         }
@@ -572,15 +572,15 @@
                 grid-template-columns: 1fr; 
                 text-align: center; 
                 padding-top: 110px; 
-                gap: 50px; 
+                gap: 40px; 
             }
-            .hero-content p { margin: 0 auto 32px; }
+            .hero-content p { margin: 0 auto 25px; }
             .hero-buttons { justify-content: center; }
             .about-split { grid-template-columns: 1fr; }
             .form-row { grid-template-columns: 1fr; }
             .footer-grid { grid-template-columns: 1fr 1fr; }
-            .hero-content h1 { font-size: 2.8rem; }
-            .category-header h3 { font-size: 1.5rem; }
+            .hero-content h1 { font-size: 2.5rem; }
+            .category-header h3 { font-size: 1.3rem; }
         }
 
         @media (max-width: 768px) {
@@ -589,50 +589,50 @@
             }
             
             .logo-text { display: none; } 
-            .logo-img { height: 40px; }
-            .logo-text { display: block; font-size: 1rem; }
+            .logo-img { height: 35px; }
+            .logo-text { display: block; font-size: 0.9rem; }
 
             html {
-                font-size: 14px; /* Maintain base font size */
+                font-size: 14px; 
             }
 
             /* Mobile Tweaks for "Small" layout */
             .contact-card {
-                padding: 30px 20px; /* Less side padding on mobile, more vertical space */
+                padding: 25px 15px; /* Less side padding on mobile */
             }
             
-            .form-group { margin-bottom: 24px; }
+            .form-group { margin-bottom: 15px; }
 
             .form-input {
-                padding: 18px 16px; /* Slightly adjust for narrow screens */
-                font-size: 16px; /* 16px is minimum for touch targets (Apple standard) */
+                padding: 15px 14px; /* Mobile padding */
+                font-size: 16px; /* Ensure touch target is large enough */
             }
 
             .phone-select {
-                width: 110px; /* Adjust for country code width */
-                padding: 18px 12px;
+                width: 120px; 
+                padding: 15px 12px;
             }
 
             .hero-content h1 { 
-                font-size: 2rem; 
-                margin-bottom: 15px;
+                font-size: 1.8rem; 
+                margin-bottom: 12px;
             }
 
-            h2 { font-size: 1.6rem !important; } 
-            h3 { font-size: 1.3rem !important; }
+            h2 { font-size: 1.4rem !important; } 
+            h3 { font-size: 1.2rem !important; }
 
             .hero-content p { 
-                font-size: 0.95rem; 
-                margin: 0 auto 20px;
+                font-size: 0.9rem; 
+                margin: 0 auto 15px;
             }
 
             .section-padding { 
-                padding: 50px 0; 
+                padding: 70px 0; /* Slightly larger for mobile readability */
             }
 
-            .service-card { padding: 24px; } 
-            .service-title { font-size: 1.1rem; }
-            .service-desc { font-size: 0.9rem; }
+            .service-card { padding: 20px; } 
+            .service-title { font-size: 1rem; }
+            .service-desc { font-size: 0.85rem; }
             
             /* Mobile Menu: Full screen width for easier touching */
             .nav-links {
@@ -642,15 +642,16 @@
                 width: 100%;
                 background: white;
                 flex-direction: column;
-                padding: 0; /* Remove vertical padding to maximize height */
+                padding: 0;
                 border-bottom: 1px solid var(--border);
                 transform: translateY(-150%);
                 transition: transform 0.3s ease;
-                gap: 0; /* Remove gaps for cleaner list */
+                gap: 0;
             }
             .nav-links li, .nav-links button {
                 width: 100%;
                 text-align: center;
+                padding: 15px 0;
                 border-bottom: 1px solid var(--border);
             }
             .nav-links li:last-child, .nav-links button:last-child {
@@ -658,8 +659,7 @@
             }
             .nav-links a, .nav-links button {
                 display: block;
-                padding: 16px 0;
-                font-size: 1.1rem; /* Larger text for readability */
+                font-size: 1rem; /* Larger touch targets */
             }
 
             .nav-links.active { transform: translateY(0); }
@@ -670,8 +670,8 @@
                 padding: 0 20px;
             }
             
-            .thankyou h2 { font-size: 1.8rem; }
-            .thankyou p { font-size: 1rem; }
+            .thankyou h2 { font-size: 1.5rem; }
+            .thankyou p { font-size: 0.9rem; }
         }
     </style>
 </head>
@@ -714,7 +714,7 @@
                     <h1>Digital Growth for <span class="text-gradient">Your Business</span></h1>
                     <p>We craft fast, responsive, and intelligent websites. From basic HTML sites to advanced AI integrations, we have tools to scale your brand.</p>
                     <div class="hero-buttons" style="display:flex; gap:16px; flex-wrap: wrap;">
-                        <button class="btn-nav" style="padding: 16px 36px; font-size: 1.05rem;" onclick="switchPage('services')">Explore Packages</button>
+                        <button class="btn-nav" style="padding: 14px 32px; font-size: 1rem;" onclick="switchPage('services')">Explore Packages</button>
                         <button class="btn-nav" style="background:white; color:var(--text-main); border:1px solid var(--border);" onclick="switchPage('contact')">Get a Quote</button>
                     </div>
                 </div>
@@ -733,9 +733,9 @@
         <!-- === SERVICES (CONTAINS PACKAGES & ADD-ONS) === -->
         <section id="services" class="page-section">
             <div class="container section-padding">
-                <div style="text-align:center; max-width:700px; margin:0 auto 60px;">
-                    <h2 style="font-size:2.5rem; margin-bottom:20px;">Our Services & Pricing</h2>
-                    <p style="font-size:1.1rem; color:var(--text-secondary);">Choose a core package that fits your needs, and enhance it with our optional add-ons below.</p>
+                <div style="text-align:center; max-width:700px; margin:0 auto 50px;">
+                    <h2 style="font-size:2.5rem; margin-bottom:15px;">Our Services & Pricing</h2>
+                    <p style="font-size:1rem; color:var(--text-secondary);">Choose a core package that fits your needs, and enhance it with our optional add-ons below.</p>
                 </div>
 
                 <!-- Category: Core Packages -->
@@ -764,7 +764,7 @@
                         <div class="card-icon" style="background: #eff6ff;">
                             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10H12V2z"/><path d="M12 2a10 10 0 0 1 10 10h-10V2z"/><path d="M12 12L2.5 12"/></svg>
                         </div>
-                        <div style="position:absolute; top:24px; right:24px; background:var(--primary); color:white; font-size:0.7rem; padding:4px 10px; border-radius:4px; font-weight:700;">BEST VALUE</div>
+                        <div style="position:absolute; top:20px; right:20px; background:var(--primary); color:white; font-size:0.7rem; padding:4px 10px; border-radius:4px; font-weight:700;">BEST VALUE</div>
                         <h4 class="service-title">AI Powered Website</h4>
                         <p class="service-desc">Next-level websites with integrated AI chatbots, smart content suggestions, and automation features.</p>
                         <div class="price-area">
@@ -802,12 +802,12 @@
                             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
                         </div>
                         <div>
-                            <h4 style="font-size:1.2rem; margin-bottom:8px;">Domain & Hosting Setup</h4>
-                            <p style="font-size:0.95rem; color:var(--text-secondary); margin-bottom:12px;">We handle server configuration and domain registration for you.</p>
-                            <p style="font-size:0.95rem; color:var(--text-main); margin-bottom:8px; font-weight: 500;">
-                                RM 80 – RM 2000 <span style="font-size:0.85rem; font-weight: 400; color:var(--text-secondary);">(Based on Your Domain Name, Need to buy monthly)</span>
+                            <h4 style="font-size:1.1rem; margin-bottom:8px;">Domain & Hosting Setup</h4>
+                            <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:10px;">We handle server configuration and domain registration for you.</p>
+                            <p style="font-size:0.9rem; color:var(--text-main); margin-bottom:8px; font-weight: 500;">
+                                RM 80 – RM 2000 <span style="font-size:0.8rem; font-weight: 400; color:var(--text-secondary);">(Based on Your Domain Name, Need to buy monthly)</span>
                             </p>
-                            <p style="font-size:1.1rem; font-weight:700; color:var(--primary);">RM 50/Month for (ddn.one) Domain</p>
+                            <p style="font-size:1rem; font-weight:700; color:var(--primary);">RM 50/Month for (ddn.one) Domain</p>
                         </div>
                     </div>
 
@@ -817,9 +817,9 @@
                             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
                         </div>
                         <div>
-                            <h4 style="font-size:1.2rem; margin-bottom:8px;">SEO Optimization</h4>
-                            <p style="font-size:0.95rem; color:var(--text-secondary); margin-bottom:12px;">Improve your ranking on search engines with keyword research.</p>
-                            <span style="font-weight:700; color:var(--primary); font-size:1.1rem;">RM 150 – RM 300</span>
+                            <h4 style="font-size:1.1rem; margin-bottom:8px;">SEO Optimization</h4>
+                            <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:10px;">Improve your ranking on search engines with keyword research.</p>
+                            <span style="font-weight:700; color:var(--primary); font-size:1rem;">RM 150 – RM 300</span>
                         </div>
                     </div>
 
@@ -829,9 +829,9 @@
                             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
                         </div>
                         <div>
-                            <h4 style="font-size:1.2rem; margin-bottom:8px;">Maintenance / Updates</h4>
-                            <p style="font-size:0.95rem; color:var(--text-secondary); margin-bottom:12px;">Monthly security patches, backups, and content updates.</p>
-                            <span style="font-weight:700; color:var(--primary); font-size:1.1rem;">RM 100 – RM 250 <span style="font-size:0.8rem; font-weight:400; color:#999;">/month</span></span>
+                            <h4 style="font-size:1.1rem; margin-bottom:8px;">Maintenance / Updates</h4>
+                            <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:10px;">Monthly security patches, backups, and content updates.</p>
+                            <span style="font-weight:700; color:var(--primary); font-size:1rem;">RM 100 – RM 250 <span style="font-size:0.8rem; font-weight:400; color:#999;">/month</span></span>
                         </div>
                     </div>
                 </div>
@@ -850,8 +850,8 @@
                         <img src="https://raw.githubusercontent.com/ddnetwork-ent/DDN-One/refs/heads/main/DD-LOGO.JPEG" alt="DDNetwork One Logo" class="about-img">
                     </div>
                     <div>
-                        <h2 style="font-size:2.8rem; margin-bottom:24px;">Why Choose DDNetwork One?</h2>
-                        <p style="font-size:1.1rem; color:var(--text-secondary); margin-bottom:32px;">
+                        <h2 style="font-size:2.5rem; margin-bottom:20px;">Why Choose DDNetwork One?</h2>
+                        <p style="font-size:1rem; color:var(--text-secondary); margin-bottom:25px;">
                             We combine technical expertise with creative design to build digital assets that actually convert visitors into customers. Our transparent process ensures you are involved every step of way.
                         </p>
 
@@ -874,8 +874,8 @@
                             </div>
                         </div>
 
-                        <div style="margin-top:48px; padding:30px; background:#f0f9ff; border-radius:var(--radius-md); border-left:5px solid var(--primary);">
-                            <strong style="color:var(--primary-dark); font-size:1.1rem; display:block; margin-bottom:8px;">Our Promise:</strong>
+                        <div style="margin-top:40px; padding:25px; background:#f0f9ff; border-radius:var(--radius-md); border-left:5px solid var(--primary);">
+                            <strong style="color:var(--primary-dark); font-size:1rem; display:block; margin-bottom:8px;">Our Promise:</strong>
                             <p style="margin:0; font-size:1rem;">Personalized support from start to finish. We ensure you understand every step of process.</p>
                         </div>
                     </div>
@@ -894,7 +894,7 @@
                     <!-- Text Center Wrapper Added Here -->
                     <div class="text-center-wrapper">
                         <div class="badge" style="background:#f0f9ff; color:var(--primary);">Leadership</div>
-                        <h2 style="font-size:2.8rem; margin-bottom:24px;">Meet The Founder</h2>
+                        <h2 style="font-size:2.5rem; margin-bottom:20px;">Meet The Founder</h2>
                         
                         <p>Hi, I’m <strong>Danial Danish</strong>, founder of this studio.</p>
                         <p>My journey started with a strong passion for coding and web development. What began as a personal interest in building websites with HTML slowly evolved into offering professional web solutions for businesses and individuals.</p>
@@ -910,19 +910,19 @@
         <!-- === TESTIMONIALS (IMPROVED) === -->
         <section id="testimonials" class="page-section">
             <div class="container section-padding">
-                <div style="text-align:center; margin-bottom:70px;">
-                    <h2 style="font-size:2.5rem; margin-bottom:20px;">What Our Clients Say</h2>
+                <div style="text-align:center; margin-bottom:50px;">
+                    <h2 style="font-size:2.5rem; margin-bottom:15px;">What Our Clients Say</h2>
                 </div>
 
                 <div class="testimonial-slider">
                     <div class="t-card">
                         <div class="t-rating">★★★★★</div>
                         <div class="quote-icon">“</div>
-                        <p style="font-style:italic; font-size:1.1rem; margin-bottom:24px; position:relative; z-index:1; color:var(--text-main);">The team transformed our outdated site into a modern masterpiece. The AI chatbot feature is a game changer for our customer service speed.</p>
+                        <p style="font-style:italic; font-size:1rem; margin-bottom:20px; position:relative; z-index:1; color:var(--text-main);">The team transformed our outdated site into a modern masterpiece. The AI chatbot feature is a game changer for our customer service speed.</p>
                         <div style="display:flex; align-items:center; gap:15px;">
                             <img src="https://picsum.photos/seed/user1/60/60" style="border-radius:50%;" alt="User">
                             <div>
-                                <strong style="display:block; font-size:1.1rem;">Sarah L.</strong>
+                                <strong style="display:block; font-size:1rem;">Sarah L.</strong>
                                 <span style="font-size:0.9rem; color:var(--text-secondary);">Marketing Director</span>
                             </div>
                         </div>
@@ -931,11 +931,11 @@
                     <div class="t-card">
                         <div class="t-rating">★★★★★</div>
                         <div class="quote-icon">“</div>
-                        <p style="font-style:italic; font-size:1.1rem; margin-bottom:24px; position:relative; z-index:1; color:var(--text-main);">Fast, affordable, and professional. The 5% discount was a nice bonus, but quality of work is what keeps us coming back for updates.</p>
+                        <p style="font-style:italic; font-size:1rem; margin-bottom:20px; position:relative; z-index:1; color:var(--text-main);">Fast, affordable, and professional. The 5% discount was a nice bonus, but quality of work is what keeps us coming back for updates.</p>
                         <div style="display:flex; align-items:center; gap:15px;">
                             <img src="https://picsum.photos/seed/user2/60/60" style="border-radius:50%;" alt="User">
                             <div>
-                                <strong style="display:block; font-size:1.1rem;">James T.</strong>
+                                <strong style="display:block; font-size:1rem;">James T.</strong>
                                 <span style="font-size:0.9rem; color:var(--text-secondary);">Startup Founder</span>
                             </div>
                         </div>
@@ -944,11 +944,11 @@
                     <div class="t-card">
                         <div class="t-rating">★★★★★</div>
                         <div class="quote-icon">“</div>
-                        <p style="font-style:italic; font-size:1.1rem; margin-bottom:24px; position:relative; z-index:1; color:var(--text-main);">I was worried about technical side of things, but they handled domain and hosting setup perfectly. Highly recommended!</p>
+                        <p style="font-style:italic; font-size:1rem; margin-bottom:20px; position:relative; z-index:1; color:var(--text-main);">I was worried about technical side of things, but they handled domain and hosting setup perfectly. Highly recommended!</p>
                         <div style="display:flex; align-items:center; gap:15px;">
                             <img src="https://picsum.photos/seed/user3/60/60" style="border-radius:50%;" alt="User">
                             <div>
-                                <strong style="display:block; font-size:1.1rem;">Amanda K.</strong>
+                                <strong style="display:block; font-size:1rem;">Amanda K.</strong>
                                 <span style="font-size:0.9rem; color:var(--text-secondary);">Freelancer</span>
                             </div>
                         </div>
@@ -957,23 +957,24 @@
             </div>
         </section>
 
-        <!-- === CONTACT (AJAX FORM + RELIABLE EMAIL) === -->
+        <!-- === CONTACT (AJAX FORM) === -->
         <section id="contact" class="page-section">
             <div class="container section-padding">
                 <div class="contact-card">
-                    <div style="text-align:center; margin-bottom:50px;">
-                        <h2 style="font-size:2.4rem;">Let's Start Your Project</h2>
-                        <p style="font-size:1.1rem; color:var(--text-secondary);">Fill out the form below to get in touch.</p>
+                    <div style="text-align:center; margin-bottom:40px;">
+                        <h2 style="font-size:2rem; margin-bottom:20px;">Let's Start Your Project</h2>
+                        <p style="font-size:0.95rem; color:var(--text-secondary);">Fill out the form below. You will receive a confirmation upon success.</p>
                     </div>
 
                     <!-- FORMSUBMIT CO INTEGRATION -->
-                    <!-- ACTION URL: CHANGED TO DIRECT EMAIL ADDRESS TO FIX "NO EMAIL" ISSUE -->
+                    <!-- FIXED: Using direct email endpoint to fix 405/undefined issues -->
                     <form action="https://formsubmit.co/danialamir1809@gmail.com" method="POST" id="contactForm">
                         
                         <!-- Subject Line -->
                         <input type="hidden" name="_subject" value="New Project Inquiry - DDNetwork">
 
                         <!-- Hidden Redirect Parameter -->
+                        <!-- This ensures that when FormSubmit succeeds, it redirects to the Thank You page with the parameter -->
                         <input type="hidden" name="_redirect" value="https://one.ddnetwork.uk/?thankyou=true">
                         
                         <!-- Disable CAPTCHA (Optional) -->
@@ -1026,7 +1027,8 @@
                         </div>
 
                         <!-- Submit Button -->
-                        <button type="submit" class="btn-nav" id="submitBtn" style="width:100%; justify-content:center; padding: 18px 0;">Send Message</button>
+                        <!-- Using type="button" to intercept with JavaScript for AJAX handling and status checking -->
+                        <button type="button" onclick="handleFormSubmit(event)" class="btn-nav" id="submitBtn" style="width:100%; justify-content:center; padding: 14px 0;">Send Message</button>
                     </form>
                 </div>
             </div>
@@ -1045,7 +1047,7 @@
                     <p>Thank you for choosing us! Our team will review your email within 24 hours.</p>
                     
                     <!-- Button redirects to https://one.ddnetwork.uk/ -->
-                    <button class="btn-nav" onclick="window.location.href='https://one.ddnetwork.uk/'" style="padding: 18px 40px; font-size: 1.1rem; margin-top:30px;">Return to Home</button>
+                    <button class="btn-nav" onclick="window.location.href='https://one.ddnetwork.uk/'" style="padding: 14px 32px; font-size: 1rem; margin-top:20px;">Return to Home</button>
                 </div>
             </div>
         </section>
@@ -1062,7 +1064,7 @@
                         <img src="https://raw.githubusercontent.com/ddnetwork-ent/DDN-One/refs/heads/main/DD-LOGO.JPEG" class="logo-img" alt="DDNetwork One Logo">
                         <span class="logo-text">DDNetwork One</span>
                     </div>
-                    <p>Building modern, high-performance websites for the future of business.</p>
+                    <p>Building modern, high-performance websites for future of business.</p>
                 </div>
                 <div class="footer-col">
                     <h4>Company</h4>
@@ -1155,51 +1157,47 @@
             document.getElementById('navLinks').classList.toggle('active');
         }
 
-        // === AJAX FORM HANDLER (FIXES "NO EMAIL" ISSUE) ===
-        document.getElementById('contactForm').addEventListener('submit', function(event) {
-            // 1. Prevent default form submission (page reload)
+        // === AJAX FORM HANDLER (FIXES "UNDEFINED" ERROR) ===
+        function handleFormSubmit(event) {
             event.preventDefault();
 
             const form = event.target;
             const btn = document.getElementById('submitBtn');
 
-            // 2. Show "Sending..." state
-            const originalText = btn.innerText;
+            // 1. Show "Sending..." state
+            const originalText = "Send Message";
             btn.innerText = "Sending...";
-            btn.style.opacity = "0.7";
             btn.disabled = true;
 
-            // 3. Prepare Data
+            // 2. Prepare Data
             const formData = new FormData(form);
 
-            // 4. Send data via Fetch API to FormSubmit
-            // Using mode: 'cors' ensures correct pre-flight checks
+            // 3. Send data via Fetch API
             fetch(form.action, {
                 method: "POST",
-                body: formData,
-                headers: {
-                    'Accept': 'application/json'
-                }
+                body: formData
             })
             .then(response => {
-                // 5. Handle Success
-                if (response.success) {
-                    // Restore Button and Show Success
-                    btn.innerText = "Email sent successfully!";
+                // FIX: Check response.ok. This prevents "Error: undefined"
+                // if response.ok is true, we assume success regardless of JSON content structure
+                if (response.ok) {
+                    // 4. Handle Success
+                    // Restore Button and Show Success State
+                    btn.innerText = "Sent!";
                     btn.style.opacity = "1";
                     btn.disabled = false;
 
-                    // Show Alert so user KNOW it worked
+                    // Show Alert
                     alert("Email sent successfully! Redirecting to Thank You page...");
 
-                    // Wait 1 second then redirect to Thank You page
+                    // 5. Wait 1 second then redirect to Thank You page
                     setTimeout(() => {
                         window.location.href = "https://one.ddnetwork.uk/?thankyou=true";
                     }, 1000);
                 } else {
-                    // 6. Handle Error (This tells you WHY email didn't send)
-                    console.error("FormSubmit Error:", response);
-                    alert("Error: " + response.message);
+                    // 6. Handle Error
+                    console.error("FormSubmit Error Status:", response.status);
+                    alert("Error: Server returned failure status. Please try again later.");
                     
                     // Restore Button
                     btn.innerText = originalText;
@@ -1216,7 +1214,7 @@
                 btn.style.opacity = "1";
                 btn.disabled = false;
             });
-        });
+        }
 
         // Initialize Home page on load
         window.addEventListener('DOMContentLoaded', () => {
