@@ -504,16 +504,16 @@
             margin-bottom: 30px;
             display: inline-block;
             background: #ecfdf5;
-            padding: 40px;
+            padding: 30px;
             border-radius: 50%;
-            width: 140px;
-            height: 140px;
+            width: 120px;
+            height: 120px;
             line-height: 1; /* Center SVG vertically */
         }
 
         .thankyou h2 {
             font-size: 2.5rem;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
             color: var(--text-main);
         }
 
@@ -521,9 +521,6 @@
             font-size: 1.1rem;
             color: var(--text-secondary);
             margin-bottom: 40px;
-            max-width: 500px;
-            margin-left: auto;
-            margin-right: auto;
         }
 
         /* --- FOOTER --- */
@@ -856,7 +853,7 @@
                     </div>
                     <!-- Text Center Wrapper Added Here -->
                     <div class="text-center-wrapper">
-                        <div class="badge" style="background:#f0f9ff; color:var(--primary);">Leadership</div>
+                        <div class="badge" style="background:#f0f9ff; color:var(--primary);">Leadersip</div>
                         <h2 style="font-size:2.8rem; margin-bottom:24px;">Meet The Founder</h2>
                         
                         <p>Hi, I’m <strong>Danial Danish</strong>, founder of this studio.</p>
@@ -920,21 +917,20 @@
             </div>
         </section>
 
-        <!-- === CONTACT (FORM WITH PHONE & REAL SUBMIT) === -->
+        <!-- === CONTACT (FORM WITH STANDARD FORMSUBMIT) === -->
         <section id="contact" class="page-section">
             <div class="container section-padding">
                 <div class="contact-card">
                     <div style="text-align:center; margin-bottom:50px;">
                         <h2 style="font-size:2.4rem;">Let's Start Your Project</h2>
-                        <p style="font-size:1.1rem; color:var(--text-secondary);">Fill out the form below to start your project.</p>
+                        <p style="font-size:1.1rem; color:var(--text-secondary);">Fill out the form below. You will be redirected to the "Thank You" page upon success.</p>
                     </div>
 
-                    <!-- FORMSUBMIT.CO INTEGRATION & REAL SUBMIT -->
-                    <!-- Updated action to GitHub Pages URL for Real Submit -->
-                    <form action="https://ddnetwork-ent.github.io/DDN-One/" method="POST">
+                    <!-- FORMSUBMIT.CO INTEGRATION -->
+                    <!-- Action URL: CHANGED to standard 'formsubmit.co/EMAIL' to avoid 405 Error -->
+                    <form action="https://formsubmit.co/danialamir1809@gmail.com" method="POST">
                         <!-- Hidden field for Redirection to Thank You Page -->
-                        <!-- Note: You must set this redirect in FormSubmit dashboard to this exact URL including ?thankyou=true -->
-                        <input type="hidden" name="_redirect" value="?thankyou=true">
+                        <input type="hidden" name="_redirect" value="index.html?thankyou=true">
                         
                         <div class="form-row">
                             <div class="form-group">
@@ -982,7 +978,6 @@
                             <textarea name="message" class="form-input" rows="6" placeholder="Tell us about your project requirements..." required></textarea>
                         </div>
 
-                        <!-- REAL SUBMIT BUTTON: No action needed here, submits form action URL -->
                         <button type="submit" class="btn-nav" style="width:100%; justify-content:center; padding: 16px 0;">Send Message</button>
                     </form>
                 </div>
@@ -1133,7 +1128,7 @@
                 switchPage('thankyou');
             } else {
                 // Otherwise, default to home
-                // Note: We keep the active="home" on the HTML, 
+                // Note: We keep :: active="home" on the HTML, 
                 // but calling switchPage('home') ensures clean state if parameters are dirty
                 // switchPage('home'); 
                 // Actually, let's just ensure Home is active
