@@ -368,8 +368,7 @@
             box-shadow: var(--shadow-md); 
             width: 100%; 
             height: auto;
-            object-fit: contain; /* Changed from cover to contain for Logo */
-            /* aspect-ratio: 1/1;  Removed aspect ratio to let logo natural fit */
+            object-fit: contain; 
         }
 
         /* CENTERED TEXT STYLE FOR FOUNDER */
@@ -405,7 +404,7 @@
         }
 
         .t-card {
-            background: white; /* Changed to white for better contrast */
+            background: white; 
             padding: 40px;
             border-radius: var(--radius-lg);
             position: relative;
@@ -424,14 +423,14 @@
             position: absolute;
             top: 30px;
             right: 30px;
-            font-size: 2.5rem; /* Slightly smaller */
+            font-size: 2.5rem; 
             color: #e2e8f0;
             font-family: serif;
             opacity: 0.5;
         }
 
         .t-rating {
-            color: #fbbf24; /* Gold */
+            color: #fbbf24; 
             margin-bottom: 20px;
             font-size: 1.2rem;
         }
@@ -479,7 +478,34 @@
             gap: 10px;
         }
         .phone-select {
-            width: 140px; /* Fixed width for code */
+            width: 140px; 
+        }
+
+        /* --- THANK YOU SECTION --- */
+        #thankyou {
+            text-align: center;
+            padding-top: 150px;
+        }
+        
+        .thankyou-icon {
+            font-size: 4rem;
+            color: var(--success);
+            margin-bottom: 24px;
+        }
+
+        .thankyou-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .thankyou-msg {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         /* --- FOOTER --- */
@@ -531,10 +557,10 @@
             }
             
             /* Adjust Logo on Mobile */
-            .logo-text { display: none; } /* Hide text on very small screens if needed, or keep it */
+            .logo-text { display: none; } 
             .logo-img { height: 40px; }
             
-            /* Actually, let's keep the text but make it smaller */
+            /* Actually, let's keep text but make it smaller */
             .logo-text { display: block; font-size: 1rem; }
 
             html {
@@ -580,7 +606,7 @@
             .mobile-toggle { display: block; }
             .footer-grid { grid-template-columns: 1fr; }
             /* Phone input responsive */
-            .phone-select { width: 100px; } /* Smaller on mobile */
+            .phone-select { width: 100px; }
         }
     </style>
 </head>
@@ -853,7 +879,7 @@
                     <div class="t-card">
                         <div class="t-rating">★★★★★</div>
                         <div class="quote-icon">“</div>
-                        <p style="font-style:italic; font-size:1.1rem; margin-bottom:24px; position:relative; z-index:1; color:var(--text-main);">I was worried about technical side of things, but they handled domain and hosting setup perfectly. Highly recommended!</p>
+                        <p style="font-style:italic; font-size:1.1rem; margin-bottom:24px; position:relative; z-index:1; color:var(--text-main);">I was worried about the technical side of things, but they handled domain and hosting setup perfectly. Highly recommended!</p>
                         <div style="display:flex; align-items:center; gap:15px;">
                             <img src="https://picsum.photos/seed/user3/60/60" style="border-radius:50%;" alt="User">
                             <div>
@@ -866,19 +892,20 @@
             </div>
         </section>
 
-        <!-- === CONTACT (FORM WITH PHONE) === -->
+        <!-- === CONTACT (FORM WITH PHONE & FORMSUBMIT) === -->
         <section id="contact" class="page-section">
             <div class="container section-padding">
                 <div class="contact-card">
                     <div style="text-align:center; margin-bottom:50px;">
                         <h2 style="font-size:2.4rem;">Let's Start Your Project</h2>
-                        <p style="font-size:1.1rem; color:var(--text-secondary);">Fill out the form below. On success, you will be redirected back to Home.</p>
+                        <p style="font-size:1.1rem; color:var(--text-secondary);">Fill out the form below. On success, you will see the thank you page.</p>
                     </div>
 
                     <!-- FORMSUBMIT.CO INTEGRATION -->
-                    <form action="https://formsubmit.co/danialamir1809@gmail.com" method="POST">
-                        <!-- Hidden field for Redirection to Home Page after success -->
-                        <input type="hidden" name="_redirect" value="index.html">
+                    <form action="https://formsubmit.co/el/gafase" method="POST">
+                        <!-- Hidden field for Redirection to Thank You Page -->
+                        <!-- We redirect to index.html?thankyou=true, and JS will catch it -->
+                        <input type="hidden" name="_redirect" value="index.html?thankyou=true">
                         
                         <div class="form-row">
                             <div class="form-group">
@@ -932,6 +959,20 @@
             </div>
         </section>
 
+        <!-- === THANK YOU SECTION (NEW) === -->
+        <section id="thankyou" class="page-section">
+            <div class="container section-padding">
+                <div class="thankyou-icon">
+                    <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                </div>
+                <h2 class="thankyou-title">Thank You For Choosing Us</h2>
+                <p class="thankyou-msg">Thank you for choosing us, this order will take up to 24 hours.</p>
+                <div style="margin-top: 30px;">
+                    <button class="btn-nav" onclick="switchPage('home')">Return to Home</button>
+                </div>
+            </div>
+        </section>
+
     </main>
 
     <!-- Footer -->
@@ -972,6 +1013,7 @@
     </footer>
 
     <script>
+        // Function to handle page switching (SPA logic)
         function switchPage(pageId) {
             // Special handling for "Pricing" - Go to Services and scroll to Add-ons
             if (pageId === 'pricing') {
@@ -1026,6 +1068,26 @@
         function toggleMenu() {
             document.getElementById('navLinks').classList.toggle('active');
         }
+
+        // Check URL parameters to see if we should show Thank You page
+        // This logic runs when FormSubmit redirects back to index.html?thankyou=true
+        window.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const isThankYou = params.get('thankyou');
+            
+            if (isThankYou) {
+                // If URL has ?thankyou=true, switch to thankyou section
+                switchPage('thankyou');
+            } else {
+                // Otherwise, default to home
+                // Note: We keep the active="home" on the HTML, 
+                // but calling switchPage('home') ensures clean state if parameters are dirty
+                // switchPage('home'); 
+                // Actually, let's just ensure Home is active
+                const homeSection = document.getElementById('home');
+                homeSection.classList.add('active');
+            }
+        });
     </script>
 </body>
 </html>
