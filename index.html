@@ -520,7 +520,7 @@
         .thankyou p {
             font-size: 1.1rem;
             color: var(--text-secondary);
-            margin-bottom: 40px;
+            margin-bottom: 10px; /* Reduced margin for multiple paragraphs */
         }
 
         /* --- FOOTER --- */
@@ -812,7 +812,7 @@
                     <div>
                         <h2 style="font-size:2.8rem; margin-bottom:24px;">Why Choose DDNetwork One?</h2>
                         <p style="font-size:1.1rem; color:var(--text-secondary); margin-bottom:32px;">
-                            We combine technical expertise with creative design to build digital assets that actually convert visitors into customers. Our transparent process ensures you are involved every step of way.
+                            We combine technical expertise with creative design to build digital assets that actually convert visitors into customers. Our transparent process ensures you are involved every step of the way.
                         </p>
 
                         <div class="check-grid">
@@ -836,7 +836,7 @@
 
                         <div style="margin-top:48px; padding:30px; background:#f0f9ff; border-radius:var(--radius-md); border-left:5px solid var(--primary);">
                             <strong style="color:var(--primary-dark); font-size:1.1rem; display:block; margin-bottom:8px;">Our Promise:</strong>
-                            <p style="margin:0; font-size:1rem;">Personalized support from start to finish. We ensure you understand every step of process.</p>
+                            <p style="margin:0; font-size:1rem;">Personalized support from start to finish. We ensure you understand every step of the process.</p>
                         </div>
                     </div>
                 </div>
@@ -853,7 +853,7 @@
                     </div>
                     <!-- Text Center Wrapper Added Here -->
                     <div class="text-center-wrapper">
-                        <div class="badge" style="background:#f0f9ff; color:var(--primary);">Leadersip</div>
+                        <div class="badge" style="background:#f0f9ff; color:var(--primary);">Leadership</div>
                         <h2 style="font-size:2.8rem; margin-bottom:24px;">Meet The Founder</h2>
                         
                         <p>Hi, I’m <strong>Danial Danish</strong>, founder of this studio.</p>
@@ -904,7 +904,7 @@
                     <div class="t-card">
                         <div class="t-rating">★★★★★</div>
                         <div class="quote-icon">“</div>
-                        <p style="font-style:italic; font-size:1.1rem; margin-bottom:24px; position:relative; z-index:1; color:var(--text-main);">I was worried about technical side of things, but they handled domain and hosting setup perfectly. Highly recommended!</p>
+                        <p style="font-style:italic; font-size:1.1rem; margin-bottom:24px; position:relative; z-index:1; color:var(--text-main);">I was worried about the technical side of things, but they handled domain and hosting setup perfectly. Highly recommended!</p>
                         <div style="display:flex; align-items:center; gap:15px;">
                             <img src="https://picsum.photos/seed/user3/60/60" style="border-radius:50%;" alt="User">
                             <div>
@@ -917,20 +917,20 @@
             </div>
         </section>
 
-        <!-- === CONTACT (FORM WITH STANDARD FORMSUBMIT) === -->
+        <!-- === CONTACT (FORM WITH NEW REDIRECT URL) === -->
         <section id="contact" class="page-section">
             <div class="container section-padding">
                 <div class="contact-card">
                     <div style="text-align:center; margin-bottom:50px;">
                         <h2 style="font-size:2.4rem;">Let's Start Your Project</h2>
-                        <p style="font-size:1.1rem; color:var(--text-secondary);">Fill out the form below. You will be redirected to the "Thank You" page upon success.</p>
+                        <p style="font-size:1.1rem; color:var(--text-secondary);">Fill out the form below. You will be redirected to our main page upon success.</p>
                     </div>
 
                     <!-- FORMSUBMIT.CO INTEGRATION -->
-                    <!-- Action URL: CHANGED to standard 'formsubmit.co/EMAIL' to avoid 405 Error -->
-                    <form action="https://formsubmit.co/danialamir1809@gmail.com" method="POST">
+                    <!-- UPDATED ACTION URL to point to one.ddnetwork.uk -->
+                    <form action="https://one.ddnetwork.uk/" method="POST">
                         <!-- Hidden field for Redirection to Thank You Page -->
-                        <input type="hidden" name="_redirect" value="index.html?thankyou=true">
+                        <input type="hidden" name="_redirect" value="?thankyou=true">
                         
                         <div class="form-row">
                             <div class="form-group">
@@ -984,7 +984,7 @@
             </div>
         </section>
 
-        <!-- === THANK YOU PAGE (SINGLE PAGE) === -->
+        <!-- === THANK YOU PAGE (SUCCESS SCREEN) === -->
         <section id="thankyou" class="page-section">
             <div class="container">
                 <div class="thankyou-content">
@@ -994,7 +994,7 @@
                     
                     <h2>Thank You!</h2>
                     <p>Your order has been received.</p>
-                    <p>Thank you for choosing us, this order will take up to 24 hours.</p>
+                    <p>Thank you for choosing us! Our team will review your email within 24 hours.</p>
                     
                     <button class="btn-nav" onclick="switchPage('home')" style="padding: 16px 40px; font-size: 1.1rem; margin-top:20px;">Return to Home</button>
                 </div>
@@ -1035,7 +1035,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                &copy; 2023 DDNetwork One. All rights reserved.
+                &copy; 2025 DDNetwork One. All rights reserved.
             </div>
         </div>
     </footer>
@@ -1044,11 +1044,9 @@
         function switchPage(pageId) {
             // 1. Handle "Thank You" Page Logic (Isolate it)
             if (pageId === 'thankyou') {
-                // Hide all sections
                 const sections = document.querySelectorAll('.page-section');
                 sections.forEach(s => s.classList.remove('active'));
 
-                // Show Thank You section
                 const thankYouSection = document.getElementById('thankyou');
                 if (thankYouSection) thankYouSection.classList.add('active');
 
@@ -1059,27 +1057,23 @@
                 window.scrollTo(0,0);
                 return;
             } else {
-                // 2. Normal Page Logic (Remove thank you mode)
+                // If we navigate normally (not thankyou), ensure we are not in thankyou mode
                 document.body.classList.remove('thankyou-mode');
             }
 
             // Special handling for "Pricing" - Go to Services and scroll to Add-ons
             if (pageId === 'pricing') {
-                // Hide all sections
                 const sections = document.querySelectorAll('.page-section');
                 sections.forEach(s => s.classList.remove('active'));
 
-                // Show Services section
                 const servicesSection = document.getElementById('services');
                 if (servicesSection) servicesSection.classList.add('active');
 
-                // Update nav state to Services
                 const items = document.querySelectorAll('.nav-item');
                 items.forEach(i => i.classList.remove('active'));
                 const servicesItem = Array.from(items).find(i => i.getAttribute('onclick').includes('services'));
                 if (servicesItem) servicesItem.classList.add('active');
 
-                // Scroll to top first, then smooth scroll to addons
                 window.scrollTo(0,0);
                 setTimeout(() => {
                     const addons = document.getElementById('pricing-addons');
@@ -1087,53 +1081,45 @@
                         addons.scrollIntoView({ behavior: 'smooth', block: 'start' });
                     }
                 }, 300);
-
-                // Close mobile menu if open
                 document.getElementById('navLinks').classList.remove('active');
                 return;
             }
 
-            // Standard page switching logic
-            const sections = document.querySelectorAll('.page-section');
-            sections.forEach(s => s.classList.remove('active'));
+            // Standard page switching logic (Exclude thankyou from standard logic)
+            if (pageId !== 'thankyou') {
+                const sections = document.querySelectorAll('.page-section');
+                sections.forEach(s => s.classList.remove('active'));
 
-            const target = document.getElementById(pageId);
-            if (target) target.classList.add('active');
+                const target = document.getElementById(pageId);
+                if (target) target.classList.add('active');
 
-            // Update Nav State
-            const items = document.querySelectorAll('.nav-item');
-            items.forEach(i => i.classList.remove('active'));
-            const activeItem = Array.from(items).find(i => i.getAttribute('onclick').includes(pageId));
-            if (activeItem) activeItem.classList.add('active');
+                const items = document.querySelectorAll('.nav-item');
+                items.forEach(i => i.classList.remove('active'));
+                const activeItem = Array.from(items).find(i => i.getAttribute('onclick').includes(pageId));
+                if (activeItem) activeItem.classList.add('active');
 
-            // Scroll to top
-            window.scrollTo(0,0);
-
-            // Close mobile menu
-            document.getElementById('navLinks').classList.remove('active');
+                window.scrollTo(0,0);
+                document.getElementById('navLinks').classList.remove('active');
+            }
         }
 
         function toggleMenu() {
             document.getElementById('navLinks').classList.toggle('active');
         }
 
-        // Check URL parameters to see if we should show Thank You page
-        // This logic runs when FormSubmit redirects back to index.html?thankyou=true
+        // === NEW LOGIC TO HANDLE FORMSUBMIT REDIRECT TO ONE.DDNETWORK.UK ===
         window.addEventListener('DOMContentLoaded', () => {
+            // 1. Check URL parameters to see if we are on the "Thank You" page
             const params = new URLSearchParams(window.location.search);
             const isThankYou = params.get('thankyou');
             
+            // 2. If FormSubmit redirects to ...?thankyou=true, show Thank You page
             if (isThankYou) {
-                // If URL has ?thankyou=true, switch to thankyou section
                 switchPage('thankyou');
             } else {
-                // Otherwise, default to home
-                // Note: We keep :: active="home" on the HTML, 
-                // but calling switchPage('home') ensures clean state if parameters are dirty
-                // switchPage('home'); 
-                // Actually, let's just ensure Home is active
+                // 3. Otherwise, default to Home
                 const homeSection = document.getElementById('home');
-                homeSection.classList.add('active');
+                if (homeSection) homeSection.classList.add('active');
             }
         });
     </script>
