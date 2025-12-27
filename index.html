@@ -22,26 +22,32 @@
             --success: #10b981;
             
             --border: #e2e8f0;
-            --radius-lg: 24px;
-            --radius-md: 16px;
+            --radius-lg: 20px; /* Smaller radius */
+            --radius-md: 14px;
             --radius-sm: 8px;
             
-            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08);
             --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            --shadow-glow: 0 0 20px rgba(37, 99, 235, 0.15);
+            --shadow-glow: 0 0 15px rgba(37, 99, 235, 0.1);
 
-            --header-height: 110px;
+            --header-height: 90px; /* Smaller header for compact look */
         }
 
         /* --- RESET & BASE --- */
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
+        /* SMALL EVERYTHING: Base font size 14px */
+        html {
+            font-size: 14px; 
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--bg-body);
             color: var(--text-main);
-            line-height: 1.7;
+            line-height: 1.6; /* Tighter line height */
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
         }
@@ -55,10 +61,10 @@
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 24px;
+            padding: 0 20px; /* Less horizontal padding */
         }
 
-        .section-padding { padding: 120px 0; }
+        .section-padding { padding: 80px 0; /* Less vertical padding */ }
         
         .text-gradient {
             background: linear-gradient(135deg, var(--text-main) 0%, var(--primary) 100%);
@@ -69,13 +75,14 @@
 
         .badge {
             display: inline-block;
-            padding: 8px 18px; 
+            padding: 6px 14px; /* Smaller padding */
             border-radius: 50px;
-            font-size: 0.85rem;
+            font-size: 0.75rem; /* Smaller font */
             font-weight: 600;
             letter-spacing: 0.5px;
             text-transform: uppercase;
-            margin-bottom: 32px; 
+            margin-bottom: 24px; /* Less margin */
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05); /* Subtle shadow */
         }
         
         .badge-discount {
@@ -98,7 +105,7 @@
         }
 
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(10px); } /* Smaller slide */
             to { opacity: 1; transform: translateY(0); }
         }
 
@@ -115,7 +122,7 @@
             z-index: 1000;
             padding-top: 10px;
             padding-bottom: 10px;
-            transition: all 0.3s ease; /* Smooth hiding */
+            transition: all 0.3s ease;
         }
 
         nav {
@@ -129,22 +136,23 @@
         .logo {
             font-weight: 800;
             color: var(--text-main);
-            letter-spacing: -0.03em;
+            letter-spacing: -0.02em;
             display: flex;
+            justify-content: center; /* Centered */
             align-items: center;
-            gap: 12px; 
+            gap: 10px; /* Smaller gap */
             text-decoration: none;
         }
 
         .logo-img {
-            height: 50px; 
+            height: 40px; /* Smaller logo for mobile */
             width: auto;
             object-fit: contain;
             display: block;
         }
 
         .logo-text {
-            font-size: 1.2rem; 
+            font-size: 1rem; /* Smaller text */
             display: flex;
             align-items: center;
         }
@@ -153,11 +161,11 @@
 
         .nav-links {
             display: flex;
-            gap: 35px;
+            gap: 25px; /* Smaller nav gap */
         }
 
         .nav-item {
-            font-size: 1rem;
+            font-size: 0.95rem; /* Smaller font */
             font-weight: 500;
             color: var(--text-secondary);
             cursor: pointer;
@@ -181,43 +189,47 @@
         .nav-item:hover::after, .nav-item.active::after { width: 100%; }
 
         .btn-nav {
-            padding: 12px 28px;
+            padding: 10px 24px; /* Compact padding */
             background-color: var(--text-main);
             color: white;
             border-radius: 50px;
             font-weight: 600;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             transition: all 0.2s;
             border: none;
         }
         
-        .btn-nav:hover { transform: translateY(-2px); box-shadow: var(--shadow-glow); }
+        .btn-nav:hover { 
+            transform: translateY(-1px); /* Smaller hover shift */
+            box-shadow: var(--shadow-glow); 
+            background-color: var(--primary);
+        }
 
-        .mobile-toggle { display: none; background: none; border: none; font-size: 1.5rem; color: var(--text-main); }
+        .mobile-toggle { display: none; background: none; border: none; font-size: 1.2rem; color: var(--text-main); }
 
         /* --- HERO (HOME) --- */
         .hero {
             display: grid;
             grid-template-columns: 1fr 1fr;
             align-items: center;
-            gap: 80px;
-            padding-top: 150px; 
-            padding-bottom: 80px;
+            gap: 60px; /* Smaller gap */
+            padding-top: 120px; /* Less top padding */
+            padding-bottom: 60px;
             position: relative;
         }
 
         .hero-content h1 {
-            font-size: 3.8rem;
+            font-size: 3rem; /* Smaller H1 */
             line-height: 1.1;
             font-weight: 800;
-            margin-bottom: 28px;
+            margin-bottom: 20px; /* Less margin */
             letter-spacing: -0.02em;
         }
 
         .hero-content p {
-            font-size: 1.15rem;
+            font-size: 1rem; /* Smaller p text */
             color: var(--text-secondary);
-            margin-bottom: 40px;
+            margin-bottom: 30px;
             max-width: 500px;
         }
 
@@ -228,7 +240,7 @@
         .hero-card {
             background: white;
             border-radius: var(--radius-lg);
-            padding: 20px;
+            padding: 16px; /* Smaller padding */
             box-shadow: var(--shadow-lg);
             border: 1px solid var(--border);
             overflow: hidden;
@@ -237,88 +249,89 @@
         .blob {
             position: absolute;
             border-radius: 50%;
-            filter: blur(90px);
+            filter: blur(80px); /* Softer blur */
             z-index: -1;
-            opacity: 0.3;
+            opacity: 0.25;
         }
-        .blob-1 { top: -10%; right: -5%; width: 500px; height: 500px; background: #bfdbfe; }
-        .blob-2 { bottom: 10%; left: -10%; width: 400px; height: 400px; background: #e0e7ff; }
+        .blob-1 { top: -10%; right: -5%; width: 400px; height: 400px; background: #dbeafe; }
+        .blob-2 { bottom: 10%; left: -10%; width: 300px; height: 300px; background: #e0e7ff; }
 
         /* --- SERVICES (COMBINED) --- */
         .category-header {
-            margin-bottom: 40px;
+            margin-bottom: 30px; /* Less margin */
             display: flex;
             align-items: center;
             gap: 15px;
-            margin-top: 60px;
+            margin-top: 40px; /* Less top margin */
         }
         
         .category-header:first-child { margin-top: 0; }
 
-        .category-header h3 { font-size: 2rem; font-weight: 700; color: var(--text-main); }
+        .category-header h3 { font-size: 1.5rem; /* Smaller category title */ font-weight: 700; color: var(--text-main); }
         .category-line { height: 1px; background: var(--border); flex-grow: 1; }
 
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Smaller min-width */
+            gap: 30px; /* Smaller gap */
+            margin-bottom: 30px;
         }
 
         .service-card {
             background: white;
             border: 1px solid var(--border);
             border-radius: var(--radius-lg);
-            padding: 40px;
+            padding: 30px; /* Smaller padding */
             transition: all 0.3s ease;
             position: relative;
             display: flex;
             flex-direction: column;
             height: 100%;
+            box-shadow: var(--shadow-sm); /* Subtle shadow by default */
         }
 
         .service-card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-lg);
+            transform: translateY(-5px); /* Smaller shift */
+            box-shadow: var(--shadow-md);
             border-color: var(--primary);
         }
 
         .card-icon {
-            width: 60px;
-            height: 60px;
+            width: 50px; /* Smaller icon */
+            height: 50px;
             background: var(--bg-offset);
-            border-radius: 14px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--primary);
-            margin-bottom: 24px;
-            font-size: 1.8rem;
+            margin-bottom: 20px;
+            font-size: 1.5rem; /* Adjusted font size */
         }
 
-        .service-title { font-size: 1.4rem; font-weight: 700; margin-bottom: 12px; color: var(--text-main); }
-        .service-desc { font-size: 1.05rem; color: var(--text-secondary); margin-bottom: 24px; flex-grow: 1; }
+        .service-title { font-size: 1.25rem; font-weight: 700; margin-bottom: 10px; color: var(--text-main); }
+        .service-desc { font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 20px; flex-grow: 1; line-height: 1.5; }
         
         .price-area {
-            padding-top: 24px;
+            padding-top: 20px;
             border-top: 1px solid var(--border);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
-        .price-tag { font-size: 1.4rem; font-weight: 700; color: var(--text-main); }
+        .price-tag { font-size: 1.25rem; font-weight: 700; color: var(--text-main); }
 
         /* BUY NOW BUTTON STYLE */
         .btn-buy-now {
             width: 100%;
-            padding: 14px;
+            padding: 12px; /* Compact */
             background-color: var(--text-main);
             color: white;
             border: none;
             border-radius: var(--radius-sm);
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.2s;
@@ -333,34 +346,40 @@
         /* --- ADD-ONS --- */
         .addon-list {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px; /* Smaller gap */
         }
 
         .addon-item {
             display: flex;
             align-items: flex-start;
-            gap: 20px;
+            gap: 15px;
             background: white;
-            padding: 30px;
+            padding: 24px; /* Smaller padding */
             border-radius: var(--radius-md);
             border: 1px solid var(--border);
             transition: transform 0.2s;
+            box-shadow: var(--shadow-sm);
         }
 
-        .addon-item:hover { transform: translateY(-3px); border-color: var(--primary); }
+        .addon-item:hover { 
+            transform: translateY(-3px); 
+            box-shadow: var(--shadow-md);
+            border-color: var(--primary);
+        }
 
         .addon-check {
             color: var(--success);
             flex-shrink: 0;
-            margin-top: 4px;
+            margin-top: 2px;
+            font-size: 1.2rem; /* Slightly smaller */
         }
 
         /* --- ABOUT & FOUNDER SHARED STYLES --- */
         .about-split {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 80px;
+            gap: 60px; /* Smaller gap */
             align-items: center;
         }
         
@@ -368,6 +387,7 @@
             border-radius: var(--radius-lg);
             box-shadow: var(--shadow-md); 
             width: 100%; 
+            max-width: 400px; /* Contain image size */
             height: auto;
             object-fit: contain; 
         }
@@ -382,8 +402,8 @@
             font-size: 0.9rem; 
             line-height: 1.6;   
             color: var(--text-secondary);
-            margin-bottom: 20px;
-            max-width: 650px; 
+            margin-bottom: 16px; /* Less margin */
+            max-width: 600px; 
             margin-left: auto;
             margin-right: auto;
         }
@@ -391,22 +411,22 @@
         .check-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-top: 40px;
+            gap: 15px; /* Smaller gap */
+            margin-top: 30px;
         }
         
-        .check-item { display: flex; align-items: center; gap: 12px; font-weight: 600; font-size: 1.05rem; }
+        .check-item { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 0.95rem; }
 
         /* --- TESTIMONIALS (IMPROVED) --- */
         .testimonial-slider {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Smaller width */
+            gap: 30px;
         }
 
         .t-card {
             background: white; 
-            padding: 40px;
+            padding: 30px; /* Smaller padding */
             border-radius: var(--radius-lg);
             position: relative;
             border: 1px solid var(--border);
@@ -415,34 +435,34 @@
         }
 
         .t-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-4px); /* Smaller shift */
             box-shadow: var(--shadow-md);
             border-color: var(--primary);
         }
         
         .quote-icon {
             position: absolute;
-            top: 30px;
-            right: 30px;
-            font-size: 2.5rem; 
+            top: 20px;
+            right: 20px;
+            font-size: 2rem; /* Smaller icon */
             color: #e2e8f0;
             font-family: serif;
-            opacity: 0.5;
+            opacity: 0.4;
         }
 
         .t-rating {
             color: #fbbf24; 
-            margin-bottom: 20px;
-            font-size: 1.2rem;
+            margin-bottom: 15px;
+            font-size: 1rem;
         }
 
         /* --- CONTACT (FORM) --- */
         .contact-card {
-            max-width: 750px;
+            max-width: 700px; /* Slightly narrower */
             margin: 0 auto;
             background: white;
             border-radius: var(--radius-lg);
-            padding: 50px;
+            padding: 40px; /* Less padding */
             box-shadow: var(--shadow-lg);
             border: 1px solid var(--border);
         }
@@ -450,18 +470,18 @@
         .form-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 24px;
+            gap: 20px; /* Smaller gap */
         }
 
-        .form-group { margin-bottom: 24px; }
-        .form-group label { display: block; margin-bottom: 10px; font-weight: 600; font-size: 0.95rem; }
+        .form-group { margin-bottom: 20px; /* Less margin */ }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; font-size: 0.9rem; color: var(--text-main); }
         
         .form-input {
             width: 100%;
-            padding: 16px 18px;
+            padding: 14px 16px; /* Compact inputs */
             border: 1px solid var(--border);
             border-radius: var(--radius-sm);
-            font-size: 1rem;
+            font-size: 1rem; /* Base font size */
             font-family: inherit;
             transition: all 0.2s;
             background: #fafafa;
@@ -476,78 +496,78 @@
         /* Phone Input Group Style */
         .phone-group {
             display: flex;
-            gap: 10px;
+            gap: 8px; /* Tighter gap */
         }
         .phone-select {
-            width: 140px; 
+            width: 130px; /* Smaller width */
         }
 
         /* --- THANK YOU SECTION (SINGLE PAGE STYLE) --- */
         #thankyou {
-            min-height: 100vh; /* Full screen height */
+            min-height: 100vh; 
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 40px 20px;
+            padding: 20px 20px;
             text-align: center;
         }
         
         .thankyou-content {
-            max-width: 600px;
+            max-width: 500px; /* Narrower */
             width: 100%;
         }
         
         .thankyou-icon {
-            font-size: 5rem;
+            font-size: 4rem; /* Smaller icon */
             color: var(--success);
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             display: inline-block;
             background: #ecfdf5;
             padding: 30px;
             border-radius: 50%;
-            width: 120px;
-            height: 120px;
-            line-height: 1; /* Center SVG vertically */
+            width: 100px; /* Smaller width */
+            height: 100px;
+            line-height: 1; 
         }
 
         .thankyou h2 {
-            font-size: 2.5rem;
-            margin-bottom: 16px;
+            font-size: 2rem; /* Smaller heading */
+            margin-bottom: 12px;
             color: var(--text-main);
         }
 
         .thankyou p {
-            font-size: 1.1rem;
+            font-size: 1rem;
             color: var(--text-secondary);
-            margin-bottom: 10px; /* Space between paragraphs */
+            margin-bottom: 8px;
         }
 
         /* --- FOOTER --- */
         footer {
             background: var(--text-main);
             color: white;
-            padding: 80px 0 40px;
-            margin-top: 120px;
-            transition: all 0.3s ease; /* Smooth hiding */
+            padding: 60px 0 30px; /* Tighter padding */
+            margin-top: 100px;
+            transition: all 0.3s ease;
         }
         .footer-grid {
             display: grid;
             grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 50px;
-            margin-bottom: 60px;
+            gap: 40px; /* Less gap */
+            margin-bottom: 40px;
         }
-        .footer-brand h2 { margin-bottom: 20px; font-size: 1.5rem; }
-        .footer-brand p { color: #94a3b8; max-width: 350px; font-size: 1rem; }
-        .footer-col h4 { color: white; margin-bottom: 24px; font-size: 1.1rem; }
-        .footer-col a { display: block; color: #94a3b8; margin-bottom: 14px; font-size: 0.95rem; }
+        .footer-brand h2 { margin-bottom: 15px; font-size: 1.2rem; }
+        .footer-brand p { color: #cbd5e1; max-width: 300px; font-size: 0.9rem; line-height: 1.5; }
+        .footer-col h4 { color: white; margin-bottom: 20px; font-size: 1rem; }
+        .footer-col a { display: block; color: #cbd5e1; margin-bottom: 12px; font-size: 0.85rem; }
         .footer-col a:hover { color: white; }
         .footer-bottom {
             border-top: 1px solid #334155;
-            padding-top: 30px;
+            padding-top: 20px;
             text-align: center;
-            color: #64748b;
-            font-size: 0.9rem;
+            color: #94a3b8;
+            font-size: 0.85rem;
         }
 
         /* --- HIDE HEADER & FOOTER ON THANK YOU PAGE --- */
@@ -555,10 +575,9 @@
         body.thankyou-mode footer {
             opacity: 0;
             pointer-events: none;
-            transform: translateY(-100%); /* Move completely out of view */
+            transform: translateY(-100%);
         }
         
-        /* Optional: Hide toggle button so user is't confused */
         body.thankyou-mode .mobile-toggle {
             display: none !important;
         }
@@ -568,43 +587,42 @@
             .hero { 
                 grid-template-columns: 1fr; 
                 text-align: center; 
-                padding-top: 110px; 
-                gap: 50px; 
+                padding-top: 100px; 
+                gap: 40px; 
             }
-            .hero-content p { margin: 0 auto 32px; }
+            .hero-content p { margin: 0 auto 24px; }
             .hero-buttons { justify-content: center; }
             .about-split { grid-template-columns: 1fr; }
             .form-row { grid-template-columns: 1fr; }
             .footer-grid { grid-template-columns: 1fr 1fr; }
-            .hero-content h1 { font-size: 2.8rem; }
-            .category-header h3 { font-size: 1.5rem; }
+            .hero-content h1 { font-size: 2.4rem; }
+            .category-header h3 { font-size: 1.4rem; }
+            /* Hide images on tablet if needed to save space */
+            .about-img, .founder-img { max-width: 250px; }
         }
 
         @media (max-width: 768px) {
             :root {
-                --header-height: 80px; 
+                --header-height: 70px; /* Compact header on mobile */
             }
             
             .logo-text { display: none; } 
-            .logo-img { height: 40px; }
-            .logo-text { display: block; font-size: 1rem; }
+            .logo-img { height: 30px; /* Smaller logo on mobile */ }
+            .logo-text { display: none; } /* Force text off on very small screens */
 
-            html {
-                font-size: 14px; 
-            }
-
+            /* Hero adjustments */
             .hero-content h1 { 
-                font-size: 2rem; 
-                margin-bottom: 15px;
+                font-size: 1.8rem; 
+                margin-bottom: 12px;
             }
-
-            h2 { font-size: 1.6rem !important; } 
-            h3 { font-size: 1.3rem !important; }
-
             .hero-content p { 
                 font-size: 0.9rem; 
-                margin: 0 auto 20px;
+                margin: 0 auto 16px;
             }
+            .hero-buttons button { width: 100%; display: block; margin-bottom: 10px; }
+
+            h2 { font-size: 1.5rem !important; } 
+            h3 { font-size: 1.2rem !important; }
 
             .section-padding { 
                 padding: 50px 0; 
@@ -621,7 +639,7 @@
                 width: 100%;
                 background: white;
                 flex-direction: column;
-                padding: 20px;
+                padding: 15px;
                 border-bottom: 1px solid var(--border);
                 transform: translateY(-150%);
                 transition: transform 0.3s ease;
@@ -632,6 +650,9 @@
             .mobile-toggle { display: block; }
             .footer-grid { grid-template-columns: 1fr; }
             .phone-select { width: 100px; }
+            /* Full width inputs on mobile */
+            .form-row { grid-template-columns: 1fr; gap: 15px; }
+            .form-group { margin-bottom: 15px; }
         }
     </style>
 </head>
@@ -641,7 +662,7 @@
     <header>
         <div class="container">
             <nav>
-                <!-- LOGO: Image + Text Left -->
+                <!-- LOGO: Image + Text Left (CENTERED & SMALL) -->
                 <a href="#" class="logo" onclick="switchPage('home')">
                     <img src="https://raw.githubusercontent.com/ddnetwork-ent/DDN-One/refs/heads/main/DD-LOGO.JPEG" class="logo-img" alt="DDNetwork One Logo">
                     <span class="logo-text">DDNetwork One<span>.</span>
@@ -670,20 +691,20 @@
 
             <div class="container hero">
                 <div class="hero-content">
-                    <div class="badge" style="background:#e0f2fe; color:#0369a1;">🚀 Modern Web Solutions</div>
+                    <div class="badge" style="background:#e0f2fe; color:#0369a1; font-size: 0.7rem;">🚀 Modern Web Solutions</div>
                     <h1>Digital Growth for <span class="text-gradient">Your Business</span></h1>
                     <p>We craft fast, responsive, and intelligent websites. From basic HTML sites to advanced AI integrations, we have tools to scale your brand.</p>
-                    <div class="hero-buttons" style="display:flex; gap:16px; flex-wrap: wrap;">
-                        <button class="btn-nav" style="padding: 16px 36px; font-size: 1.05rem;" onclick="switchPage('services')">Explore Packages</button>
+                    <div class="hero-buttons" style="display:flex; gap:12px; flex-wrap: wrap;">
+                        <button class="btn-nav" onclick="switchPage('services')">Explore Packages</button>
                         <button class="btn-nav" style="background:white; color:var(--text-main); border:1px solid var(--border);" onclick="switchPage('contact')">Get a Quote</button>
                     </div>
                 </div>
                 <div class="hero-visual">
                     <div class="hero-card">
-                        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:15px;">
-                            <div style="height:160px; background:#f1f5f9; border-radius:16px; display:flex; align-items:center; justify-content:center; color:#94a3b8; font-weight:600;">Design</div>
-                            <div style="height:160px; background:#eff6ff; border-radius:16px; display:flex; align-items:center; justify-content:center; color:#2563eb; font-weight:700;">Code</div>
-                            <div style="height:160px; background:#ecfdf5; border-radius:16px; display:flex; align-items:center; justify-content:center; color:#059669; font-weight:700; grid-column: span 2;">Launch</div>
+                        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
+                            <div style="height:140px; background:#f1f5f9; border-radius:16px; display:flex; align-items:center; justify-content:center; color:#64748b; font-weight:600;">Design</div>
+                            <div style="height:140px; background:#eff6ff; border-radius:16px; display:flex; align-items:center; justify-content:center; color:#2563eb; font-weight:700;">Code</div>
+                            <div style="height:140px; background:#ecfdf5; border-radius:16px; display:flex; align-items:center; justify-content:center; color:#059669; font-weight:700; grid-column: span 2;">Launch</div>
                         </div>
                     </div>
                 </div>
@@ -693,9 +714,9 @@
         <!-- === SERVICES (CONTAINS PACKAGES & ADD-ONS) === -->
         <section id="services" class="page-section">
             <div class="container section-padding">
-                <div style="text-align:center; max-width:700px; margin:0 auto 60px;">
-                    <h2 style="font-size:2.8rem; margin-bottom:20px;">Our Services & Pricing</h2>
-                    <p style="font-size:1.15rem; color:var(--text-secondary);">Choose a core package that fits your needs, and enhance it with our optional add-ons below.</p>
+                <div style="text-align:center; max-width:700px; margin:0 auto 40px;">
+                    <h2 style="font-size:2.5rem; margin-bottom:20px;">Our Services & Pricing</h2>
+                    <p style="font-size:1rem; color:var(--text-secondary);">Choose a core package that fits your needs, and enhance it with our optional add-ons below.</p>
                 </div>
 
                 <!-- Category: Core Packages -->
@@ -708,7 +729,7 @@
                     <!-- Card 1: Front End -->
                     <article class="service-card">
                         <div class="card-icon">
-                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
                         </div>
                         <h4 class="service-title">Front-End Website</h4>
                         <p class="service-desc">Fully responsive website (HTML, CSS, JS). Ideal for businesses needing up to 5 pages with modern interactivity.</p>
@@ -722,9 +743,9 @@
                     <!-- Card 2: AI Website -->
                     <article class="service-card" style="border-color: var(--primary); box-shadow: var(--shadow-md);">
                         <div class="card-icon" style="background: #eff6ff;">
-                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10H12V2z"/><path d="M12 2a10 10 0 0 1 10 10h-10V2z"/><path d="M12 12L2.5 12"/></svg>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10H12V2z"/><path d="M12 2a10 10 0 0 1 10 10h-10V2z"/><path d="M12 12L2.5 12"/></svg>
                         </div>
-                        <div style="position:absolute; top:24px; right:24px; background:var(--primary); color:white; font-size:0.7rem; padding:4px 10px; border-radius:4px; font-weight:700;">BEST VALUE</div>
+                        <div style="position:absolute; top:16px; right:16px; background:var(--primary); color:white; font-size:0.6rem; padding:3px 6px; border-radius:3px; font-weight:700;">BEST VALUE</div>
                         <h4 class="service-title">AI Powered Website</h4>
                         <p class="service-desc">Next-level websites with integrated AI chatbots, smart content suggestions, and automation features.</p>
                         <div class="price-area">
@@ -737,7 +758,7 @@
                     <!-- Card 3: HTML Only -->
                     <article class="service-card">
                         <div class="card-icon">
-                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
                         </div>
                         <h4 class="service-title">HTML Only (Static)</h4>
                         <p class="service-desc">Clean, lightweight static HTML websites. Perfect for simple landing pages or personal portfolios.</p>
@@ -759,39 +780,39 @@
                     <!-- Addon 1: Updated Pricing -->
                     <div class="addon-item">
                         <div class="addon-check">
-                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
                         </div>
                         <div>
-                            <h4 style="font-size:1.2rem; margin-bottom:8px;">Domain & Hosting Setup</h4>
-                            <p style="font-size:0.95rem; color:var(--text-secondary); margin-bottom:12px;">We handle server configuration and domain registration for you.</p>
-                            <p style="font-size:0.95rem; color:var(--text-main); margin-bottom:8px; font-weight: 500;">
-                                RM 80 – RM 2000 <span style="font-size:0.85rem; font-weight: 400; color:var(--text-secondary);">(Based on Your Domain Name, Need to buy monthly)</span>
+                            <h4 style="font-size:1.1rem; margin-bottom:8px;">Domain & Hosting Setup</h4>
+                            <p style="font-size:0.9rem; color:var(--text-secondary); margin-bottom:10px; line-height:1.5;">We handle server configuration and domain registration for you.</p>
+                            <p style="font-size:0.9rem; color:var(--text-main); margin-bottom:6px; font-weight: 500;">
+                                RM 80 – RM 2000 <span style="font-size:0.8rem; font-weight: 400; color:var(--text-secondary);">(Based on Your Domain Name, Need to buy monthly)</span>
                             </p>
-                            <p style="font-size:1.1rem; font-weight:700; color:var(--primary);">RM 50/Month for (ddn.one) Domain</p>
+                            <p style="font-size:1rem; font-weight:700; color:var(--primary);">RM 50/Month for (ddn.one) Domain</p>
                         </div>
                     </div>
 
                     <!-- Addon 2 -->
                     <div class="addon-item">
                         <div class="addon-check">
-                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
                         </div>
                         <div>
-                            <h4 style="font-size:1.2rem; margin-bottom:8px;">SEO Optimization</h4>
-                            <p style="font-size:0.95rem; color:var(--text-secondary); margin-bottom:12px;">Improve your ranking on search engines with keyword research.</p>
-                            <span style="font-weight:700; color:var(--primary); font-size:1.1rem;">RM 150 – RM 300</span>
+                            <h4 style="font-size:1.1rem; margin-bottom:8px;">SEO Optimization</h4>
+                            <p style="font-size:0.9rem; color:var(--text-secondary); margin-bottom:10px; line-height:1.5;">Improve your ranking on search engines with keyword research.</p>
+                            <span style="font-weight:700; color:var(--primary); font-size:1rem;">RM 150 – RM 300</span>
                         </div>
                     </div>
 
                     <!-- Addon 3 -->
                     <div class="addon-item">
                         <div class="addon-check">
-                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
                         </div>
                         <div>
-                            <h4 style="font-size:1.2rem; margin-bottom:8px;">Maintenance / Updates</h4>
-                            <p style="font-size:0.95rem; color:var(--text-secondary); margin-bottom:12px;">Monthly security patches, backups, and content updates.</p>
-                            <span style="font-weight:700; color:var(--primary); font-size:1.1rem;">RM 100 – RM 250 <span style="font-size:0.8rem; font-weight:400; color:#999;">/month</span></span>
+                            <h4 style="font-size:1.1rem; margin-bottom:8px;">Maintenance / Updates</h4>
+                            <p style="font-size:0.9rem; color:var(--text-secondary); margin-bottom:10px; line-height:1.5;">Monthly security patches, backups, and content updates.</p>
+                            <span style="font-weight:700; color:var(--primary); font-size:1rem;">RM 100 – RM 250 <span style="font-size:0.8rem; font-weight:400; color:#999;">/month</span></span>
                         </div>
                     </div>
                 </div>
@@ -810,33 +831,33 @@
                         <img src="https://raw.githubusercontent.com/ddnetwork-ent/DDN-One/refs/heads/main/DD-LOGO.JPEG" alt="DDNetwork One Logo" class="about-img">
                     </div>
                     <div>
-                        <h2 style="font-size:2.8rem; margin-bottom:24px;">Why Choose DDNetwork One?</h2>
-                        <p style="font-size:1.1rem; color:var(--text-secondary); margin-bottom:32px;">
+                        <h2 style="font-size:2.5rem; margin-bottom:20px;">Why Choose DDNetwork One?</h2>
+                        <p style="font-size:1rem; color:var(--text-secondary); margin-bottom:24px; line-height:1.7;">
                             We combine technical expertise with creative design to build digital assets that actually convert visitors into customers. Our transparent process ensures you are involved every step of way.
                         </p>
 
                         <div class="check-grid">
                             <div class="check-item">
-                                <svg width="22" height="22" stroke="var(--success)" fill="none" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                                <svg width="20" height="20" stroke="var(--success)" fill="none" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
                                 Modern & Clean Designs
                             </div>
                             <div class="check-item">
-                                <svg width="22" height="22" stroke="var(--success)" fill="none" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                                <svg width="20" height="20" stroke="var(--success)" fill="none" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
                                 Fully Responsive
                             </div>
                             <div class="check-item">
-                                <svg width="22" height="22" stroke="var(--success)" fill="none" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                                <svg width="20" height="20" stroke="var(--success)" fill="none" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
                                 Affordable Pricing
                             </div>
                             <div class="check-item">
-                                <svg width="22" height="22" stroke="var(--success)" fill="none" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                                <svg width="20" height="20" stroke="var(--success)" fill="none" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
                                 First-time Client Discounts
                             </div>
                         </div>
 
-                        <div style="margin-top:48px; padding:30px; background:#f0f9ff; border-radius:var(--radius-md); border-left:5px solid var(--primary);">
-                            <strong style="color:var(--primary-dark); font-size:1.1rem; display:block; margin-bottom:8px;">Our Promise:</strong>
-                            <p style="margin:0; font-size:1rem;">Personalized support from start to finish. We ensure you understand every step of process.</p>
+                        <div style="margin-top:40px; padding:24px; background:#f0f9ff; border-radius:var(--radius-md); border-left:4px solid var(--primary);">
+                            <strong style="color:var(--primary-dark); font-size:1rem; display:block; margin-bottom:6px;">Our Promise:</strong>
+                            <p style="margin:0; font-size:0.95rem; line-height:1.6;">Personalized support from start to finish. We ensure you understand every step of process.</p>
                         </div>
                     </div>
                 </div>
@@ -853,8 +874,8 @@
                     </div>
                     <!-- Text Center Wrapper Added Here -->
                     <div class="text-center-wrapper">
-                        <div class="badge" style="background:#f0f9ff; color:var(--primary);">Leadership</div>
-                        <h2 style="font-size:2.8rem; margin-bottom:24px;">Meet The Founder</h2>
+                        <div class="badge" style="background:#f0f9ff; color:var(--primary); font-size:0.7rem;">Leadership</div>
+                        <h2 style="font-size:2.5rem; margin-bottom:20px;">Meet The Founder</h2>
                         
                         <p>Hi, I’m <strong>Danial Danish</strong>, founder of this studio.</p>
                         <p>My journey started with a strong passion for coding and web development. What began as a personal interest in building websites with HTML slowly evolved into offering professional web solutions for businesses and individuals.</p>
@@ -870,20 +891,20 @@
         <!-- === TESTIMONIALS (IMPROVED) === -->
         <section id="testimonials" class="page-section">
             <div class="container section-padding">
-                <div style="text-align:center; margin-bottom:70px;">
-                    <h2 style="font-size:2.8rem;">What Our Clients Say</h2>
+                <div style="text-align:center; margin-bottom:50px;">
+                    <h2 style="font-size:2.5rem;">What Our Clients Say</h2>
                 </div>
 
                 <div class="testimonial-slider">
                     <div class="t-card">
                         <div class="t-rating">★★★★★</div>
                         <div class="quote-icon">“</div>
-                        <p style="font-style:italic; font-size:1.1rem; margin-bottom:24px; position:relative; z-index:1; color:var(--text-main);">The team transformed our outdated site into a modern masterpiece. The AI chatbot feature is a game changer for our customer service speed.</p>
-                        <div style="display:flex; align-items:center; gap:15px;">
+                        <p style="font-style:italic; font-size:0.95rem; margin-bottom:20px; position:relative; z-index:1; color:var(--text-main); line-height:1.6;">The team transformed our outdated site into a modern masterpiece. The AI chatbot feature is a game changer for our customer service speed.</p>
+                        <div style="display:flex; align-items:center; gap:12px;">
                             <img src="https://picsum.photos/seed/user1/60/60" style="border-radius:50%;" alt="User">
                             <div>
-                                <strong style="display:block; font-size:1.1rem;">Sarah L.</strong>
-                                <span style="font-size:0.9rem; color:var(--text-secondary);">Marketing Director</span>
+                                <strong style="display:block; font-size:1rem;">Sarah L.</strong>
+                                <span style="font-size:0.85rem; color:var(--text-secondary);">Marketing Director</span>
                             </div>
                         </div>
                     </div>
@@ -891,12 +912,12 @@
                     <div class="t-card">
                         <div class="t-rating">★★★★★</div>
                         <div class="quote-icon">“</div>
-                        <p style="font-style:italic; font-size:1.1rem; margin-bottom:24px; position:relative; z-index:1; color:var(--text-main);">Fast, affordable, and professional. The 5% discount was a nice bonus, but quality of work is what keeps us coming back for updates.</p>
-                        <div style="display:flex; align-items:center; gap:15px;">
+                        <p style="font-style:italic; font-size:0.95rem; margin-bottom:20px; position:relative; z-index:1; color:var(--text-main); line-height:1.6;">Fast, affordable, and professional. The 5% discount was a nice bonus, but quality of work is what keeps us coming back for updates.</p>
+                        <div style="display:flex; align-items:center; gap:12px;">
                             <img src="https://picsum.photos/seed/user2/60/60" style="border-radius:50%;" alt="User">
                             <div>
-                                <strong style="display:block; font-size:1.1rem;">James T.</strong>
-                                <span style="font-size:0.9rem; color:var(--text-secondary);">Startup Founder</span>
+                                <strong style="display:block; font-size:1rem;">James T.</strong>
+                                <span style="font-size:0.85rem; color:var(--text-secondary);">Startup Founder</span>
                             </div>
                         </div>
                     </div>
@@ -904,12 +925,12 @@
                     <div class="t-card">
                         <div class="t-rating">★★★★★</div>
                         <div class="quote-icon">“</div>
-                        <p style="font-style:italic; font-size:1.1rem; margin-bottom:24px; position:relative; z-index:1; color:var(--text-main);">I was worried about technical side of things, but they handled domain and hosting setup perfectly. Highly recommended!</p>
-                        <div style="display:flex; align-items:center; gap:15px;">
+                        <p style="font-style:italic; font-size:0.95rem; margin-bottom:20px; position:relative; z-index:1; color:var(--text-main); line-height:1.6;">I was worried about technical side of things, but they handled domain and hosting setup perfectly. Highly recommended!</p>
+                        <div style="display:flex; align-items:center; gap:12px;">
                             <img src="https://picsum.photos/seed/user3/60/60" style="border-radius:50%;" alt="User">
                             <div>
-                                <strong style="display:block; font-size:1.1rem;">Amanda K.</strong>
-                                <span style="font-size:0.9rem; color:var(--text-secondary);">Freelancer</span>
+                                <strong style="display:block; font-size:1rem;">Amanda K.</strong>
+                                <span style="font-size:0.85rem; color:var(--text-secondary);">Freelancer</span>
                             </div>
                         </div>
                     </div>
@@ -917,33 +938,32 @@
             </div>
         </section>
 
-        <!-- === CONTACT (IMAGE PIXEL FORM - FIXES 405/CORS) === -->
+        <!-- === CONTACT (FORM) === -->
         <section id="contact" class="page-section">
             <div class="container section-padding">
                 <div class="contact-card">
-                    <div style="text-align:center; margin-bottom:50px;">
-                        <h2 style="font-size:2.4rem;">Let's Start Your Project</h2>
-                        <p style="font-size:1.1rem; color:var(--text-secondary);">Fill out the form below to start your project.</p>
+                    <div style="text-align:center; margin-bottom:30px;">
+                        <h2 style="font-size:2rem;">Let's Start Your Project</h2>
+                        <p style="font-size:0.95rem; color:var(--text-secondary);">Fill out the form below.</p>
                     </div>
 
-                    <!-- FORM SUBMISSION FORM (NO AJAX/FETCH) -->
-                    <!-- Using standard FormSubmit action with Image Pixel submission -->
-                    <form action="https://formsubmit.co/el/gafase" method="POST">
+                    <!-- FORM SUBMISSION (REDIRECT LOGIC) -->
+                    <!-- Action: FormSubmit standard endpoint. -->
+                    <!-- Redirect: FormSubmit appends ?thankyou=true to your site after success. -->
+                    <form id="contactForm" action="https://formsubmit.co/el/gafase" method="POST">
+                        <!-- Hidden redirect parameter: Tells FormSubmit where to go after processing -->
+                        <input type="hidden" name="_redirect" value="?thankyou=true">
+                        <!-- Hidden captcha parameter: Tries to skip I'm not a robot -->
+                        <input type="hidden" name="_captcha" value="false">
                         
-                        <!-- HIDDEN PIXEL IMAGE FOR DATA TRANSFER -->
-                        <!-- Note: 'next' parameter redirects to your Thank You page after FormSubmit sends email -->
-                        <input type="hidden" name="pixel" 
-                            src="https://formsubmit.co/el/gafase?name={name}&email={email}&service={service}&message={message}&country_code={country_code}&phone={phone}&next=https://one.ddnetwork.uk/?thankyou=true"
-                            alt="pixel">
-
                         <div class="form-row">
                             <div class="form-group">
                                 <label>Name</label>
-                                <input type="text" name="name" id="form-name" class="form-input" placeholder="Your Full Name" required>
+                                <input type="text" name="name" class="form-input" placeholder="Your Full Name" required>
                             </div>
                             <div class="form-group">
                                 <label>Email</label>
-                                <input type="email" name="email" id="form-email" class="form-input" placeholder="email@address.com" required>
+                                <input type="email" name="email" class="form-input" placeholder="email@address.com" required>
                             </div>
                         </div>
 
@@ -951,7 +971,8 @@
                         <div class="form-group">
                             <label>Phone Number</label>
                             <div class="phone-group">
-                                <select name="country_code" id="form-country" class="form-input phone-select">
+                                <!-- Dropdown for Country Code (Default +60) -->
+                                <select name="country_code" class="form-input phone-select">
                                     <option value="+60" selected>+60 (MY)</option>
                                     <option value="+65">+65 (SG)</option>
                                     <option value="+62">+62 (ID)</option>
@@ -962,13 +983,13 @@
                                     <option value="+86">+86 (CN)</option>
                                     <option value="+81">+81 (JP)</option>
                                 </select>
-                                <input type="tel" name="phone" id="form-phone" class="form-input" placeholder="12 345 6789">
+                                <input type="tel" name="phone" class="form-input" placeholder="12 345 6789">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label>Service Interest</label>
-                            <select name="service" id="form-service" class="form-input">
+                            <select name="service" class="form-input">
                                 <option>Front-End Website (RM 400-800)</option>
                                 <option>AI Website (RM 800-1500)</option>
                                 <option>HTML Only (RM 200-400)</option>
@@ -978,11 +999,10 @@
 
                         <div class="form-group">
                             <label>Message</label>
-                            <textarea name="message" id="form-message" class="form-input" rows="6" placeholder="Tell us about your project requirements..." required></textarea>
+                            <textarea name="message" class="form-input" rows="5" placeholder="Tell us about your project requirements..." required></textarea>
                         </div>
 
-                        <!-- Submit Button: Calls JS function to trigger Thank You UI immediately -->
-                        <button type="button" onclick="submitImage(event)" class="btn-nav" style="width:100%; justify-content:center; padding: 16px 0;">Send Message</button>
+                        <button type="submit" class="btn-nav" style="width:100%; justify-content:center; padding: 14px 0;">Send Message</button>
                     </form>
                 </div>
             </div>
@@ -1001,7 +1021,7 @@
                     <p>Thank you for choosing us! Our team will review your email within 24 hours.</p>
                     
                     <!-- Button redirects to https://one.ddnetwork.uk/ -->
-                    <button class="btn-nav" onclick="window.location.href='https://one.ddnetwork.uk/'" style="padding: 16px 40px; font-size: 1.1rem; margin-top:20px;">Return to Home</button>
+                    <button class="btn-nav" onclick="window.location.href='https://one.ddnetwork.uk/'" style="padding: 14px 30px; font-size: 1rem; margin-top:15px;">Return to Home</button>
                 </div>
             </div>
         </section>
@@ -1013,12 +1033,12 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-brand">
-                    <!-- LOGO: Image + Text Left -->
-                    <div class="logo" style="color:white; margin-bottom:15px;">
+                    <!-- LOGO: Image + Text Left (CENTERED & SMALL) -->
+                    <div class="logo" style="color:white; margin-bottom:15px; justify-content:center;">
                         <img src="https://raw.githubusercontent.com/ddnetwork-ent/DDN-One/refs/heads/main/DD-LOGO.JPEG" class="logo-img" alt="DDNetwork One Logo">
                         <span class="logo-text">DDNetwork One</span>
                     </div>
-                    <p>Building modern, high-performance websites for future of business.</p>
+                    <p>Building modern, high-performance websites for the future of business.</p>
                 </div>
                 <div class="footer-col">
                     <h4>Company</h4>
@@ -1086,73 +1106,32 @@
                         addons.scrollIntoView({ behavior: 'smooth', block: 'start' });
                     }
                 }, 300);
-
-                // Close mobile menu if open
                 document.getElementById('navLinks').classList.remove('active');
                 return;
             }
 
-            // Standard page switching logic (Exclude thankyou from standard logic)
-            if (pageId !== 'thankyou') {
-                const sections = document.querySelectorAll('.page-section');
-                sections.forEach(s => s.classList.remove('active'));
+            // Standard page switching logic
+            const sections = document.querySelectorAll('.page-section');
+            sections.forEach(s => s.classList.remove('active'));
 
-                const target = document.getElementById(pageId);
-                if (target) target.classList.add('active');
+            const target = document.getElementById(pageId);
+            if (target) target.classList.add('active');
 
-                const items = document.querySelectorAll('.nav-item');
-                items.forEach(i => i.classList.remove('active'));
-                const activeItem = Array.from(items).find(i => i.getAttribute('onclick').includes(pageId));
-                if (activeItem) activeItem.classList.add('active');
+            // Update Nav State
+            const items = document.querySelectorAll('.nav-item');
+            items.forEach(i => i.classList.remove('active'));
+            const activeItem = Array.from(items).find(i => i.getAttribute('onclick').includes(pageId));
+            if (activeItem) activeItem.classList.add('active');
 
-                window.scrollTo(0,0);
-                document.getElementById('navLinks').classList.remove('active');
-            }
+            window.scrollTo(0,0);
+            document.getElementById('navLinks').classList.remove('active');
         }
 
         function toggleMenu() {
             document.getElementById('navLinks').classList.toggle('active');
         }
 
-        // === FIX FOR 405 / NETWORK ERROR (IMAGE PIXEL METHOD) ===
-        function submitImage(event) {
-            event.preventDefault();
-            
-            // 1. Get form values
-            const name = document.getElementById('form-name').value;
-            const email = document.getElementById('form-email').value;
-            const service = document.getElementById('form-service').value;
-            const message = document.getElementById('form-message').value;
-            const country = document.getElementById('form-country').value;
-            const phone = document.getElementById('form-phone').value;
-
-            if (!name || !email || !message) {
-                alert("Please fill in all required fields.");
-                return;
-            }
-
-            // 2. Construct the Pixel Image URL
-            // This includes all data + the 'next' parameter
-            // Using encodeURIComponent ensures special characters don't break the URL
-            const pixelSrc = `https://formsubmit.co/el/gafase?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&service=${encodeURIComponent(service)}&message=${encodeURIComponent(message)}&country_code=${encodeURIComponent(country)}&phone=${encodeURIComponent(phone)}&next=https://one.ddnetwork.uk/?thankyou=true`;
-
-            // 3. Create a temporary image element
-            const img = new Image();
-            img.src = pixelSrc;
-            img.style.display = "none"; // Hide the 1x1 pixel
-
-            // 4. Trigger the submission (Browser loads the image -> FormSubmit receives data -> FormSubmit redirects to ?next=... -> Server detects ?thankyou=true -> Show Thank You page)
-            // Note: FormSubmit will ignore the 'action' on the <form> if a hidden input with name="pixel" and "src" is present.
-            // But to be safe, we don't let the form submit normally. We rely on the pixel image load.
-            
-            document.body.appendChild(img);
-
-            // 5. Immediate UI Feedback (No need to wait for network)
-            // Show Thank You page immediately for better UX
-            switchPage('thankyou');
-        }
-
-        // Initialize Home page on load (If no URL params present)
+        // Check URL parameters to see if we should show Thank You page
         window.addEventListener('DOMContentLoaded', () => {
             const params = new URLSearchParams(window.location.search);
             const isThankYou = params.get('thankyou');
@@ -1160,6 +1139,7 @@
             if (isThankYou) {
                 switchPage('thankyou');
             } else {
+                // Default to Home
                 const homeSection = document.getElementById('home');
                 if (homeSection) homeSection.classList.add('active');
             }
