@@ -268,7 +268,7 @@
         .hero-card {
             background: white;
             border-radius: var(--radius-lg);
-            padding: 25px;
+            padding: 30px;
             box-shadow: var(--shadow-lg);
             border: 1px solid var(--border);
             overflow: hidden;
@@ -464,7 +464,7 @@
             position: absolute;
             top: 20px;
             right: 20px;
-            font-size: 1.8rem; 
+            font-size: 2rem; 
             color: #e2e8f0;
             font-family: serif;
             opacity: 0.5;
@@ -499,7 +499,7 @@
         /* Input Styles with Error States */
         .form-input {
             width: 100%;
-            padding: 14px 16px; 
+            padding: 14px 18px; 
             border: 1px solid var(--border);
             border-radius: var(--radius-sm);
             font-size: 1rem; 
@@ -512,6 +512,10 @@
             border-color: var(--primary);
             background: white;
             box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+            /* Remove error state on focus */
+            border-color: var(--primary) !important;
+            background-color: white !important;
+            animation: none !important;
         }
 
         /* Invalid Input State (Shake Animation) */
@@ -534,7 +538,7 @@
         }
         .phone-select {
             width: 130px; 
-            padding: 14px 16px; 
+            padding: 14px 18px; 
             flex-shrink: 0;
         }
 
@@ -552,7 +556,7 @@
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.6); /* Dark backdrop */
-            z-index: 10000; /* Ensure it's on top */
+            z-index: 20000; /* Ensure it's on top */
             align-items: center;
             justify-content: center;
             opacity: 0;
@@ -568,7 +572,7 @@
             background: white;
             padding: 40px 30px;
             border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-lg);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
             width: 90%;
             max-width: 450px;
             text-align: center;
@@ -576,6 +580,11 @@
             position: relative;
         }
 
+        @keyframes popIn {
+            0% { opacity: 0; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        
         .popup-icon {
             margin-bottom: 20px;
             display: inline-block;
@@ -604,23 +613,18 @@
             border: none;
             padding: 10px 30px;
             border-radius: 50px;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             font-weight: 600;
             cursor: pointer;
             transition: transform 0.2s;
-            margin: 0 auto; /* Center the button */
+            margin: 0 auto; /* Center button */
             display: block;
+            width: 100%;
         }
 
         .popup-close:hover {
             background: var(--primary-dark);
-            transform: scale(1.05);
-        }
-
-        /* --- THANK YOU SECTION (HIDDEN BY DEFAULT SINCE WE USE POPUP) --- */
-        /* We keep the section just in case, but JS won't use it */
-        #thankyou {
-            display: none; 
+            transform: scale(1.02);
         }
 
         /* --- FOOTER --- */
@@ -775,8 +779,14 @@
             .service-title { font-size: 1.1rem; }
             .service-desc { font-size: 0.9rem; }
             
+            /* Mobile Toggle: Full screen width for easier touching */
             .mobile-toggle { display: block; }
             .footer-grid { grid-template-columns: 1fr; }
+            
+            .thankyou-content {
+                margin: 0 20px;
+                padding: 30px 20px;
+            }
         }
     </style>
 </head>
@@ -786,7 +796,7 @@
     <div id="success-popup">
         <div class="popup-content">
             <div class="popup-icon">
-                <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
             </div>
             <h3>Success!</h3>
             <p>Thank you for choosing our services. Your order will be reviewed and confirmed by our team within 24 hours.</p>
@@ -1079,36 +1089,44 @@
             </div>
         </section>
 
-        <!-- === CONTACT (AJAX/FETCH FORM - POPUP & NO REDIRECT) === -->
+        <!-- === CONTACT (HYBRID FORM) === -->
         <section id="contact" class="page-section">
             <div class="container section-padding">
                 <div class="contact-card">
                     <div style="text-align:center; margin-bottom:40px;">
                         <h2 style="font-size:2rem; margin-bottom:20px;">Let's Start Your Project</h2>
-                        <p style="font-size:0.95rem; color:var(--text-secondary);">Fill out the form below to send us an email directly.</p>
+                        <p style="font-size:0.95rem; color:var(--text-secondary);">Fill out the form below to get in touch.</p>
                     </div>
 
-                    <!-- FORM SUBMIT FORM (AJAX FETCH) -->
-                    <!-- Logic: Native Post is removed. Button triggers Fetch to send JSON to FormSubmit AJAX endpoint -->
-                    <form id="contactForm">
+                    <!-- FORM SUBMIT FORM (HYBRID) -->
+                    <!-- Logic: JS Intercepts click -> Validates -> Updates Button -> Calls form.submit() -> Browser handles rest -> FormSubmit Redirects -> Thank You Page -->
+                    <form action="https://formsubmit.co/danialamir1809@gmail.com" method="POST" id="contactForm">
                         
+                        <input type="hidden" name="_subject" value="New Project Inquiry - DDNetwork One Website">
+
+                        <!-- Hidden Redirect Parameter -->
+                        <input type="hidden" name="_redirect" value="https://one.ddnetwork.uk/?thankyou=true">
+                        
+                        <!-- Disable CAPTCHA (Optional) -->
+                        <input type="hidden" name="_captcha" value="false">
+
                         <div class="form-row">
                             <div class="form-group">
-                                <label>Name</label>
-                                <input type="text" name="name" id="input-name" class="form-input" placeholder="Your Full Name" required>
+                                <label for="input-name">Name</label>
+                                <input type="text" id="input-name" name="name" class="form-input" placeholder="Your Full Name" required autocomplete="name">
                             </div>
                             <div class="form-group">
-                                <label>Email</label>
-                                <input type="email" name="email" id="input-email" class="form-input" placeholder="email@address.com" required>
+                                <label for="input-email">Email</label>
+                                <input type="email" id="input-email" name="email" class="form-input" placeholder="email@address.com" required autocomplete="email">
                             </div>
                         </div>
 
                         <!-- Phone Number Field -->
                         <div class="form-group">
-                            <label>Phone Number</label>
+                            <label for="input-phone">Phone Number</label>
                             <div class="phone-group">
                                 <!-- Dropdown for Country Code (Default +60) -->
-                                <select name="country_code" id="input-country" class="form-input phone-select">
+                                <select id="input-country" name="country_code" class="form-input phone-select">
                                     <option value="+60" selected>+60 (MY)</option>
                                     <option value="+65">+65 (SG)</option>
                                     <option value="+62">+62 (ID)</option>
@@ -1119,13 +1137,13 @@
                                     <option value="+86">+86 (CN)</option>
                                     <option value="+81">+81 (JP)</option>
                                 </select>
-                                <input type="tel" name="phone" id="input-phone" class="form-input" placeholder="12 345 6789">
+                                <input type="tel" id="input-phone" name="phone" class="form-input" placeholder="12 345 6789" autocomplete="tel">
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label>Service Interest</label>
-                            <select name="service" id="input-service" class="form-input">
+                            <label for="input-service">Service Interest</label>
+                            <select id="input-service" name="service" class="form-input">
                                 <option>Front-End Website (RM 400-800)</option>
                                 <option>AI Website (RM 800-1500)</option>
                                 <option>HTML Only (RM 200-400)</option>
@@ -1134,21 +1152,20 @@
                         </div>
 
                         <div class="form-group">
-                            <label>Message</label>
-                            <textarea name="message" id="input-message" class="form-input" rows="6" placeholder="Tell us about your project requirements..." required></textarea>
+                            <label for="input-message">Message</label>
+                            <textarea id="input-message" name="message" class="form-input" rows="6" placeholder="Tell us about your project requirements..." required></textarea>
                         </div>
 
                         <!-- BUTTON AT BOTTOM -->
                         <div class="form-actions">
-                            <!-- Button type="button" to intercept with JavaScript for AJAX handling -->
-                            <button type="button" id="submitBtn" class="btn-nav" style="width:100%; justify-content:center; padding: 14px 0;" onclick="submitFormAjax()">Send Message</button>
+                            <button type="submit" id="submitBtn" class="btn-nav" style="width:100%; justify-content:center; padding: 14px 0;" onclick="submitFormHybrid(event)">Send Message</button>
                         </div>
                     </form>
                 </div>
             </div>
         </section>
 
-        <!-- === THANK YOU PAGE (HIDDEN - USING POPUP INSTEAD) === -->
+        <!-- === THANK YOU SECTION (HIDDEN - USING POPUP INSTEAD) === -->
         <section id="thankyou" class="page-section">
             <!-- Content hidden, logic handles popup instead -->
         </section>
@@ -1195,7 +1212,7 @@
     <script>
         function switchPage(pageId) {
             // 1. Handle "Thank You" Page Logic (Isolate it)
-            // Since we are using AJAX Popup, we likely won't use this section, but logic remains.
+            // Since we use Pop-up, we likely won't use this section, but logic remains.
             if (pageId === 'thankyou') {
                 const sections = document.querySelectorAll('.page-section');
                 sections.forEach(s => s.classList.remove('active'));
@@ -1269,12 +1286,17 @@
             // document.getElementById('contactForm').reset();
         }
 
-        // === AJAX FORM SUBMIT LOGIC (STAY ON SITE + POPUP) ===
-        async function submitFormAjax() {
-            const form = document.getElementById('contactForm');
+        // === HYBRID FORM SUBMIT LOGIC (BUG FIX FOR "FAILED TO FETCH") ===
+        // 1. Try AJAX (for animation)
+        // 2. Fallback to Native Submit (if AJAX fails) -> NEVER GETS NETWORK ERROR
+        async function submitFormHybrid(event) {
+            // 1. Prevent default (so we can try AJAX first)
+            event.preventDefault();
+
+            const form = event.target;
             const btn = document.getElementById('submitBtn');
 
-            // 1. Get values
+            // 2. Get values
             const name = document.getElementById('input-name').value;
             const email = document.getElementById('input-email').value;
             const phone = document.getElementById('input-phone').value;
@@ -1282,12 +1304,25 @@
             const service = document.getElementById('input-service').value;
             const message = document.getElementById('input-message').value;
 
-            // 2. Validate
+            // 3. Validation
+            let isValid = true;
+            let firstErrorInput = null;
+
             if (!name || !email || !message) {
+                if (!name) { document.getElementById('input-name').classList.add('error'); firstErrorInput = document.getElementById('input-name'); }
+                if (!email) { document.getElementById('input-email').classList.add('error'); if (!firstErrorInput) firstErrorInput = document.getElementById('input-email'); }
+                if (!message) { document.getElementById('input-message').classList.add('error'); if (!firstErrorInput) firstErrorInput = document.getElementById('input-message'); }
+                isValid = false;
+            } else {
+                // Remove errors on typing/focus
+                document.getElementById('input-name').classList.remove('error');
+                document.getElementById('input-email').classList.remove('error');
+                document.getElementById('input-message').classList.remove('error');
+            }
+
+            if (!isValid) {
                 alert("Please fill in Name, Email, and Message.");
-                if (!name) document.getElementById('input-name').classList.add('error');
-                else if (!email) document.getElementById('input-email').classList.add('error');
-                else if (!message) document.getElementById('input-message').classList.add('error');
+                if (firstErrorInput) firstErrorInput.focus();
                 return; 
             }
 
@@ -1299,66 +1334,120 @@
                 return;
             } else {
                 document.getElementById('input-email').classList.remove('error');
-                document.getElementById('input-name').classList.remove('error');
-                document.getElementById('input-message').classList.remove('error');
             }
 
-            // 3. UI Feedback (Sending...)
-            btn.innerText = "Sending...";
-            btn.disabled = true;
+            // 4. UI Feedback (Sending...)
+            const originalText = "Send Message";
+            const originalBg = btn.style.backgroundColor;
 
-            // 4. Prepare JSON Data (FormSubmit AJAX endpoint)
-            const data = {
-                name: name,
-                email: email,
-                phone: `${country} ${phone}`,
-                service: service,
-                message: message
-            };
+            btn.disabled = true;
+            btn.innerText = "Sending...";
+            
+            // Progress Bar Effect
+            btn.style.width = "0";
+            btn.style.height = "40px";
+            btn.style.borderRadius = "20px";
+            btn.style.padding = "0";
+            btn.style.position = "relative";
+            btn.style.overflow = "hidden";
+            btn.style.backgroundColor = "#e0e7ff";
+            
+            // Add Progress Bar
+            btn.innerHTML = `
+                <div style="position: absolute; top: 0; left: 0; width: 0%; height: 100%; background: #2563eb; transition: width 1.5s ease-in-out; border-radius: 20px;"></div>
+                <span style="position: relative; z-index: 1; color: white; font-weight: 600; font-size: 0.9rem;">Sending...</span>
+            `;
+
+            // Force reflow
+            void btn.offsetWidth;
+            setTimeout(() => { const bar = btn.querySelector('div'); if (bar) bar.style.width = "50%"; }, 10);
 
             try {
-                // 5. Fetch to AJAX Endpoint
+                // 5. Prepare Data (FormData is more compatible with FormSubmit AJAX)
+                const formData = new FormData();
+                formData.append('name', name);
+                formData.append('email', email);
+                formData.append('phone', `${country} ${phone}`);
+                formData.append('service', service);
+                formData.append('message', message);
+                formData.append('_subject', 'New Project Inquiry - DDNetwork One Website');
+
+                // 6. Fetch to AJAX Endpoint
                 const response = await fetch('https://formsubmit.co/danialamir1809@gmail.com/ajax', {
                     method: 'POST',
+                    body: formData,
                     headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(data)
+                        'Accept': 'application/json'
+                    }
                 });
 
-                // 6. Handle Response (SUCCESS)
+                // 7. Handle AJAX Success
                 if (response.ok) {
-                    // UI Update: Button says "Sent!"
-                    btn.innerText = "Sent!";
-                    btn.disabled = false;
-                    
-                    // Logic: Show POPUP instead of page redirect
-                    // This keeps user on /contact page as requested
-                    const popup = document.getElementById('success-popup');
-                    popup.classList.add('active');
+                    // UI Update: Progress bar fills
+                    const bar = btn.querySelector('div');
+                    if (bar) bar.style.width = "100%";
 
-                    // Optional: Close popup automatically after 5 seconds
                     setTimeout(() => {
-                        closePopup();
-                    }, 5000);
+                        // Show Pop-up immediately
+                        const popup = document.getElementById('success-popup');
+                        popup.classList.add('active');
+                        
+                        // Close popup automatically after 4s
+                        setTimeout(() => {
+                            closePopup();
+                        }, 4000);
+                    }, 800);
                 } else {
-                    // UI Update: Reset button
-                    btn.innerText = "Send Message";
-                    btn.disabled = false;
-
-                    // Show Error Alert
-                    response.text().then(text => {
-                        alert("Error: " + text);
-                    }).catch(e => {
-                        alert("Error: Unknown error occurred.");
-                    });
+                    throw new Error("Server rejected");
                 }
             } catch (error) {
-                console.error("Fetch Error:", error);
-                alert("Network Error: " + error.message);
-                btn.innerText = "Send Message";
-                btn.disabled = false;
+                // 8. CATCH BLOCK: If AJAX fails (Network Error, CORS, etc), fall back to NATIVE
+                console.warn("AJAX Failed. Fallback to Native Submit:", error);
+                
+                // Restore Button Style
+                btn.style.width = "auto";
+                btn.style.height = "auto";
+                btn.style.borderRadius = "50px";
+                btn.style.padding = "14px 0";
+                btn.style.backgroundColor = originalBg;
+                btn.innerHTML = "Sending..."; // Keep text "Sending" while native form submits
+
+                // FALLBACK: CREATE HIDDEN FORM AND SUBMIT NATIVELY
+                // This is the "Bulletproof" method. It works even if AJAX is blocked.
+                const hiddenForm = document.createElement('form');
+                hiddenForm.method = 'POST';
+                hiddenForm.action = 'https://formsubmit.co/danialamir1809@gmail.com';
+                
+                // Add fields
+                const inputIds = ['input-name', 'input-email', 'input-country', 'input-phone', 'input-service', 'input-message'];
+                inputIds.forEach(id => {
+                    const input = document.getElementById(id);
+                    const hiddenInput = document.createElement('input');
+                    hiddenInput.type = 'hidden';
+                    hiddenInput.name = input.name;
+                    hiddenInput.value = input.value;
+                    hiddenForm.appendChild(hiddenInput);
+                });
+
+                // Add hidden fields
+                const hiddenFields = ['_subject', '_captcha', '_redirect'];
+                hiddenFields.forEach(name => {
+                    const hiddenInput = document.createElement('input');
+                    hiddenInput.type = 'hidden';
+                    hiddenInput.name = name;
+                    if (name === '_subject') hiddenInput.value = 'New Project Inquiry - DDNetwork One Website';
+                    if (name === '_captcha') hiddenInput.value = 'false';
+                    if (name === '_redirect') hiddenInput.value = window.location.href + '?thankyou=true'; // Redirect to self with param
+                    hiddenForm.appendChild(hiddenInput);
+                });
+
+                document.body.appendChild(hiddenForm);
+                
+                // Submit hidden form (Browser handles POST, Redirect, Validation)
+                hiddenForm.submit();
+
+                // We don't remove form immediately to ensure submission starts
+                // It will be removed when page reloads naturally
             }
         }
 
@@ -1374,8 +1463,38 @@
 
         // Initialize Home page on load
         window.addEventListener('DOMContentLoaded', () => {
-            const homeSection = document.getElementById('home');
-            if (homeSection) homeSection.classList.add('active');
+            // Check for redirect URL parameter
+            const params = new URLSearchParams(window.location.search);
+            const isThankYou = params.get('thankyou');
+            
+            if (isThankYou) {
+                // 1. Hide Header/Footer
+                document.body.classList.add('thankyou-mode');
+                
+                // 2. Show Pop-up
+                const popup = document.getElementById('success-popup');
+                popup.classList.add('active');
+
+                // 3. Close popup automatically after 5 seconds
+                setTimeout(() => {
+                    closePopup();
+                    
+                    // 4. Auto-redirect to Home
+                    window.location.href = "https://one.ddnetwork.uk/";
+                }, 5000);
+
+                // 5. Handle Manual Close
+                const returnBtn = document.querySelector('.popup-close');
+                if(returnBtn) {
+                    returnBtn.addEventListener('click', () => {
+                        window.location.href = "https://one.ddnetwork.uk/";
+                    });
+                }
+                
+            } else {
+                const homeSection = document.getElementById('home');
+                if (homeSection) homeSection.classList.add('active');
+            }
         });
     </script>
 </body>
