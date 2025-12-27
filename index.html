@@ -31,7 +31,7 @@
             --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
             --shadow-glow: 0 0 20px rgba(37, 99, 235, 0.15);
 
-            --header-height: 80px; /* Slim header */
+            --header-height: 80px;
             --header-height-mobile: 70px;
         }
 
@@ -169,13 +169,13 @@
         /* Nav Links Wrapper (Centered) */
         .nav-links-container {
             display: flex;
-            justify-content: center; /* Explicitly center links */
-            flex-grow: 1; /* Take up available space to ensure centering */
+            justify-content: center; 
+            flex-grow: 1;
         }
 
         .nav-links {
             display: flex;
-            gap: 40px; /* Good spacing */
+            gap: 40px; 
             align-items: center;
         }
 
@@ -185,7 +185,7 @@
             color: var(--text-secondary);
             cursor: pointer;
             position: relative;
-            padding: 8px 16px; /* Slightly larger hit area */
+            padding: 8px 16px; 
             border-radius: 6px;
             transition: all 0.2s ease;
             text-transform: capitalize; 
@@ -196,7 +196,7 @@
             color: var(--primary); 
         }
 
-        .nav-item.active { color: var(--text-main); font-weight: 600; background-color: rgba(37, 99, 235, 0.1); }
+        .nav-item.active { color: var(--text-main); font-weight: 600; background-color: rgba(37, 99, 235, 0.05); }
 
         /* --- CONTACT BUTTON (HEADER) --- */
         .btn-nav {
@@ -205,7 +205,7 @@
             color: white;
             border-radius: 50px;
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             transition: all 0.2s ease;
             border: none;
         }
@@ -233,14 +233,14 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             align-items: center;
-            gap: 60px; /* Tighter gap */
+            gap: 60px; 
             padding-top: 140px; 
             padding-bottom: 80px;
             position: relative;
         }
 
         .hero-content h1 {
-            font-size: 3.2rem; /* Optimized size */
+            font-size: 3.2rem; 
             line-height: 1.1;
             font-weight: 800;
             margin-bottom: 24px;
@@ -302,7 +302,7 @@
             background: white;
             border: 1px solid var(--border);
             border-radius: var(--radius-lg);
-            padding: 30px;
+            padding: 30px; 
             transition: all 0.3s ease;
             position: relative;
             display: flex;
@@ -491,7 +491,7 @@
         
         .form-input {
             width: 100%;
-            padding: 14px 16px; 
+            padding: 14px 18px; 
             border: 1px solid var(--border);
             border-radius: var(--radius-sm);
             font-size: 1rem; 
@@ -513,14 +513,12 @@
         }
         .phone-select {
             width: 130px; 
-            padding: 14px 16px; 
+            padding: 14px 18px; 
             flex-shrink: 0;
         }
 
         .form-actions {
             margin-top: 30px;
-            border-top: 1px solid var(--border);
-            padding-top: 20px;
             text-align: center;
         }
 
@@ -533,7 +531,6 @@
             align-items: center;
             padding: 40px 20px;
             text-align: center;
-            background: radial-gradient(circle at 50% 50%, #f0fdf4 0%, #ffffff 100%);
         }
         
         .thankyou-content {
@@ -613,7 +610,6 @@
             transform: translateY(-100%); 
         }
         
-        /* Optional: Hide toggle button so user is't confused */
         body.thankyou-mode .mobile-toggle {
             display: none !important;
         }
@@ -685,9 +681,7 @@
                 color: var(--text-main);
                 border: none;
                 display: block;
-                padding: 20px 0;
-                width: 100%;
-                font-size: 1.1rem; /* Larger touch targets */
+                font-size: 1.1rem; 
                 text-transform: uppercase;
                 letter-spacing: 1px;
                 font-weight: 700;
@@ -703,7 +697,7 @@
             
             .form-group { margin-bottom: 20px; }
             .form-input {
-                padding: 16px 15px; /* Touch targets */
+                padding: 16px 15px; 
                 font-size: 16px; 
             }
             .phone-select {
@@ -732,7 +726,6 @@
             .service-title { font-size: 1.1rem; }
             .service-desc { font-size: 0.9rem; }
             
-            /* Mobile Toggle: Full screen width for easier touching */
             .mobile-toggle { display: block; }
             .footer-grid { grid-template-columns: 1fr; }
             
@@ -759,12 +752,7 @@
                 </a>
             </div>
             
-            <!-- Mobile Toggle (Right) -->
-            <button class="mobile-toggle" onclick="toggleMenu()">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-            </button>
-
-            <!-- Nav Links Wrapper (Centered) -->
+            <!-- Desktop Nav (Centered) -->
             <div class="nav-links">
                 <ul class="nav-links" id="navLinks">
                     <li class="nav-item active" onclick="switchPage('home')">Home</li>
@@ -776,6 +764,11 @@
                     <li class="nav-item" onclick="switchPage('contact')">Contact Us</li>
                 </ul>
             </div>
+
+            <!-- Mobile Toggle (Right) -->
+            <button class="mobile-toggle" onclick="toggleMenu()">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+            </button>
         </nav>
     </header>
 
@@ -880,7 +873,7 @@
                         </div>
                         <div>
                             <h4 style="font-size:1.1rem; margin-bottom:8px;">Domain & Hosting Setup</h4>
-                            <p style="font-size:0.9rem; color:var(--text-secondary); margin-bottom:10px;">We handle server configuration and domain registration for you.</p>
+                            <p style="font-size:0.9rem; color:var(--text-secondary); margin-bottom:12px;">We handle server configuration and domain registration for you.</p>
                             <p style="font-size:0.9rem; color:var(--text-main); margin-bottom:8px; font-weight: 500;">
                                 RM 80 – RM 2000 <span style="font-size:0.85rem; font-weight: 400; color:var(--text-secondary);">(Based on Your Domain Name, Need to buy monthly)</span>
                             </p>
@@ -895,7 +888,7 @@
                         </div>
                         <div>
                             <h4 style="font-size:1.1rem; margin-bottom:8px;">SEO Optimization</h4>
-                            <p style="font-size:0.9rem; color:var(--text-secondary); margin-bottom:10px;">Improve your ranking on search engines with keyword research.</p>
+                            <p style="font-size:0.9rem; color:var(--text-secondary); margin-bottom:12px;">Improve your ranking on search engines with keyword research.</p>
                             <span style="font-weight:700; color:var(--primary); font-size:1rem;">RM 150 – RM 300</span>
                         </div>
                     </div>
@@ -907,7 +900,7 @@
                         </div>
                         <div>
                             <h4 style="font-size:1.1rem; margin-bottom:8px;">Maintenance / Updates</h4>
-                            <p style="font-size:0.9rem; color:var(--text-secondary); margin-bottom:10px;">Monthly security patches, backups, and content updates.</p>
+                            <p style="font-size:0.9rem; color:var(--text-secondary); margin-bottom:12px;">Monthly security patches, backups, and content updates.</p>
                             <span style="font-weight:700; color:var(--primary); font-size:1rem;">RM 100 – RM 250 <span style="font-size:0.8rem; font-weight:400; color:#999;">/month</span></span>
                         </div>
                     </div>
@@ -1033,7 +1026,7 @@
             </div>
         </section>
 
-        <!-- === CONTACT (AJAX/FETCH FORM) === -->
+        <!-- === CONTACT (AJAX/FETCH FORM - BUG FIXED) === -->
         <section id="contact" class="page-section">
             <div class="container section-padding">
                 <div class="contact-card">
@@ -1042,18 +1035,18 @@
                         <p style="font-size:0.95rem; color:var(--text-secondary);">Fill out the form below to get in touch.</p>
                     </div>
 
-                    <!-- FORM SUBMIT FORM (AJAX/FETCH) -->
-                    <!-- Logic: Native Post is removed. Button triggers Fetch to send JSON to FormSubmit AJAX endpoint -->
+                    <!-- FORM SUBMIT FORM (AJAX ENDPOINT) -->
+                    <!-- Using FormSubmit AJAX endpoint to handle sending without page reload, fixing the "stuck" issue -->
                     <form id="contactForm">
                         
                         <div class="form-row">
                             <div class="form-group">
                                 <label>Name</label>
-                                <input type="text" name="name" class="form-input" placeholder="Your Full Name" required>
+                                <input type="text" name="name" id="input-name" class="form-input" placeholder="Your Full Name" required>
                             </div>
                             <div class="form-group">
                                 <label>Email</label>
-                                <input type="email" name="email" class="form-input" placeholder="email@address.com" required>
+                                <input type="email" name="email" id="input-email" class="form-input" placeholder="email@address.com" required>
                             </div>
                         </div>
 
@@ -1062,7 +1055,7 @@
                             <label>Phone Number</label>
                             <div class="phone-group">
                                 <!-- Dropdown for Country Code (Default +60) -->
-                                <select name="country_code" class="form-input phone-select">
+                                <select name="country_code" id="input-country" class="form-input phone-select">
                                     <option value="+60" selected>+60 (MY)</option>
                                     <option value="+65">+65 (SG)</option>
                                     <option value="+62">+62 (ID)</option>
@@ -1073,13 +1066,13 @@
                                     <option value="+86">+86 (CN)</option>
                                     <option value="+81">+81 (JP)</option>
                                 </select>
-                                <input type="tel" name="phone" class="form-input" placeholder="12 345 6789">
+                                <input type="tel" name="phone" id="input-phone" class="form-input" placeholder="12 345 6789">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label>Service Interest</label>
-                            <select name="service" class="form-input">
+                            <select name="service" id="input-service" class="form-input">
                                 <option>Front-End Website (RM 400-800)</option>
                                 <option>AI Website (RM 800-1500)</option>
                                 <option>HTML Only (RM 200-400)</option>
@@ -1089,13 +1082,12 @@
 
                         <div class="form-group">
                             <label>Message</label>
-                            <textarea name="message" class="form-input" rows="6" placeholder="Tell us about your project requirements..." required></textarea>
+                            <textarea name="message" id="input-message" class="form-input" rows="6" placeholder="Tell us about your project requirements..." required></textarea>
                         </div>
 
                         <!-- BUTTON AT BOTTOM -->
                         <div class="form-actions">
-                            <!-- Button type="button" to intercept with JavaScript for AJAX handling -->
-                            <button type="button" id="submitBtn" class="btn-nav" style="width:100%; justify-content:center; padding: 14px 0;" onclick="submitFormAjax()">Send Message</button>
+                            <button type="submit" id="submitBtn" class="btn-nav" style="width:100%; justify-content:center; padding: 14px 0;" onclick="submitFormAjax(event)">Send Message</button>
                         </div>
                     </form>
                 </div>
@@ -1114,13 +1106,13 @@
                     <p>Thank you for choosing our services.</p>
                     <p>Your order will be reviewed and confirmed by our team within 24 hours.</p>
                     
-                    <!-- AUTOMATIC REDIRECT: Timer and logic handles redirect to Home -->
+                    <!-- AUTOMATIC REDIRECT -->
                     <div id="countdown" style="margin-top: 15px; font-size: 0.9rem; color: var(--text-secondary); display: none;">
                         Redirecting to Home in <span id="timer">3</span> seconds...
                     </div>
 
                     <!-- Button: Returns to Home immediately if clicked -->
-                    <button class="btn-nav" onclick="window.location.href='https://one.ddnetwork.uk/'" style="padding: 14px 32px; font-size: 1rem; margin-top:20px;">Return to Home</button>
+                    <button class="btn-nav" id="returnHomeBtn" onclick="window.location.href='https://one.ddnetwork.uk/'" style="padding: 14px 32px; font-size: 1rem; margin-top:20px;">Return to Home</button>
                 </div>
             </div>
         </section>
@@ -1231,38 +1223,39 @@
             document.getElementById('navLinks').classList.toggle('active');
         }
 
-        // === AJAX FORM SUBMIT LOGIC (FIXES "STUCK AT SENDING") ===
-        async function submitFormAjax() {
-            const form = document.getElementById('contactForm');
+        // === FORM AJAX HANDLER (BUG FIX FOR "STUCK AT SENDING") ===
+        async function submitFormAjax(event) {
+            // 1. Prevent default (page reload)
+            event.preventDefault();
+
+            const form = event.target;
             const btn = document.getElementById('submitBtn');
 
-            // 1. Get values
-            const formData = new FormData(form);
-            const name = formData.get('name');
-            const email = formData.get('email');
-            const phone = formData.get('phone');
-            const country = formData.get('country_code');
-            const service = formData.get('service');
-            const message = formData.get('message');
+            // 2. Get values
+            const name = document.getElementById('input-name').value;
+            const email = document.getElementById('input-email').value;
+            const phone = document.getElementById('input-phone').value;
+            const country = document.getElementById('input-country').value;
+            const service = document.getElementById('input-service').value;
+            const message = document.getElementById('input-message').value;
 
-            // 2. Validate
+            // 3. Validate
             if (!name || !email || !message) {
                 alert("Please fill in Name, Email, and Message.");
-                return; 
+                return; // Stop submission
             }
 
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailRegex.test(email)) {
                 alert("Please enter a valid email address.");
-                return;
+                return; // Stop submission
             }
 
-            // 3. UI Feedback (Sending...)
+            // 4. UI Feedback (Sending...)
             btn.innerText = "Sending...";
             btn.disabled = true;
 
-            // 4. Prepare JSON for FormSubmit AJAX endpoint
-            // The AJAX endpoint requires a flat JSON object, not FormData
+            // 5. Prepare JSON Data (FormSubmit AJAX expects JSON)
             const data = {
                 name: name,
                 email: email,
@@ -1272,7 +1265,8 @@
             };
 
             try {
-                // 5. Fetch to FormSubmit AJAX endpoint
+                // 6. Fetch to AJAX Endpoint (Most Stable Method)
+                // We use the /ajax endpoint which returns JSON and doesn't force page reload
                 const response = await fetch('https://formsubmit.co/danialamir1809@gmail.com/ajax', {
                     method: 'POST',
                     headers: {
@@ -1282,14 +1276,15 @@
                     body: JSON.stringify(data)
                 });
 
-                // 6. Handle Response
+                // 7. Handle Success
                 if (response.ok) {
-                    // Success: Show "Sent!", Show Thank You, Start Timer
+                    // UI Update: Button says "Sent!"
                     btn.innerText = "Sent!";
                     btn.disabled = false;
-                    
-                    switchPage('thankyou');
 
+                    // Logic: Show Thank You, Start Timer
+                    switchPage('thankyou');
+                    
                     // Start 3 second countdown to Home
                     let timeLeft = 3;
                     const timerEl = document.getElementById('timer');
@@ -1308,28 +1303,22 @@
                             }
                         }, 1000);
                     }
-                } else {
-                    // Fallback redirect if elements missing
-                    setTimeout(() => {
-                        window.location.href = "https://one.ddnetwork.uk/";
-                    }, 3000);
                 }
 
-                } else {
-                    // Error: Reset button and alert
-                    btn.innerText = "Send Message";
-                    btn.disabled = false;
-                    
-                    // Try to get error text (if any)
-                    response.text().then(text => {
-                        alert("Error: " + text);
-                    }).catch(e => {
-                        alert("Error: Unknown error occurred.");
-                    });
-                }
+                // 8. Handle Error (e.g., Spam Filter or Server Down)
+                // This prevents "Stuck at Sending..."
+                const errorText = await response.text();
+                alert("Error: " + errorText);
+                
+                // Reset Button
+                btn.innerText = "Send Message";
+                btn.disabled = false;
+
             } catch (error) {
                 console.error("Fetch Error:", error);
                 alert("Network Error: " + error.message);
+                
+                // Reset Button
                 btn.innerText = "Send Message";
                 btn.disabled = false;
             }
@@ -1347,8 +1336,16 @@
 
         // Initialize Home page on load
         window.addEventListener('DOMContentLoaded', () => {
-            const homeSection = document.getElementById('home');
-            if (homeSection) homeSection.classList.add('active');
+            // Check for redirect URL param
+            const params = new URLSearchParams(window.location.search);
+            const isThankYou = params.get('thankyou');
+            
+            if (isThankYou) {
+                switchPage('thankyou');
+            } else {
+                const homeSection = document.getElementById('home');
+                if (homeSection) homeSection.classList.add('active');
+            }
         });
     </script>
 </body>
