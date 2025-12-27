@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DDNetwork One - Professional Web Solutions</title>
+    <title>DDNetwork One</title>
     <meta name="description" content="Professional web development and AI solutions.">
     
     <!-- Google Fonts: Inter -->
@@ -52,6 +52,9 @@
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
         }
+
+        /* Lock body scroll when menu is open */
+        body.menu-open { overflow: hidden; }
 
         a { text-decoration: none; color: inherit; transition: color 0.2s; }
         ul { list-style: none; }
@@ -121,7 +124,7 @@
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             border-bottom: 1px solid rgba(226, 232, 240, 0.6); 
-            z-index: 1000;
+            z-index: 1002; /* Higher than overlay and menu */
             display: flex;
             align-items: center;
             padding: 0 24px;
@@ -151,6 +154,7 @@
             align-items: center;
             gap: 12px; 
             cursor: pointer;
+            z-index: 1003; /* Ensure logo clicks work */
         }
 
         .logo-img {
@@ -200,7 +204,7 @@
         }
         .btn-nav:hover { background-color: var(--primary); transform: translateY(-2px); }
 
-        /* Mobile Toggle */
+        /* Mobile Toggle Button */
         .mobile-toggle { 
             display: none; 
             background: none; 
@@ -209,7 +213,86 @@
             color: var(--text-main);
             cursor: pointer;
             padding: 10px;
-            z-index: 1002;
+            z-index: 1003; /* Above everything */
+            transition: transform 0.3s ease;
+        }
+        .mobile-toggle:hover { transform: scale(1.1); }
+
+        /* --- MOBILE NAVIGATION (PROPER IMPLEMENTATION) --- */
+        
+        /* 1. The Backdrop Overlay */
+        .nav-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(15, 23, 42, 0.6); /* Dark backdrop */
+            backdrop-filter: blur(4px);
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        .nav-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* 2. The Drawer Container */
+        .nav-drawer {
+            position: fixed;
+            top: 0; right: 0;
+            width: 300px; /* Fixed width for side drawer */
+            height: 100vh;
+            background: white;
+            z-index: 1001; /* Below header, above overlay */
+            transform: translateX(100%); /* Hidden to right */
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+            padding-top: var(--header-height-mobile); /* Start below header */
+        }
+
+        .nav-drawer.active {
+            transform: translateX(0); /* Slide in */
+        }
+
+        /* Mobile Menu Items */
+        .nav-links-mobile {
+            list-style: none;
+            padding: 20px;
+            overflow-y: auto; /* Allow scrolling inside menu if needed */
+            flex-grow: 1;
+        }
+
+        .nav-item-mobile {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-main);
+            padding: 16px 0;
+            border-bottom: 1px solid #f1f5f9;
+            cursor: pointer;
+            transition: color 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-item-mobile:hover { color: var(--primary); }
+        
+        .nav-item-mobile.active { color: var(--primary); }
+
+        .nav-item-mobile svg {
+            color: var(--text-secondary);
+            transition: transform 0.2s;
+        }
+        .nav-item-mobile:hover svg { transform: translateX(5px); color: var(--primary); }
+
+        /* Close Button inside Menu */
+        .mobile-close-header {
+            display: none; /* Hidden on desktop */
+            padding: 20px;
+            border-bottom: 1px solid #e2e8f0;
+            text-align: right;
         }
 
         /* --- HERO --- */
@@ -478,35 +561,14 @@
         @media (max-width: 768px) {
             :root { --header-height: 70px; }
             
-            /* FIX: Hide desktop links, show toggle */
+            /* Hide Desktop Nav */
             .nav-links-container { display: none; }
             
-            /* FIX: Mobile Menu Styling */
-            .nav-links {
-                display: flex;
-                position: fixed;
-                top: var(--header-height);
-                left: 0;
-                width: 100%;
-                height: calc(100vh - var(--header-height));
-                background: white;
-                flex-direction: column;
-                justify-content: flex-start;
-                padding: 40px 20px;
-                transform: translateX(100%); /* Hidden to the right */
-                transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-                z-index: 1001; /* Higher than header */
-                box-shadow: 10px 0 30px rgba(0,0,0,0.1);
-            }
-            
-            /* When active, slide in */
-            .nav-links.active { transform: translateX(0); }
-
-            .nav-item { width: 100%; text-align: left; padding: 16px 0; font-size: 1.1rem; border-bottom: 1px solid #f1f5f9; }
-            .nav-item:hover { background: transparent; color: var(--primary); padding-left: 10px; }
-
+            /* Show Mobile Components */
             .mobile-toggle { display: block; }
-            
+            .nav-drawer { display: flex; }
+            .nav-overlay { display: block; }
+
             .form-row { grid-template-columns: 1fr; }
             .contact-card { padding: 30px 20px; }
             
@@ -519,7 +581,6 @@
 <body>
 
     <!-- HIDDEN IFRAME FOR FORM SUBMIT -->
-    <!-- This iframe is used to submit the form in the background without reloading the page -->
     <iframe id="formSubmitFrame" name="formSubmitFrame" style="display:none;" onload="handleFormLoad()"></iframe>
 
     <!-- Success Popup -->
@@ -529,9 +590,43 @@
                 <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
             </div>
             <h3>Message Sent!</h3>
-            <p>Thank you for contacting DDNetwork One. We have received your inquiry and will reply to you shortly.</p>
+            <p>Thank you for choosing DDNetwork One. We’ve received your inquiry and will be in touch within 24 hours to assist you further.</p>
             <button class="popup-close" onclick="closePopup()">Back to Home</button>
         </div>
+    </div>
+
+    <!-- Mobile Navigation Overlay & Drawer -->
+    <div class="nav-overlay" id="navOverlay" onclick="toggleMenu()"></div>
+    <div class="nav-drawer" id="navDrawer">
+        <div class="mobile-close-header" onclick="toggleMenu()">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </div>
+        <ul class="nav-links-mobile" id="navLinksMobile">
+            <li class="nav-item-mobile" onclick="switchPage('home')">
+                Home
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+            </li>
+            <li class="nav-item-mobile" onclick="switchPage('services')">
+                Services
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+            </li>
+            <li class="nav-item-mobile" onclick="switchPage('about')">
+                About Us
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            </li>
+            <li class="nav-item-mobile" onclick="switchPage('founder')">
+                Founder
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+            </li>
+            <li class="nav-item-mobile" onclick="switchPage('testimonials')">
+                Testimonials
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+            </li>
+            <li class="nav-item-mobile" onclick="switchPage('contact')">
+                Contact
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            </li>
+        </ul>
     </div>
 
     <!-- Header -->
@@ -542,6 +637,7 @@
                 <span style="font-size: 1.1rem; font-weight: 800;">DDNetwork<span style="color:var(--primary)">One</span></span>
             </div>
             
+            <!-- Desktop Nav Links -->
             <div class="nav-links-container">
                 <ul class="nav-links" id="navLinks">
                     <li class="nav-item active" onclick="switchPage('home')">Home</li>
@@ -553,8 +649,10 @@
                 </ul>
             </div>
 
-            <button class="mobile-toggle" onclick="toggleMenu()" aria-label="Toggle Menu">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+            <!-- Mobile Hamburger Toggle -->
+            <button class="mobile-toggle" id="mobileToggle" onclick="toggleMenu()" aria-label="Toggle Menu">
+                <svg id="icon-menu" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                <svg id="icon-close" style="display:none;" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
             </button>
         </nav>
     </header>
@@ -736,7 +834,7 @@
                         <p style="font-size:1.05rem; margin-bottom:24px; color:var(--text-main); font-style:italic;">The team transformed our outdated site into a modern masterpiece. The AI chatbot feature is a game changer.</p>
                         <div style="display:flex; align-items:center; gap:15px;">
                             <img src="https://picsum.photos/seed/user1/60/60" style="border-radius:50%;" alt="User">
-                            <div><strong>Sarah L.</strong><br><span style="font-size:0.85rem; color:var(--text-secondary);">Marketing Director</span></div>
+                            <div><strong>Pn. Aida.</strong><br><span style="font-size:0.85rem; color:var(--text-secondary);">Director PNE ARENA</span></div>
                         </div>
                     </div>
                     <div class="t-card">
@@ -745,7 +843,7 @@
                         <p style="font-size:1.05rem; margin-bottom:24px; color:var(--text-main); font-style:italic;">Fast, affordable, and professional. The quality of work is what keeps us coming back for updates.</p>
                         <div style="display:flex; align-items:center; gap:15px;">
                             <img src="https://picsum.photos/seed/user2/60/60" style="border-radius:50%;" alt="User">
-                            <div><strong>James T.</strong><br><span style="font-size:0.85rem; color:var(--text-secondary);">Startup Founder</span></div>
+                            <div><strong>Putri Erinna.</strong><br><span style="font-size:0.85rem; color:var(--text-secondary);">Startup Founder</span></div>
                         </div>
                     </div>
                     <div class="t-card">
@@ -754,7 +852,7 @@
                         <p style="font-size:1.05rem; margin-bottom:24px; color:var(--text-main); font-style:italic;">I was worried about the technical side, but they handled domain and hosting setup perfectly.</p>
                         <div style="display:flex; align-items:center; gap:15px;">
                             <img src="https://picsum.photos/seed/user3/60/60" style="border-radius:50%;" alt="User">
-                            <div><strong>Amanda K.</strong><br><span style="font-size:0.85rem; color:var(--text-secondary);">Freelancer</span></div>
+                            <div><strong>Shaiful Adlan.</strong><br><span style="font-size:0.85rem; color:var(--text-secondary);">Freelancer</span></div>
                         </div>
                     </div>
                 </div>
@@ -770,34 +868,25 @@
                         <p style="color:var(--text-secondary);">Fill out the form below to start your project.</p>
                     </div>
 
-                    <!-- 
-                         FORM SUBMIT FIX:
-                         1. target="formSubmitFrame" -> Sends to hidden iframe instead of reloading page.
-                         2. onsubmit="validateForm(event)" -> Validates before sending.
-                    -->
+                    <!-- FORM SUBMIT FIX -->
                     <form id="contactForm" 
                           action="https://formsubmit.co/danialamir1809@gmail.com" 
                           method="POST" 
                           target="formSubmitFrame" 
                           onsubmit="return validateForm(event)">
                         
-                        <!-- Honeypot for spam -->
                         <input type="text" name="_honey" style="display:none">
-                        
-                        <!-- Disable Captcha -->
                         <input type="hidden" name="_captcha" value="false">
-                        
-                        <!-- Subject -->
                         <input type="hidden" name="_subject" value="New Project Inquiry - DDNetwork One">
 
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="name">Full Name</label>
-                                <input type="text" id="name" name="name" class="form-input" placeholder="John Doe" required>
+                                <input type="text" id="name" name="name" class="form-input" placeholder="Danial Danish" required>
                             </div>
                             <div class="form-group">
                                 <label for="email">Email Address</label>
-                                <input type="email" id="email" name="email" class="form-input" placeholder="john@example.com" required>
+                                <input type="email" id="email" name="email" class="form-input" placeholder="danial@example.com" required>
                             </div>
                         </div>
 
@@ -870,7 +959,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                &copy; 2023 DDNetwork One. All rights reserved.
+                &copy; 2025 DDNetwork One. All rights reserved.
             </div>
         </div>
     </footer>
@@ -878,12 +967,24 @@
     <script>
         // === NAVIGATION LOGIC ===
         function switchPage(pageId) {
-            // Update active link styling
+            // Close menu if open
+            if(document.body.classList.contains('menu-open')) {
+                toggleMenu();
+            }
+
+            // Update active link styling (Desktop)
             const navLinks = document.querySelectorAll('.nav-item');
             navLinks.forEach(link => link.classList.remove('active'));
             
             const activeLink = Array.from(navLinks).find(link => link.getAttribute('onclick').includes(pageId));
             if(activeLink) activeLink.classList.add('active');
+
+            // Update active link styling (Mobile)
+            const navLinksMobile = document.querySelectorAll('.nav-item-mobile');
+            navLinksMobile.forEach(link => link.classList.remove('active'));
+            
+            const activeLinkMobile = Array.from(navLinksMobile).find(link => link.getAttribute('onclick').includes(pageId));
+            if(activeLinkMobile) activeLinkMobile.classList.add('active');
 
             // Hide all sections
             const sections = document.querySelectorAll('.page-section');
@@ -894,16 +995,31 @@
             if (target) target.classList.add('active');
 
             window.scrollTo(0, 0);
-
-            // Close mobile menu if open
-            const menu = document.getElementById('navLinks');
-            menu.classList.remove('active');
         }
 
-        // === MOBILE MENU ===
+        // === MOBILE MENU LOGIC (PROPER) ===
         function toggleMenu() {
-            const menu = document.getElementById('navLinks');
-            menu.classList.toggle('active');
+            const body = document.body;
+            const drawer = document.getElementById('navDrawer');
+            const overlay = document.getElementById('navOverlay');
+            const iconMenu = document.getElementById('icon-menu');
+            const iconClose = document.getElementById('icon-close');
+
+            if (body.classList.contains('menu-open')) {
+                // Close Menu
+                body.classList.remove('menu-open');
+                drawer.classList.remove('active');
+                overlay.classList.remove('active');
+                iconMenu.style.display = 'block';
+                iconClose.style.display = 'none';
+            } else {
+                // Open Menu
+                body.classList.add('menu-open');
+                drawer.classList.add('active');
+                overlay.classList.add('active');
+                iconMenu.style.display = 'none';
+                iconClose.style.display = 'block';
+            }
         }
 
         // === PRE-FILL SERVICE SELECTOR ===
@@ -924,7 +1040,6 @@
         }
 
         // === FORM SUBMIT LOGIC (IFRAME FIX) ===
-        
         let isFormSubmitting = false;
 
         function validateForm(e) {
@@ -941,20 +1056,17 @@
             });
 
             if(!isValid) {
-                e.preventDefault(); // Stop submission
+                e.preventDefault();
                 return false;
             }
 
-            // If valid, allow submission to iframe
             startLoading();
             isFormSubmitting = true;
             return true;
         }
 
         function handleFormLoad() {
-            // This function triggers when the hidden iframe finishes loading
             if (isFormSubmitting) {
-                // Wait a brief moment to ensure data was processed
                 setTimeout(() => {
                     stopLoading();
                     document.getElementById('success-popup').classList.add('active');
