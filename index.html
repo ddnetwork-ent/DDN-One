@@ -714,6 +714,81 @@
 
         @keyframes slideDown { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
 
+        /* --- FAQ SECTION --- */
+        .faq-section {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .faq-item {
+            border-bottom: 1px solid var(--border);
+        }
+        .faq-question {
+            width: 100%;
+            text-align: left;
+            padding: 20px 0;
+            background: none;
+            border: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-main);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+        .faq-question:hover { color: var(--primary); }
+        .faq-icon {
+            transition: transform 0.3s ease;
+            font-size: 1.2rem;
+            color: var(--primary);
+        }
+        .faq-question.active .faq-icon {
+            transform: rotate(45deg);
+        }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        .faq-answer.open {
+            padding-bottom: 20px;
+        }
+
+        /* --- TERMS SECTION --- */
+        .terms-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+        }
+        .terms-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+        }
+        .terms-content h2 {
+            font-size: 1.5rem;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            color: var(--text-main);
+        }
+        .terms-content p, .terms-content ul {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+        .terms-content ul {
+            list-style: disc;
+            margin-left: 20px;
+        }
+
         /* --- ABOUT & FOUNDER --- */
         .about-split { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
         .about-img, .founder-img { border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); width: 100%; height: auto; object-fit: cover; }
@@ -895,6 +970,7 @@
             .testimonial-slider { gap: 20px; }
             .clients-grid { gap: 20px; }
             .domain-option { flex-direction: column; align-items: flex-start; gap: 10px; }
+            .terms-container { padding: 20px; }
         }
     </style>
 </head>
@@ -928,7 +1004,9 @@
             <li class="nav-item-mobile" onclick="switchPage('founder')">Founder <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></li>
             <li class="nav-item-mobile" onclick="switchPage('testimonials')">Testimonials <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg></li>
             <li class="nav-item-mobile" onclick="switchPage('contact')">Contact <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></li>
+            <li class="nav-item-mobile" onclick="switchPage('faq')">FAQ <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></li>
             <li class="nav-item-mobile" onclick="switchPage('about')">About Us <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg></li>
+            <li class="nav-item-mobile" onclick="switchPage('terms')">Terms <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg></li>
         </ul>
     </div>
 
@@ -949,7 +1027,8 @@
                     <li class="nav-item" onclick="switchPage('founder')">Founder</li>
                     <li class="nav-item" onclick="switchPage('testimonials')">Testimonials</li>
                     <li class="nav-item" onclick="switchPage('contact')">Contact</li>
-                    <li class="nav-item" onclick="switchPage('about')">About Us</li>
+                    <li class="nav-item" onclick="switchPage('faq')">FAQ</li>
+                    <li class="nav-item" onclick="switchPage('terms')">Terms</li>
                 </ul>
             </div>
 
@@ -971,7 +1050,7 @@
                 <div class="hero-content">
                     <div class="badge" style="background:var(--primary-light); color:var(--primary);">🚀 Modern Web Solutions</div>
                     <h1>Digital Growth for <span class="text-gradient">Your Business</span></h1>
-                    <p>We craft fast, responsive, and intelligent websites. From basic static sites to advanced AI integrations, we have the tools to scale your brand.</p>
+                    <p>We craft fast, responsive, and intelligent websites. From basic static sites to advanced AI integrations, we have tools to scale your brand.</p>
                     <div style="display:flex; gap:12px; flex-wrap: wrap; justify-content: center; @media(min-width:992px){justify-content:start;}">
                         <button class="btn-nav" onclick="switchPage('services')">View Packages</button>
                         <button class="btn-nav" style="background:white; color:var(--text-main); border:1px solid var(--border);" onclick="switchPage('contact')">Get a Quote</button>
@@ -1165,6 +1244,99 @@
                     </ul>
                 </div>
 
+            </div>
+        </section>
+
+        <!-- === FAQ === -->
+        <section id="faq" class="page-section">
+            <div class="container section-padding">
+                <div class="faq-section">
+                    <div style="text-align: center; margin-bottom: 40px;">
+                        <h2 style="font-size: 2.2rem; margin-bottom: 12px;">Frequently Asked Questions</h2>
+                        <p style="color: var(--text-secondary);">Everything you need to know about our services.</p>
+                    </div>
+
+                    <!-- FAQ Item 1 -->
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFaq(this)">
+                            <span>What is included in the pricing?</span>
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Our pricing covers the design, coding, and implementation of your chosen package.</p>
+                            <ul style="margin-top:10px; padding-left:20px; list-style:disc;">
+                                <li><strong>HTML Only:</strong> Static structure (1-2 pages) and basic SEO.</li>
+                                <li><strong>Front-End:</strong> Interactive design, contact forms, WhatsApp buttons, and responsiveness.</li>
+                                <li><strong>AI Powered:</strong> Everything in Front-End plus AI chatbot setup and integration.</li>
+                            </ul>
+                            <p style="margin-top:10px;">Prices exclude domain registration (if not using DDN) and external hosting fees.</p>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 2 -->
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFaq(this)">
+                            <span>How long does it take to build my website?</span>
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>The timeline depends on the package complexity and how quickly you provide the content (text, images, logo).</p>
+                            <p><strong>Estimated Timelines:</strong></p>
+                            <ul style="margin-top:5px; padding-left:20px; list-style:disc;">
+                                <li><strong>HTML Only:</strong> 3 - 5 Days</li>
+                                <li><strong>Front-End Website:</strong> 1 - 2 Weeks</li>
+                                <li><strong>AI Powered Website:</strong> 2 - 3 Weeks</li>
+                            </ul>
+                            <p style="margin-top:10px; font-size:0.9rem; color:var(--text-secondary);">*Delivery starts once we receive all necessary materials from you.</p>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 3 -->
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFaq(this)">
+                            <span>Do you provide hosting and domain?</span>
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>We provide <strong>Domain Options</strong>. You can choose a DDNetwork One subdomain (RM 55/mo) or use your own custom domain.</p>
+                            <p style="margin-top:10px;">We do not provide standard web hosting ourselves, but we provide full deployment guidance to help you set your website live on your preferred hosting provider.</p>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 4 -->
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFaq(this)">
+                            <span>What payment methods do you accept?</span>
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>We accept Bank Transfer and online payment gateways. A 50% deposit is required to start the project, with the remaining 50% due upon completion and before the final handover.</p>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 5 -->
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFaq(this)">
+                            <span>Can I upgrade my package later?</span>
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Absolutely. You can start with a Basic or Front-End package and add the AI features or a Maintenance Plan at any time. We will provide a quote for the additional work required.</p>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 6 -->
+                    <div class="faq-item" style="border:none;">
+                        <button class="faq-question" onclick="toggleFaq(this)">
+                            <span>Is the source code mine?</span>
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Yes. Upon full payment and completion of the project, you own 100% of the source code and the website. You are free to host it anywhere or move it to another developer in the future.</p>
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </section>
 
@@ -1371,6 +1543,58 @@
                                 </button>
                             </div>
                         </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- === TERMS === -->
+        <section id="terms" class="page-section">
+            <div class="container section-padding">
+                <div class="terms-container">
+                    <div class="terms-header">
+                        <h2 style="font-size:2.2rem; margin-bottom:12px;">Terms of Service</h2>
+                        <p style="color:var(--text-secondary); font-size:1rem;">Last Updated: January 2025</p>
+                        <div style="margin-top:20px;">
+                            <a href="https://raw.githubusercontent.com/ddnetwork-ent/DDN-One/refs/heads/main/DDNETWORK%20ONE%20(1).pdf" target="_blank" class="btn-nav" style="display:inline-block; padding:12px 24px;">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:text-bottom; margin-right:8px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                                Download Official PDF
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="terms-content">
+                        <h2>1. Acceptance of Terms</h2>
+                        <p>By accessing and using the services provided by DDNetwork One ("We," "Us," or "Our"), you agree to be bound by these Terms of Service. If you do not agree to abide by these terms, please do not use our service.</p>
+
+                        <h2>2. Services Description</h2>
+                        <p>DDNetwork One provides web design and development services as outlined in our Service Packages. These include but are not limited to:</p>
+                        <ul>
+                            <li><strong>HTML Only (Static):</strong> Basic structure, basic SEO, deployment guidance.</li>
+                            <li><strong>Front-End Website:</strong> Responsive design, contact forms, WhatsApp integration, basic optimization.</li>
+                            <li><strong>AI Powered Website:</strong> All Front-End features plus AI chatbot setup and integration.</li>
+                        </ul>
+                        <p>We also offer optional add-ons for Domain management and Monthly Maintenance plans. All deliverables are subject to the specific package selected.</p>
+
+                        <h2>3. Client Responsibilities</h2>
+                        <ul>
+                            <li>The Client must provide all necessary content (text, images, logos) within a reasonable timeframe to begin work.</li>
+                            <li>The Client must respond to inquiries and approval requests in a timely manner to avoid delays.</li>
+                            <li>The Client warrants that they have the right to use any trademarks, images, or data provided for the website.</li>
+                        </ul>
+
+                        <h2>4. Payment Terms</h2>
+                        <p>All prices are in Malaysian Ringgit (RM). A 50% deposit is required to initiate the project. The remaining 50% is due upon completion and before the final handover of source files.</p>
+                        <p>For Monthly Maintenance Plans, billing occurs monthly in advance. Failure to pay may result in suspension of maintenance services.</p>
+
+                        <h2>5. Intellectual Property</h2>
+                        <p>Upon full payment, the Client owns 100% of the final website source code and design assets created specifically for the project. DDNetwork One retains the right to display the work in our portfolio unless a Non-Disclosure Agreement (NDA) is signed.</p>
+
+                        <h2>6. Limitation of Liability</h2>
+                        <p>We strive for high quality but do not guarantee specific business results such as traffic, leads, or sales. We are not liable for any damages arising from the use of our services, including but not limited to loss of data or downtime caused by third-party hosting providers.</p>
+
+                        <h2>7. Termination</h2>
+                        <p>Either party may terminate the agreement with written notice. If terminated by the Client before completion, the Client is liable for payment for all work completed up to that date.</p>
                     </div>
                 </div>
             </div>
@@ -1597,8 +1821,8 @@
                 </div>
                 <div class="footer-col">
                     <h4>Legal</h4>
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Terms of Service</a>
+                    <a href="#" onclick="switchPage('terms')">Terms of Service</a>
+                    <a href="#" onclick="switchPage('contact')">Contact Support</a>
                 </div>
                 <div class="footer-col">
                     <h4>Social</h4>
@@ -1662,6 +1886,28 @@
                 overlay.classList.add('active');
                 iconMenu.style.display = 'none';
                 iconClose.style.display = 'block';
+            }
+        }
+
+        // === FAQ ACCORDION LOGIC ===
+        function toggleFaq(button) {
+            const answer = button.nextElementSibling;
+            const icon = button.querySelector('.faq-icon');
+            
+            if (answer.style.maxHeight) {
+                answer.style.maxHeight = null;
+                answer.classList.remove('open');
+                button.classList.remove('active');
+            } else {
+                // Close others (optional, keeps it cleaner)
+                const allAnswers = document.querySelectorAll('.faq-answer');
+                const allButtons = document.querySelectorAll('.faq-question');
+                allAnswers.forEach(a => { a.style.maxHeight = null; a.classList.remove('open'); });
+                allButtons.forEach(b => { b.classList.remove('active'); });
+
+                answer.style.maxHeight = answer.scrollHeight + "px";
+                answer.classList.add('open');
+                button.classList.add('active');
             }
         }
 
