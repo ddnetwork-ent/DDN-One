@@ -11,6 +11,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
+    <!-- EMAILJS SDK (ADDED) -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
     <style>
         /* --- CSS VARIABLES --- */
         :root {
@@ -92,6 +95,30 @@
         .badge-popular { background-color: #fff7ed; color: #ea580c; border: 1px solid #ffedd5; }
         .badge-best { background-color: #ecfdf5; color: var(--success); border: 1px solid #d1fae5; }
         .badge-discount { background-color: #ecfdf5; color: var(--success); border: 1px solid #d1fae5; }
+
+        /* --- PROMO BANNER (MARQUEE) --- */
+        .promo-banner-wrapper {
+            background-color: var(--primary);
+            color: white;
+            overflow: hidden;
+            white-space: nowrap;
+            position: relative;
+            z-index: 1004;
+            padding: 8px 0;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .marquee-content {
+            display: inline-block;
+            animation: marquee 25s linear infinite;
+            padding-left: 100%;
+        }
+
+        @keyframes marquee {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-100%, 0); }
+        }
 
         /* --- SPA LOGIC --- */
         .page-section {
@@ -348,7 +375,7 @@
 
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); 
             gap: 30px; 
             margin-bottom: 50px;
         }
@@ -387,28 +414,41 @@
         .service-title { font-size: 1.3rem; font-weight: 700; margin-bottom: 10px; color: var(--text-main); }
         .service-desc { font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 20px; line-height: 1.6; }
         
+        /* Detailed Lists Styling */
+        .detail-group { margin-bottom: 20px; font-size: 0.9rem; }
+        .detail-label { 
+            text-transform: uppercase; 
+            font-size: 0.75rem; 
+            letter-spacing: 0.5px; 
+            font-weight: 700; 
+            color: #94a3b8; 
+            margin-bottom: 8px; 
+            display: block; 
+        }
+        
         .feature-list {
             list-style: none;
             margin-bottom: 25px;
-            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
         }
         
         .feature-list li {
-            font-size: 0.9rem;
             color: var(--text-main);
-            margin-bottom: 10px;
             padding-left: 24px;
             position: relative;
-            line-height: 1.5;
+            line-height: 1.4;
+            font-size: 0.9rem;
         }
         
         .feature-list li::before {
-            content: "✓";
-            color: var(--success);
+            content: "•";
+            color: var(--primary);
             font-weight: bold;
             position: absolute;
-            left: 0;
-            top: 1px;
+            left: 8px;
+            top: 0;
         }
 
         .price-area {
@@ -435,6 +475,7 @@
             text-align: center;
         }
         .btn-buy-now:hover { background-color: var(--primary); transform: translateY(-2px); }
+        
         .btn-select-plan {
             width: 100%;
             padding: 12px;
@@ -629,12 +670,13 @@
         .addon-item {
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: flex-start;
             margin-bottom: 12px;
             font-size: 0.95rem;
+            gap: 10px;
         }
-        .addon-label { color: var(--text-secondary); }
-        .addon-value { font-weight: 600; color: var(--text-main); }
+        .addon-label { color: var(--text-secondary); font-weight: 500;}
+        .addon-value { font-weight: 600; color: var(--text-main); text-align: right;}
 
         .total-row {
             display: flex;
@@ -671,8 +713,50 @@
             gap: 8px;
         }
         
+        /* Business Type Selector */
+        .business-type-selector {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .type-option {
+            position: relative;
+        }
+        
+        .type-option input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+        
+        .type-btn {
+            display: block;
+            text-align: center;
+            padding: 10px;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: var(--text-secondary);
+        }
+        
+        .type-option input:checked + .type-btn {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
         .addon-option-group {
             margin-bottom: 20px;
+            background: white;
+            padding: 15px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border);
         }
         .addon-label {
             display: block;
@@ -682,6 +766,37 @@
             color: var(--text-main);
         }
 
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .checkbox-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 8px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .checkbox-item:hover { background: #f8fafc; }
+        
+        .checkbox-item input[type="checkbox"] {
+            accent-color: var(--primary);
+            width: 16px; height: 16px;
+            margin-top: 3px;
+        }
+
+        .checkbox-text {
+            display: flex;
+            flex-direction: column;
+        }
+        .checkbox-title { font-weight: 500; color: var(--text-main); font-size: 0.9rem;}
+        .checkbox-price { font-size: 0.8rem; color: var(--text-secondary); }
+
+        /* Domain Specifics in Checkout */
         .radio-group {
             display: flex;
             flex-direction: column;
@@ -893,7 +1008,7 @@
             position: absolute;
             left: 50%; top: 50%;
             width: 20px; height: 20px;
-            border: 3px solid rgba(255,255,255,0.3);
+            border: 3px solid rgba(255,255,255,255,0.3);
             border-radius: 50%;
             border-top-color: white;
             animation: spin 0.8s linear infinite;
@@ -947,6 +1062,7 @@
             .contact-grid { grid-template-columns: 1fr; gap: 30px; }
             .checkout-grid { grid-template-columns: 1fr; }
             .order-summary { position: static; margin-bottom: 20px; }
+            .business-type-selector { grid-template-columns: 1fr; }
         }
 
         @media (max-width: 768px) {
@@ -976,8 +1092,12 @@
 </head>
 <body>
 
-    <!-- HIDDEN IFRAME FOR FORM SUBMIT -->
-    <iframe id="formSubmitFrame" name="formSubmitFrame" style="display:none;" onload="handleFormLoad()"></iframe>
+    <!-- PROMO BANNER (MARQUEE) -->
+    <div class="promo-banner-wrapper">
+        <div class="marquee-content">
+            Website Launch 1/1/2026 🎉 New Users: 10% OFF &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Website Launch 1/1/2026 🎉 New Users: 10% OFF &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Website Launch 1/1/2026 🎉 New Users: 10% OFF
+        </div>
+    </div>
 
     <!-- Success Popup -->
     <div id="success-popup">
@@ -1005,7 +1125,7 @@
             <li class="nav-item-mobile" onclick="switchPage('testimonials')">Testimonials <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg></li>
             <li class="nav-item-mobile" onclick="switchPage('contact')">Contact <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></li>
             <li class="nav-item-mobile" onclick="switchPage('faq')">FAQ <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></li>
-            <li class="nav-item-mobile" onclick="switchPage('about')">About Us <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg></li>
+            <li class="nav-item-mobile" onclick="switchPage('about')">About Us <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></i></svg></li>
             <li class="nav-item-mobile" onclick="switchPage('terms')">Terms <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg></li>
         </ul>
     </div>
@@ -1054,6 +1174,7 @@
                     <div style="display:flex; gap:12px; flex-wrap: wrap; justify-content: center; @media(min-width:992px){justify-content:start;}">
                         <button class="btn-nav" onclick="switchPage('services')">View Packages</button>
                         <button class="btn-nav" style="background:white; color:var(--text-main); border:1px solid var(--border);" onclick="switchPage('contact')">Get a Quote</button>
+                        <button class="btn-nav" style="background:transparent; color:var(--primary); border:1px solid var(--primary);" onclick="switchPage('clients')">Visit Our Clients</button>
                     </div>
                 </div>
                 <div class="hero-visual">
@@ -1089,19 +1210,36 @@
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
                         </div>
                         <h4 class="service-title">HTML Only (Static)</h4>
-                        <p class="service-desc">Simple, clean, and mobile-friendly website for personal brands or landing pages.</p>
-                        
-                        <ul class="feature-list">
-                            <li>1–2 Pages</li>
-                            <li>Basic SEO setup</li>
-                            <li>Deployment guidance</li>
-                            <li>Lightweight & Fast</li>
-                        </ul>
-
                         <div class="price-area">
                             <span class="price-tag">RM 200 - 400</span>
                         </div>
-                        <button class="btn-buy-now" onclick="selectPackage('HTML Only (Static)', 'RM 200 - 400', 'Simple, clean, and mobile-friendly website for personal brands or landing pages. Includes 1-2 pages, Basic SEO, and Deployment guidance.')">Select Package</button>
+                        
+                        <!-- Best For -->
+                        <div class="detail-group">
+                            <span class="detail-label">Best for:</span>
+                            <ul class="feature-list">
+                                <li>Food & drink menus (café, restaurant, kiosk)</li>
+                                <li>Clinic info page (services, hours, location)</li>
+                                <li>Personal profile or portfolio</li>
+                                <li>Event or promotion landing page</li>
+                                <li>Small business basic online presence</li>
+                            </ul>
+                        </div>
+
+                        <!-- Includes -->
+                        <div class="detail-group">
+                            <span class="detail-label">Includes:</span>
+                            <ul class="feature-list">
+                                <li>1–2 pages</li>
+                                <li>Simple & clean layout</li>
+                                <li>Mobile-friendly design</li>
+                                <li>Basic SEO setup</li>
+                                <li>Fast loading website</li>
+                                <li>Deployment guidance</li>
+                            </ul>
+                        </div>
+
+                        <button class="btn-buy-now" onclick="selectPackage('HTML Only (Static)', 'RM 200 - 400', 'Simple, clean, and mobile-friendly website for personal brands or landing pages.')">Select Package</button>
                     </article>
 
                     <!-- Card 2: Front-End (Popular) -->
@@ -1112,20 +1250,36 @@
                         <div style="position:absolute; top:15px; right:15px;" class="badge badge-popular">Popular</div>
                         
                         <h4 class="service-title">Front-End Website</h4>
-                        <p class="service-desc">Professional multi-page website with interactive elements and responsive design.</p>
-                        
-                        <ul class="feature-list">
-                            <li>HTML, CSS & JavaScript</li>
-                            <li>Fully responsive (Mobile/Tablet/PC)</li>
-                            <li>Contact form (email notify)</li>
-                            <li>WhatsApp quick contact button</li>
-                            <li>Basic performance optimization</li>
-                            <li>1–2 rounds of revisions</li>
-                        </ul>
-
                         <div class="price-area">
                             <span class="price-tag">RM 400 - 800</span>
                         </div>
+
+                        <!-- Best For -->
+                        <div class="detail-group">
+                            <span class="detail-label">Best for:</span>
+                            <ul class="feature-list">
+                                <li>Small & medium business websites</li>
+                                <li>Dental / medical clinics</li>
+                                <li>Service businesses (beauty, repair, education)</li>
+                                <li>Company profile website</li>
+                                <li>Online enquiry or contact websites</li>
+                            </ul>
+                        </div>
+
+                        <!-- Includes -->
+                        <div class="detail-group">
+                            <span class="detail-label">Includes:</span>
+                            <ul class="feature-list">
+                                <li>HTML, CSS & JavaScript</li>
+                                <li>Multi-page website</li>
+                                <li>Fully responsive (mobile, tablet & desktop)</li>
+                                <li>Contact form (email notification)</li>
+                                <li>WhatsApp quick contact button</li>
+                                <li>Basic performance optimization</li>
+                                <li>1–2 rounds of revisions</li>
+                            </ul>
+                        </div>
+
                         <button class="btn-buy-now" style="background:var(--primary);" onclick="selectPackage('Front-End Website', 'RM 400 - 800', 'Professional multi-page website (up to 5 pages). Fully responsive with Contact Form, WhatsApp Button, and 2 rounds of revisions.')">Select Package</button>
                     </article>
 
@@ -1137,19 +1291,34 @@
                         <div style="position:absolute; top:15px; right:15px;" class="badge badge-best">Best Value</div>
                         
                         <h4 class="service-title">AI Powered Website</h4>
-                        <p class="service-desc">Smart websites with integrated AI chatbot to answer questions and capture leads.</p>
-                        
-                        <ul class="feature-list">
-                            <li>Everything in Front-End Website</li>
-                            <li>AI chatbot setup</li>
-                            <li>Lead capture & smart forms</li>
-                            <li>14–30 days post-launch support</li>
-                            <li>Rule-based or API-based AI</li>
-                        </ul>
-
                         <div class="price-area">
                             <span class="price-tag">RM 800 - 1,500</span>
                         </div>
+
+                        <!-- Best For -->
+                        <div class="detail-group">
+                            <span class="detail-label">Best for:</span>
+                            <ul class="feature-list">
+                                <li>Clinics with frequent customer questions</li>
+                                <li>Businesses that receive enquiries daily</li>
+                                <li>Lead generation websites</li>
+                                <li>Consultation & sales-based services</li>
+                                <li>Businesses wanting auto-reply & smarter interaction</li>
+                            </ul>
+                        </div>
+
+                        <!-- Includes -->
+                        <div class="detail-group">
+                            <span class="detail-label">Includes:</span>
+                            <ul class="feature-list">
+                                <li>Everything in Front-End Website</li>
+                                <li>AI chatbot setup</li>
+                                <li>Lead capture & smart forms</li>
+                                <li>Rule-based or API-based AI</li>
+                                <li>14–30 days post-launch support</li>
+                            </ul>
+                        </div>
+
                         <button class="btn-buy-now" style="background:var(--success);" onclick="selectPackage('AI Powered Website', 'RM 800 - 1,500', 'Smart websites with integrated AI chatbot. Includes Front-End features + AI Setup, Lead Capture, and 30 days support.')">Select Package</button>
                     </article>
                 </div>
@@ -1432,6 +1601,10 @@
                                 <span class="addon-label">Maintenance:</span>
                                 <span class="addon-value" id="summary-maintenance">None</span>
                             </div>
+                            <div class="addon-item">
+                                <span class="addon-label">Business Add-ons:</span>
+                                <span class="addon-value" id="summary-addons">None</span>
+                            </div>
                         </div>
 
                         <div class="total-row">
@@ -1445,10 +1618,8 @@
 
                     <!-- Right: Checkout Form -->
                     <div class="checkout-form-container">
+                        <!-- UPDATED FORM: Removed Action/Method/Target -->
                         <form id="checkoutForm" 
-                              action="https://formsubmit.co/danialamir1809@gmail.com" 
-                              method="POST" 
-                              target="formSubmitFrame" 
                               onsubmit="return validateCheckoutForm(event)">
                             
                             <input type="text" name="_honey" style="display:none">
@@ -1458,6 +1629,7 @@
                             <!-- Hidden fields to capture final add-on choices for email -->
                             <input type="hidden" id="final-domain-choice" name="final_domain_choice" value="">
                             <input type="hidden" id="final-maintenance-choice" name="final_maintenance_choice" value="">
+                            <input type="hidden" id="final-addons-choice" name="final_business_addons" value="">
 
                             <div class="form-row">
                                 <div class="form-group">
@@ -1484,9 +1656,9 @@
                             </div>
 
                             <!-- === ADD-ON SECTIONS === -->
+                            
+                            <!-- DOMAIN ADD-ON -->
                             <div class="checkout-addons">
-                                
-                                <!-- DOMAIN ADD-ON -->
                                 <h4>
                                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/></svg>
                                     Add Domain (Optional)
@@ -1509,13 +1681,13 @@
 
                                     <!-- Conditional Input: DDN Subdomain -->
                                     <div id="input-wrapper-ddn" class="addon-input-wrapper">
-                                        <input type="text" id="input-ddn-sub" class="form-input" placeholder="Enter subdomain name (e.g. myshop)" oninput="updateDomainDisplay()">
+                                        <input type="text" id="input-ddn-sub" name="ddn_sub" class="form-input" placeholder="Enter subdomain name (e.g. myshop)" oninput="updateDomainDisplay()">
                                         <div style="font-size:0.8rem; color:var(--text-secondary); margin-top:4px;">Final URL: <span style="color:var(--primary); font-weight:600;" id="display-ddn-preview"></span></div>
                                     </div>
 
                                     <!-- Conditional Input: Custom Domain -->
                                     <div id="input-wrapper-custom" class="addon-input-wrapper">
-                                        <input type="text" id="input-custom-domain" class="form-input" placeholder="Enter domain name (e.g. myshop.com)" oninput="updateDomainDisplay()">
+                                        <input type="text" id="input-custom-domain" name="custom_domain" class="form-input" placeholder="Enter domain name (e.g. myshop.com)" oninput="updateDomainDisplay()">
                                         <div style="font-size:0.8rem; color:var(--text-secondary); margin-top:4px;">Price depends on provider.</div>
                                     </div>
                                 </div>
@@ -1524,7 +1696,7 @@
                             <!-- MAINTENANCE ADD-ON -->
                             <div class="checkout-addons" style="margin-top:20px;">
                                 <h4>
-                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 0 1-5.93 9.14 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path><polyline points="22 11.08V12a10 10 0 0 1-5.93 9.14 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
                                     Maintenance Plan (Optional)
                                 </h4>
                                 <div class="addon-option-group">
@@ -1546,6 +1718,34 @@
                                             <span>AI Care (RM 150-250/mo)</span>
                                         </label>
                                     </div>
+                                </div>
+                            </div>
+
+                            <!-- BUSINESS SPECIFIC ADD-ONS -->
+                            <div class="checkout-addons" style="margin-top:20px;">
+                                <h4>
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>
+                                    Business Specific Add-ons
+                                </h4>
+                                <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:10px;">Select your business type to see available enhancements.</p>
+                                
+                                <div class="business-type-selector">
+                                    <label class="type-option">
+                                        <input type="radio" name="business_type" value="general" checked onchange="toggleBusinessAddons('general')">
+                                        <span class="type-btn">General</span>
+                                    </label>
+                                    <label class="type-option">
+                                        <input type="radio" name="business_type" value="clinic" onchange="toggleBusinessAddons('clinic')">
+                                        <span class="type-btn">Clinic</span>
+                                    </label>
+                                    <label class="type-option">
+                                        <input type="radio" name="business_type" value="restaurant" onchange="toggleBusinessAddons('restaurant')">
+                                        <span class="type-btn">Restaurant</span>
+                                    </label>
+                                </div>
+
+                                <div id="business-addons-container" class="checkbox-group">
+                                    <!-- Dynamically populated by JS -->
                                 </div>
                             </div>
                             <!-- === END ADD-ONS === -->
@@ -1735,10 +1935,8 @@
 
                     <!-- Contact Form (Right) -->
                     <div class="contact-card">
+                        <!-- UPDATED FORM: Removed Action/Method/Target -->
                         <form id="contactForm" 
-                              action="https://formsubmit.co/danialamir1809@gmail.com" 
-                              method="POST" 
-                              target="formSubmitFrame" 
                               onsubmit="return validateContactForm(event)">
                             
                             <input type="text" name="_honey" style="display:none">
@@ -1829,7 +2027,7 @@
                         <img src="https://raw.githubusercontent.com/ddnetwork-ent/DDN-One/refs/heads/main/DD-LOGO.JPEG" alt="Logo" style="height:30px; margin-right:10px; border-radius:4px;">
                         DDNetwork One
                     </h2>
-                    <p>Building modern, high-performance websites for future of business. Based in Malaysia, serving the world.</p>
+                    <p>Building modern, high-performance websites for future of business. Based in Malaysia, serving world.</p>
                 </div>
                 <div class="footer-col">
                     <h4>Company</h4>
@@ -1856,6 +2054,16 @@
     </footer>
 
     <script>
+        // === CONFIGURATION (EDIT THESE WITH YOUR KEYS) ===
+        const SERVICE_ID = "service_cwb3f24"; // e.g., service_xxxxx
+        const TEMPLATE_ID = "template_k1cw1a5"; // e.g., template_xxxxx
+        const PUBLIC_KEY = "A8_ho6XtXf6EbjK6x";  // e.g., xxxxxxxxxxxxxx
+
+        // Initialize EmailJS
+        (function(){
+            emailjs.init(PUBLIC_KEY); 
+        })();
+
         // === NAVIGATION LOGIC ===
         function switchPage(pageId) {
             if(document.body.classList.contains('menu-open')) {
@@ -1940,12 +2148,17 @@
             document.getElementById('checkoutForm').reset();
             document.getElementById('summary-domain').innerText = "None";
             document.getElementById('summary-maintenance').innerText = "None";
+            document.getElementById('summary-addons').innerText = "None";
             document.getElementById('summary-domain').style.color = "var(--text-main)";
             
             // Hide input fields
             document.getElementById('input-wrapper-ddn').classList.remove('active');
             document.getElementById('input-wrapper-custom').classList.remove('active');
             
+            // Reset Business Type to general
+            toggleBusinessAddons('general');
+            document.querySelector('input[name="business_type"][value="general"]').checked = true;
+
             switchPage('buynow');
         }
 
@@ -2054,13 +2267,80 @@
             }
         }
 
+        // === BUSINESS ADD-ON DATA & LOGIC ===
+        const businessAddOns = {
+            general: [
+                { id: 'gen_page', label: 'Additional page', price: 'RM 50 - RM 100 / page' },
+                { id: 'gen_content', label: 'Content update (text & images)', price: 'RM 50 - RM 150' },
+                { id: 'gen_revision', label: 'Extra revision round', price: 'RM 50 / round' },
+                { id: 'gen_image', label: 'Basic image editing / resize', price: 'RM 30 - RM 80' },
+                { id: 'gen_maps', label: 'Google Maps integration', price: 'RM 30 - RM 60' },
+                { id: 'gen_wa', label: 'WhatsApp chat setup (custom)', price: 'RM 30 - RM 50' },
+                { id: 'gen_host', label: 'Domain & hosting assistance', price: 'Price depends on provider' },
+                { id: 'gen_maint', label: 'Website maintenance (monthly)', price: 'RM 50 - RM 150 / month' }
+            ],
+            clinic: [
+                { id: 'cli_services', label: 'Services & treatment page setup', price: 'RM 80 - RM 150' },
+                { id: 'cli_doctor', label: 'Doctor / staff profile section', price: 'RM 80 - RM 150' },
+                { id: 'cli_appt', label: 'Appointment / enquiry form', price: 'RM 80 - RM 200' },
+                { id: 'cli_faq', label: 'Clinic FAQ section', price: 'RM 80 - RM 150' },
+                { id: 'cli_maps', label: 'Google Maps + Waze button', price: 'RM 50 - RM 80' },
+                { id: 'cli_wa', label: 'WhatsApp auto-reply message', price: 'RM 50 - RM 100' },
+                { id: 'cli_ai', label: 'AI chatbot (clinic questions)', price: 'RM 200 - RM 400' }
+            ],
+            restaurant: [
+                { id: 'res_menu', label: 'Digital menu page (mobile-friendly)', price: 'RM 80 - RM 150' },
+                { id: 'res_opt', label: 'Menu image optimisation', price: 'RM 50 - RM 100' },
+                { id: 'res_cat', label: 'Category-based menu (Drinks / Food)', price: 'RM 80 - RM 150' },
+                { id: 'res_wa', label: 'WhatsApp order button', price: 'RM 50 - RM 80' },
+                { id: 'res_banner', label: 'Promo banner / announcement', price: 'RM 50 - RM 100' },
+                { id: 'res_qr', label: 'QR code for menu website', price: 'RM 30 - RM 50' }
+            ]
+        };
+
+        function toggleBusinessAddons(type) {
+            const container = document.getElementById('business-addons-container');
+            container.innerHTML = ''; // Clear existing
+            updateBusinessSummary(); // Reset summary
+
+            if (businessAddOns[type]) {
+                businessAddOns[type].forEach(addon => {
+                    const div = document.createElement('label');
+                    div.className = 'checkbox-item';
+                    div.innerHTML = `
+                        <input type="checkbox" name="biz_addon" value="${addon.label}" onchange="updateBusinessSummary()">
+                        <div class="checkbox-text">
+                            <span class="checkbox-title">${addon.label}</span>
+                            <span class="checkbox-price">${addon.price}</span>
+                        </div>
+                    `;
+                    container.appendChild(div);
+                });
+            }
+        }
+
+        function updateBusinessSummary() {
+            const checkboxes = document.querySelectorAll('input[name="biz_addon"]:checked');
+            const summaryEl = document.getElementById('summary-addons');
+            const hiddenInput = document.getElementById('final-addons-choice');
+            
+            if (checkboxes.length === 0) {
+                summaryEl.innerText = "None";
+                hiddenInput.value = "None";
+            } else {
+                const selected = Array.from(checkboxes).map(cb => cb.value);
+                summaryEl.innerText = selected.length + " selected";
+                hiddenInput.value = selected.join(', ');
+            }
+        }
+
         // === POPUP LOGIC ===
         function closePopup() {
             document.getElementById('success-popup').classList.remove('active');
             switchPage('home');
         }
 
-        // === FORM VALIDATION & SUBMIT LOGIC ===
+        // === FORM VALIDATION & SUBMIT LOGIC (EMAILJS VERSION) ===
         function startLoading(btnId) {
             const btn = document.getElementById(btnId);
             btn.classList.add('btn-loading');
@@ -2071,21 +2351,25 @@
         }
 
         function validateContactForm(e) {
+            e.preventDefault();
             const formId = 'contactForm';
             const btnId = 'submitBtn';
-            return validateAndSubmit(e, formId, btnId);
+            handleFormSubmit(e, formId, btnId);
         }
 
         function validateCheckoutForm(e) {
+            e.preventDefault();
             const formId = 'checkoutForm';
             const btnId = 'checkoutSubmitBtn';
-            return validateAndSubmit(e, formId, btnId);
+            handleFormSubmit(e, formId, btnId);
         }
 
-        function validateAndSubmit(e, formId, btnId) {
-            const inputs = document.querySelectorAll(`#${formId} input[required], #${formId} textarea[required]`);
+        function handleFormSubmit(e, formId, btnId) {
+            const form = document.getElementById(formId);
+            const inputs = form.querySelectorAll('input[required], textarea[required]');
             let isValid = true;
 
+            // Validation
             inputs.forEach(input => {
                 if(!input.value.trim()) {
                     input.classList.add('error');
@@ -2095,34 +2379,32 @@
                 }
             });
 
-            if(!isValid) {
-                e.preventDefault();
-                return false;
-            }
+            if(!isValid) return;
 
+            // Loading State
             startLoading(btnId);
-            return true;
-        }
-
-        function handleFormLoad() {
-            const contactBtn = document.getElementById('submitBtn');
-            const checkoutBtn = document.getElementById('checkoutSubmitBtn');
-
-            if (contactBtn.classList.contains('btn-loading') || checkoutBtn.classList.contains('btn-loading')) {
-                setTimeout(() => {
-                    stopLoading('submitBtn');
-                    stopLoading('checkoutSubmitBtn');
+            
+            // EmailJS Send
+            // Parameters: serviceID, templateID, #formID, publicKey
+            emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, '#' + formId, PUBLIC_KEY)
+                .then(function() {
+                    stopLoading(btnId);
                     document.getElementById('success-popup').classList.add('active');
-                    document.getElementById('contactForm').reset();
-                    document.getElementById('checkoutForm').reset();
+                    form.reset();
                     
                     // Reset summary logic for checkout
-                    document.getElementById('summary-domain').innerText = "None";
-                    document.getElementById('summary-maintenance').innerText = "None";
-                    document.getElementById('input-wrapper-ddn').classList.remove('active');
-                    document.getElementById('input-wrapper-custom').classList.remove('active');
-                }, 1000);
-            }
+                    if(formId === 'checkoutForm') {
+                        document.getElementById('summary-domain').innerText = "None";
+                        document.getElementById('summary-maintenance').innerText = "None";
+                        document.getElementById('summary-addons').innerText = "None";
+                        document.getElementById('input-wrapper-ddn').classList.remove('active');
+                        document.getElementById('input-wrapper-custom').classList.remove('active');
+                    }
+                }, function(error) {
+                    stopLoading(btnId);
+                    console.log('FAILED...', error);
+                    alert(`Failed to send email: ${error.text}`);
+                });
         }
 
         // Remove error styles on typing
@@ -2141,7 +2423,9 @@
                 header.classList.remove('scrolled');
             }
         });
-
+        
+        // Initialize General Addons
+        toggleBusinessAddons('general');
     </script>
 </body>
 </html>
