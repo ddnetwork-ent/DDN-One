@@ -1934,15 +1934,16 @@
                                 </div>
                             </div>
 
-                            <!-- === PAYMENT SECTION (5 SEC LOADING) === -->
+                            <!-- === PAYMENT SECTION (IMMEDIATE REDIRECT FIX) === -->
                             <div class="payment-section">
                                 <h4 style="margin-bottom: 15px; font-size:1rem; color:var(--text-main);">Payment Method</h4>
                                 <img src="https://upload.wikimedia.org/wikipedia/commons/f/fb/Touch_%27n_Go_eWallet_logo.svg" alt="TNG eWallet" class="tng-logo">
+                                <!-- Note: Changed text to reflect immediate action -->
                                 <a href="https://payment.tngdigital.com.my/sc/bDLob7YcpG" class="payment-btn" onclick="triggerTNGPayment(this)">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-wallet"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M17 8v-3a1 1 0 0 0 -1 -1h-10a2 2 0 0 0 0 4h12a1 1 0 0 1 1 1v3m0 4v3a1 1 0 0 1 -1 1h-12a2 2 0 0 1 -2 -2v-12" /><path d="M20 12v4h-4a2 2 0 0 1 0 -4h4" /></svg>
                                     Pay via TNG eWallet
                                 </a>
-                                <p class="payment-note">Click button above to make payment. Redirect in 5 seconds.</p>
+                                <p class="payment-note">Click button above to make payment. Opens in new tab immediately.</p>
                             </div>
 
                             <!-- === PROMO CODE SECTION (UPDATED TEXT) === -->
@@ -2878,30 +2879,27 @@
             }
         }
 
-        // === TNG PAYMENT LOADING LOGIC ===
+        // === FIXED TNG PAYMENT LOGIC ===
         function triggerTNGPayment(btnElement) {
-            // Prevent default link behavior
+            // Prevent default anchor behavior (we will handle opening manually)
             event.preventDefault();
-
-            // Check loading state (simple check)
-            if(btnElement.classList.contains('btn-loading')) return;
 
             // Get original content
             const originalContent = btnElement.innerHTML;
 
             // Add loading class
             btnElement.classList.add('btn-loading');
-            btnElement.innerHTML = 'Processing...';
+            btnElement.innerHTML = 'Opening Gateway...';
 
-            // Wait 5 seconds
+            // OPEN IMMEDIATELY to avoid popup blockers
+            window.open("https://payment.tngdigital.com.my/sc/bDLob7YcpG", '_blank');
+
+            // Reset button state after a short delay (2 seconds) 
+            // so user knows click happened, but we don't wait to open.
             setTimeout(() => {
-                // Open link
-                window.open("https://payment.tngdigital.com.my/sc/bDLob7YcpG", '_blank');
-                
-                // Reset button state
                 btnElement.classList.remove('btn-loading');
                 btnElement.innerHTML = originalContent;
-            }, 5000);
+            }, 2000);
         }
 
         // === MODAL LOGIC ===
